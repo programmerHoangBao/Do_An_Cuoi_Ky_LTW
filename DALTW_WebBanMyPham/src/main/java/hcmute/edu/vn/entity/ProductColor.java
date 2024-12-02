@@ -22,6 +22,7 @@ public class ProductColor {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id_product_color;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_product", nullable = false)
 	private Product product;

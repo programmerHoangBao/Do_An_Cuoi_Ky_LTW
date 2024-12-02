@@ -12,7 +12,7 @@ CREATE TABLE Users(
     birth_date DATE NOT NULL,
     role_user NVARCHAR(20) NOT NULL,
     image NVARCHAR(500),
-    CONSTRAINT CHK_role CHECK (role_user in ('Admin', 'Salesman', 'User'))
+    CONSTRAINT CHK_role CHECK (role_user in ('Admin', 'Saler', 'User'))
 );
 
 -- Cửa hàng
@@ -21,7 +21,15 @@ CREATE TABLE Shops (
     id_salesman INT NOT NULL, -- Mã người bán hàng
     name_shop NVARCHAR(100) NOT NULL,
     information TEXT CHARACTER SET utf8mb4,
+    image NVARCHAR(500),
     CONSTRAINT FK_Salesman FOREIGN KEY (id_salesman) REFERENCES Users(id_user)
+);
+
+-- kho hàng
+CREATE TABLE Warehouses(
+	id_warehouse INT PRIMARY KEY AUTO_INCREMENT,
+    name_warehouse NVARCHAR(100) NOT NULL,
+    address NVARCHAR(250) NOT NULL
 );
 
 -- Tạo bảng sản phẩm
@@ -30,8 +38,10 @@ CREATE TABLE Products(
     name_product NVARCHAR(100) NOT NULL,
     id_shop INT NOT NULL,
     price DECIMAL(18, 2) NOT NULL,
-    quantitymo_batch INT NOT NULL,
+    quantity INT NOT NULL,
+    id_warehouse INT NOT NULL,
     CONSTRAINT FK_Salesman FOREIGN KEY (id_shop) REFERENCES Shops(id_shop),
+    CONSTRAINT FK_IdWarehouse FOREIGN KEY (id_warehouse) REFERENCES Warehouses(id_warehouse),
     CONSTRAINT CHK_Product CHECK (price > 0 and quantity >= 0)
 );
 
@@ -44,18 +54,40 @@ CREATE TABLE ProductColor(
     CONSTRAINT FK_idProduct FOREIGN KEY (id_product) REFERENCES Products(id_product)
 );
 
--- hóa đơn người dùng
-CREATE TABLE Bills(
-	id_bill INT PRIMARY KEY AUTO_INCREMENT,
+-- đánh giá từ sản phảm từ khách hàng
+CREATE TABLE Review_User(
+	id_review_user INT PRIMARY KEY AUTO_INCREMENT,
+    id_product INT NOT NULL,
+    id_user INT NOT NULL,
+    review_content TEXT CHARACTER SET utf8mb4,
+    product_quality INT,
+    CONSTRAINT FK_ReviewProduct FOREIGN KEY (id_product) REFERENCES Products(id_product),
+    CONSTRAINT FK_ReviewUser FOREIGN KEY (id_user) REFERENCES Users(id_user)
+);
+
+-- giỏ hàng
+CREATE TABLE ShoppingCart(
+	id_shopping_cart INT PRIMARY KEY AUTO_INCREMENT,
+    id_user INT NOT NULL,
+    id_product INT NOT NULL,
+    quantity INT NOT NULL,
+    CONSTRAINT FK_CartUser FOREIGN KEY (id_user) REFERENCES Users(id_user),
+    CONSTRAINT FK_CartProduct FOREIGN KEY (id_product) REFERENCES Products(id_product)
+);
+-- Đơn hàng
+CREATE TABLE Orders(
+	id_order INT PRIMARY KEY AUTO_INCREMENT,
     id_user INT NOT NULL,
     id_product INT NOT NULL,
     id_product_color INT NOT NULL, 
     quantity INT NOT NULL, -- số lượng sản phẩm người dùng đã mua
     creation_date DATE NOT NULL,
-    total DECIMAL(18,2) NOT NULL, -- giá trị hóa đơn
+    status_order NVARCHAR(100),
+    total DECIMAL(18,2) NULL, -- giá trị hóa đơn
     CONSTRAINT FK_user FOREIGN KEY (id_user) REFERENCES Users(id_user),
     CONSTRAINT FK_Product FOREIGN KEY (id_product) REFERENCES Products(id_product),
     CONSTRAINT FK_Image_Product FOREIGN KEY (id_product_color) REFERENCES ProductColor(id_product_color),
+    CONSTRAINT CHK_Startus CHECK (status_order IN (N'Đã xác nhận', N'Chờ giao hàng', N'Đã nhận', N'Đã hủy')),
     CONSTRAINT CHK_UserBill CHECK (quantity > 0 and total > 0)
 );
 

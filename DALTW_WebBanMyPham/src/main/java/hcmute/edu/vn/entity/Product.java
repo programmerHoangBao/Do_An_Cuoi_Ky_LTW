@@ -34,10 +34,14 @@ public class Product {
 	private Shop shop;
 	
 	@Column(name = "price", nullable = false)
-	private double price;
+	private Double price;
 	
 	@Column(name = "quantity", nullable = false)
 	private Integer quantity;
+	
+    @ManyToOne
+    @JoinColumn(name = "id_warehouse", nullable = false)
+    private Warehouse warehouse;
 	
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<ProductColor> productColors;

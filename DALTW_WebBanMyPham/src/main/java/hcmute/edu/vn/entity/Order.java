@@ -4,6 +4,7 @@ import java.util.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -18,33 +19,36 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Table(name = "Bills")
+@Table(name = "Orders")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Bill {
+public class Order {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id_bill;
+	private Integer id_order;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_user", nullable = false)
 	private User user;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_product", nullable = false)
 	private Product product;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_product_color", nullable = false)
 	private ProductColor productColor;
 	
 	@Column(name = "quantity", nullable = false)
 	private Integer quantity;
 	
-	@Column(name = "creation_date", nullable = false)
-	@Temporal(TemporalType.DATE)
-	private Date creationDate;
-	
-	@Column(name = "total", nullable = false)
-	private double total;
+    @Column(name = "creation_date", nullable = false)
+    @Temporal(TemporalType.DATE)
+    private Date creationDate;
+    
+    @Column(name = "status_order", nullable = false, length = 100)
+    private String statusOrder;
+    
+    @Column(name = "total")
+    private Double total;
 }

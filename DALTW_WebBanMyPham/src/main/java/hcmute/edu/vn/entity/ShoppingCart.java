@@ -2,6 +2,7 @@ package hcmute.edu.vn.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -14,25 +15,22 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Table(name = "Shops")
+@Table(name = "ShoppingCart")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Shop {
+public class ShoppingCart {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id_shop;
+	private Integer id_shopping_cart;
 	
-	@ManyToOne
-	@JoinColumn(name = "id_salesman", nullable = false)
-	private User salesman;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_user", nullable = false)
+	private User user;
 	
-	@Column(name = "name_shop", length = 100, nullable = false)
-	private String name;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_product", nullable = false)
+	private Product product;
 	
-	@Column(name = "information", columnDefinition = "TEXT") 
-	private String information;
-	
-	@Column(name = "image", length = 500)
-	private String image;
+	@Column(name = "quantity", nullable = false)
+	private Integer quantity;
 }
-
