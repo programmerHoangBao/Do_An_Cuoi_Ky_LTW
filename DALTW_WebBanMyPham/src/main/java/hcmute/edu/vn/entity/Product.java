@@ -39,10 +39,6 @@ public class Product {
 	@Column(name = "quantity", nullable = false)
 	private Integer quantity;
 	
-    @ManyToOne
-    @JoinColumn(name = "id_warehouse", nullable = false)
-    private Warehouse warehouse;
-	
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<ProductColor> productColors;
 }
