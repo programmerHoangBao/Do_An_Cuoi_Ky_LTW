@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class HomeController {
-	@GetMapping(value = "/")
+	@GetMapping(value = {"/", "/admin/home", "/saler/home", "/user/home"})
 	public String Home() {
-		return "home";
+		return "Home/home";
 	}
 }
