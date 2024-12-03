@@ -1,12 +1,13 @@
-package hcmute.edu.vn.controller;
+package hcmute.edu.vn.controller.user;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-@Controller
+@Controller("userHomeController")
 public class HomeController {
-	@GetMapping(value = {"/", "/admin/home", "/saler/home", "/user/home"})
+	@GetMapping(value = {"/", "/user/home"})
 	public String Home() {
 		return "Home/home";
 	}
 }
+

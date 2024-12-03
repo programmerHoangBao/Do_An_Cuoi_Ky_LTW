@@ -42,9 +42,9 @@ public class Order {
 	@Column(name = "quantity", nullable = false)
 	private Integer quantity;
 	
-    @Column(name = "creation_date", nullable = false)
-    @Temporal(TemporalType.DATE)
-    private Date creationDate;
+	@Column(name = "creation_time", nullable = false) 
+	@Temporal(TemporalType.TIMESTAMP) 
+	private Date creationTime;
     
     @Column(name = "status_order", nullable = false, length = 100)
     private String statusOrder;

@@ -9,7 +9,7 @@
 <body>
 	<header>
 		<div>
-			<%@include file="/common/saler/header.jsp"%>
+			<%@include file="/common/vendor/header.jsp"%>
 		</div>
 	</header>
 
@@ -21,7 +21,7 @@
 
 	<footer>
 		<div>
-			<%@include file="/common/saler/footer.jsp"%>
+			<%@include file="/common/vendor/footer.jsp"%>
 		</div>
 	</footer>
 </body>

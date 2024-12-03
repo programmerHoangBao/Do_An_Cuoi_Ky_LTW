@@ -32,6 +32,7 @@ body {
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
+    text-align: center; /* Căn giữa nội dung trong thanh bên */
 }
 
 .sidenav a {
@@ -55,34 +56,16 @@ body {
     margin-left: 50px;
 }
 
-/* Search Box */
-.search-container {
-    padding: 10px;
+/* Logo */
+.logo {
+    margin-bottom: 20px;
 }
 
-.search-box {
-    display: flex;
-    width: 100%;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.search-box input[type="text"] {
-    border: none;
-    padding: 10px;
-    width: 80%;
-}
-
-.search-box button {
-    padding: 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-.search-box button:hover {
-    background-color: #45a049;
+.logo img {
+    border-radius: 50%; /* Hiển thị hình ảnh logo dưới dạng hình tròn */
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
 }
 
 /* Login Text */
