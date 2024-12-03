@@ -33,6 +33,10 @@ public class Product {
 	@JoinColumn(name = "id_shop", nullable = false)
 	private Shop shop;
 	
+	@ManyToOne
+	@JoinColumn(name = "id_category", nullable = false)
+	private Category category;
+	
 	@Column(name = "price", nullable = false)
 	private Double price;
 	
