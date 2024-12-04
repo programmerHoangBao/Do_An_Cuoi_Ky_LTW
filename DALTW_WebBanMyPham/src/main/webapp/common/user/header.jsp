@@ -14,8 +14,8 @@
             <img src="${pageContext.request.contextPath}/templates/images/logo.png" />
             <label id="name">Cosmetics</label>
         </div>
-        <div class="container-fluid">
-            <nav class="navbar navbar-light bg-light">
+        <div class="header-container-fluid">
+            <nav class="header-navbar navbar-light header-bg-light">
                 <div class="navbar-links">
                     <a href="${pageContext.request.contextPath}/index.html">Trang chủ</a>
                     <a href="${pageContext.request.contextPath}/products.html">Cửa hàng</a>

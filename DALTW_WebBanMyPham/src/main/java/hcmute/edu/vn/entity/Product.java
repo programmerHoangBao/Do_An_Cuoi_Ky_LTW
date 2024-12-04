@@ -33,11 +33,18 @@ public class Product {
 	@JoinColumn(name = "id_shop", nullable = false)
 	private Shop shop;
 	
+	@ManyToOne
+	@JoinColumn(name = "id_category", nullable = false)
+	private Category category;
+	
 	@Column(name = "price", nullable = false)
 	private Double price;
 	
 	@Column(name = "quantity", nullable = false)
 	private Integer quantity;
+	
+	@Column(name = "status_product", nullable = false, columnDefinition = "BOOLEAN DEFAULT TRUE")
+	private boolean status_product;
 	
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<ProductColor> productColors;

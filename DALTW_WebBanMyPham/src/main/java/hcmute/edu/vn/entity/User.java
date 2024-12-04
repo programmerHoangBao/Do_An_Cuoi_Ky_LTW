@@ -56,4 +56,6 @@ public class User {
 	@Column(name = "image", length = 500)
 	private String image;
 	
+	@Column(name = "status_user", nullable = false)
+	private Integer status;
 }
