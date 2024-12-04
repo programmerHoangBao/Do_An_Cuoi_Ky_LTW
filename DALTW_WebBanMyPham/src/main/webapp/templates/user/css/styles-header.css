@@ -52,7 +52,7 @@ body {
 }
 
 /* Container Fluid */
-.container-fluid {
+.header-container-fluid {
     display: flex;
     justify-content: center; /* Căn giữa menu theo chiều ngang */
     align-items: center; /* Căn giữa menu theo chiều dọc */
@@ -60,7 +60,7 @@ body {
 }
 
 /* Navbar */
-.navbar {
+.header-navbar {
     display: flex;
     flex-direction: row; /* Chỉnh menu thành hàng ngang */
     justify-content: center; /* Căn giữa các liên kết */

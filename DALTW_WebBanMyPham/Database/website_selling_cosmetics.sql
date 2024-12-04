@@ -64,6 +64,7 @@ CREATE TABLE Products(
     id_category INT NOT NULL,
     price DECIMAL(18, 2) NOT NULL,
     quantity INT NOT NULL,
+    status_product BOOL DEFAULT TRUE NOT NULL,
     CONSTRAINT FK_Shop FOREIGN KEY (id_shop) REFERENCES Shops(id_shop),
     CONSTRAINT FK_Category FOREIGN KEY (id_category) REFERENCES Categories(id_category),
     CONSTRAINT CHK_Product CHECK (price > 0 and quantity >= 0)
