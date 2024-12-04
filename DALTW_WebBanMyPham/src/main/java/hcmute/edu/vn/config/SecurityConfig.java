@@ -47,6 +47,9 @@ public class SecurityConfig {
                         .logoutSuccessUrl("/")
                         .permitAll()
                 )
+                .exceptionHandling(exception -> exception
+                        .accessDeniedPage("/error-403") // Chỉ định trang lỗi 403
+                )
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED));
 
