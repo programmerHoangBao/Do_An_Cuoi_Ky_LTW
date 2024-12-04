@@ -38,7 +38,7 @@
                         <div class="item">
                             <div class="pd-box">
                                 <div class="box-images">
-                                    <a href="" title="${product.name}">
+                                    <a href="${pageContext.request.contextPath}/product/${product.id_product}" title="${product.name}">
                                         <img width="206" height="230"
                                              src="${pageContext.request.contextPath}/templates/images/logo.png"
 <%--                                             data-src="${pageContext.request.contextPath}/templates/images/logo.png"--%>
