@@ -15,7 +15,8 @@
         <h2 class="mb-4 text-primary">Đăng ký làm người bán</h2>
     </div>
 
-    <form action="/user/register" method="post" enctype="multipart/form-data">
+<%--    <form action="/user/register" method="post" enctype="multipart/form-data">--%>
+    <form action="/user/register" method="post">
         <!-- Thông tin người dùng -->
         <fieldset class="border rounded-3 p-4 mb-5">
             <legend class="w-auto px-3 text-primary">Thông tin người dùng</legend>
@@ -45,7 +46,7 @@
             <div class="row mb-3">
                 <label for="address" class="col-sm-3 col-form-label fw-semibold">Địa chỉ:</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="address" name="address" placeholder="Nhập địa chỉ" required>
+                    <input type="text" class="form-control" id="address" name="address" value="${user.address}" placeholder="Nhập địa chỉ" required>
                 </div>
             </div>
             <div class="row mb-3">
@@ -55,9 +56,10 @@
                 </div>
             </div>
             <div class="row mb-3">
-                <label for="logo" class="col-sm-3 col-form-label fw-semibold">Logo cửa hàng:</label>
+                <label for="image" class="col-sm-3 col-form-label fw-semibold">Logo cửa hàng:</label>
                 <div class="col-sm-9">
-                    <input type="file" class="form-control" id="logo" name="image" accept="image/*">
+<%--                    <input type="file" class="form-control" id="image" name="image" accept="image/*">--%>
+                    <input type="file" id="image" name="image"><br>
                 </div>
             </div>
         </fieldset>

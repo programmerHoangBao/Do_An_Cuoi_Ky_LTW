@@ -19,7 +19,7 @@ public class HomeController {
 	public String Home(ModelMap model) {
 		List<Product> products = productRepository.findAll();
 		model.addAttribute("products", products);
-		return "user/home";
+		return "User/home";
 	}
 }
 

@@ -4,7 +4,9 @@ import hcmute.edu.vn.entity.Shop;
 import hcmute.edu.vn.entity.User;
 import hcmute.edu.vn.service.implement.ShopService;
 import hcmute.edu.vn.service.implement.UserService;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.Part;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,7 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.UUID;
 
+//@MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 1024 * 1024 * 5, maxRequestSize = 1024 * 1024 * 5 * 5)
 @Controller
 @RequestMapping("/user")
 public class RegisterVendorController {
@@ -46,6 +49,8 @@ public class RegisterVendorController {
         user.setFullName("Test User");
         user.setSignUpDate(new Date());
         user.setRole("User");
+        user.setAddress("DongThap");
+        user.setBirthDate(new Date());
 
         // Chuyển thông tin người dùng vào form đăng ký
         model.addAttribute("user", user);
@@ -57,7 +62,6 @@ public class RegisterVendorController {
     // Xử lý đăng ký cửa hàng
     @PostMapping("/register")
     public String registerShop(@ModelAttribute("shop") Shop shop,
-                               @RequestParam("logo") MultipartFile logo,
                                HttpSession session) throws IOException {
 
         // Lấy thông tin người dùng đã đăng nhập từ session
@@ -67,41 +71,38 @@ public class RegisterVendorController {
 //            return "redirect:/login";  // Nếu chưa đăng nhập, chuyển hướng về trang đăng nhập
 //        }
         User user = new User();
-        user.setId_user(1);
-        user.setUsername("testuser");
+        user.setId_user(2);
+        user.setUsername("testuser1");
         user.setPassword("password");
         user.setEmail("testuser@example.com");
         user.setPhone("0123456789");
         user.setFullName("Test User");
         user.setSignUpDate(new Date());
         user.setRole("User");
+        user.setBirthDate(new Date());
+        user.setStatus(1);
 
         // Gán id của người dùng hiện tại làm người bán
         shop.setVendor(user);
         // Gán ngày đăng ký cửa hàng là ngày hiện tại
         shop.setSignUpDate(new Date());
 
-        // Lưu logo vào thư mục nếu có
-        if (!logo.isEmpty()) {
-            String logoFilename = saveLogo(logo);
-            shop.setImage(logoFilename);  // Lưu đường dẫn logo vào database
-        }
-
         // Lưu thông tin cửa hàng vào cơ sở dữ liệu
-        shopService.saveShop(shop);
+        shopService.save(shop);
 
         // Cập nhật vai trò người dùng thành 'Vendor'
         user.setRole("Vendor");
         userService.updateUser(user);
 
-        return "redirect:/shop/" + shop.getId_shop();  // Sau khi đăng ký, chuyển hướng đến trang cửa hàng vừa tạo
+        //return "/Home/home/?id=" + shop.getId_shop();  // Sau khi đăng ký, chuyển hướng đến trang cửa hàng vừa tạo
+        return "/vendor/home/?id=" + shop.getId_shop();  // Sau khi đăng ký, chuyển hướng đến trang cửa hàng vừa tạo
     }
 
     private String saveLogo(MultipartFile logo) throws IOException {
         // Tạo thư mục lưu trữ logo nếu chưa có
         File dir = new File(uploadDir);
         if (!dir.exists()) {
-            dir.mkdirs();
+            dir.mkdir();
         }
 
         // Lưu logo vào thư mục và trả về tên file

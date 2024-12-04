@@ -14,6 +14,15 @@ public class ShopService implements IShopService {
     @Autowired
     private ShopRepository shopRepository;
 
+    public ShopService(ShopRepository shopRepository) {
+        this.shopRepository = shopRepository;
+    }
+
+    @Override
+    public <S extends Shop> S save(S entity) {
+        return shopRepository.save(entity);
+    }
+
     @Override
     public Shop createShop(Shop shop, User salesman) {
         shop.setVendor(salesman); // Liên kết người bán với shop
@@ -21,8 +30,4 @@ public class ShopService implements IShopService {
         return shopRepository.save(shop); // Lưu vào DB
     }
 
-    @Override
-    public void saveShop(Shop shop) {
-        shopRepository.save(shop);
-    }
 }
