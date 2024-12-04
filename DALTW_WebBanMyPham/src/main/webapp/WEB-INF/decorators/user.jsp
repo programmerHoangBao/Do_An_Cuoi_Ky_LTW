@@ -5,6 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Cosmetics</title>
+<sitemesh:write property="head" />
+<!-- Thêm liên kết tới Boxicons -->
+<link href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css"
+	rel="stylesheet" />
 </head>
 <body>
 	<header>
