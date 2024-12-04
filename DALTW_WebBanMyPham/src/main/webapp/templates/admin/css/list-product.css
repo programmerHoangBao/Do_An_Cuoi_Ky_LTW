@@ -1,0 +1,205 @@
+/* Reset some default styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+}
+
+/* Main container styling */
+.contain {
+    width: 80%;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Search bar styling */
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.search-input {
+    width: 60%;
+    max-width: 600px;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 25px 0 0 25px;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.search-input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 6px rgba(0, 123, 255, 0.4);
+}
+
+.search-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 0 25px 25px 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+    background-color: #0056b3;
+}
+
+/* Table styling */
+.table_product {
+    overflow-x: auto;
+    margin-top: 20px;
+}
+
+/* File: styles.css */
+
+/* Kiểu cho div chứa button */
+.div_InsertProduct {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin-top: 20px;  /* Khoảng cách phía trên */
+    margin-bottom: 20px; /* Khoảng cách phía dưới */
+}
+
+/* Kiểu cho button */
+#btnInsertProduct {
+    padding: 10px 20px;  /* Khoảng cách bên trong */
+    background-color: #007bff; /* Màu nền */
+    color: white;  /* Màu chữ */
+    border: none;  /* Bỏ viền */
+    border-radius: 4px;  /* Bo tròn các góc */
+    cursor: pointer;  /* Con trỏ chuột */
+    font-size: 16px;  /* Kích thước chữ */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  /* Hiệu ứng đổ bóng */
+    transition: background-color 0.3s ease;  /* Hiệu ứng chuyển màu */
+}
+
+#btnInsertProduct:hover {
+    background-color: #0056b3;  /* Màu nền khi hover */
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+    font-size: 16px;
+    table-layout: fixed; /* Ensures columns are evenly distributed */
+}
+
+thead th {
+    background-color: #007bff;
+    color: white;
+    padding: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    border: 2px solid #0056b3;
+}
+
+tbody td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #ddd;
+    vertical-align: middle;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tbody tr:hover {
+    background-color: #eef5ff;
+    transition: background-color 0.3s ease;
+}
+
+#price_product {
+    color: #28a745;
+    font-weight: bold;
+}
+
+/* Image styling */
+#image_product {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#image_product_color {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#image_product_color:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Pagination styling */
+.pagination {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.pagination a {
+    display: inline-block;
+    margin: 5px;
+    padding: 10px 15px;
+    font-size: 14px;
+    text-decoration: none;
+    color: #007bff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.pagination a.active {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.pagination a:hover {
+    background-color: #0056b3;
+    color: white;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .contain {
+        width: 95%;
+    }
+
+    .search-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .search-input {
+        width: 100%;
+    }
+
+    table {
+        font-size: 14px;
+    }
+
+    #image_product_color {
+        width: 80px;
+        height: 80px;
+    }
+}

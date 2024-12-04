@@ -19,9 +19,9 @@
                 	</div>
                     <div class="select-item">
                         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                        <a href="${pageContext.request.contextPath}/index.html">Trang chủ</a>
-                        <a href="${pageContext.request.contextPath}/products.html">Cửa hàng</a>
-                        <a href="${pageContext.request.contextPath}/about.html">Sản phẩm</a>
+                        <a href="/admin/home">Trang chủ</a>
+                        <a href="/admin/shop">Cửa hàng</a>
+                        <a href="/admin/list-product">Sản phẩm</a>
                         <a href="${pageContext.request.contextPath}/client.html">Tài khoản của tôi</a>
                         <a href="${pageContext.request.contextPath}/client.html">Tài khoản người dùng</a>
                         <a href="${pageContext.request.contextPath}/contact.html">Hoạt động</a>
