@@ -18,6 +18,6 @@ public class LogoutController extends HttpServlet {
         cookie.setMaxAge(0); // Đặt thời gian sống của cookie về 0 để xóa nó
         resp.addCookie(cookie);
         //Redirect vể home
-        resp.sendRedirect("/login");
+        resp.sendRedirect("/");
     }
 }
