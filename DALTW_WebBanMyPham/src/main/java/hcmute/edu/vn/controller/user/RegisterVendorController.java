@@ -1,0 +1,115 @@
+package hcmute.edu.vn.controller.user;
+
+import hcmute.edu.vn.entity.Shop;
+import hcmute.edu.vn.entity.User;
+import hcmute.edu.vn.service.implement.ShopService;
+import hcmute.edu.vn.service.implement.UserService;
+import jakarta.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
+import java.util.UUID;
+
+@Controller
+@RequestMapping("/user")
+public class RegisterVendorController {
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private ShopService shopService;
+
+    @Value("${app.upload.dir}")
+    private String uploadDir; // Đường dẫn lưu logo cửa hàng
+
+    // Hiển thị form đăng ký cửa hàng
+    @GetMapping("/register")
+    public String showRegisterPage(HttpSession session, Model model) {
+        // Lấy thông tin người dùng đã đăng nhập từ session
+//        User user = (User) session.getAttribute("user");
+//        if (user == null) {
+//            return "redirect:/login";  // Nếu chưa đăng nhập, chuyển hướng về trang đăng nhập
+//        }
+        User user = new User();
+        user.setId_user(1);
+        user.setUsername("testuser");
+        user.setPassword("password");
+        user.setEmail("testuser@example.com");
+        user.setPhone("0123456789");
+        user.setFullName("Test User");
+        user.setSignUpDate(new Date());
+        user.setRole("User");
+
+        // Chuyển thông tin người dùng vào form đăng ký
+        model.addAttribute("user", user);
+        model.addAttribute("shop", new Shop());  // Thêm đối tượng shop để sử dụng trong form
+
+        return "User/registerVendor";  // Trả về JSP hiển thị form đăng ký cửa hàng
+    }
+
+    // Xử lý đăng ký cửa hàng
+    @PostMapping("/register")
+    public String registerShop(@ModelAttribute("shop") Shop shop,
+                               @RequestParam("logo") MultipartFile logo,
+                               HttpSession session) throws IOException {
+
+        // Lấy thông tin người dùng đã đăng nhập từ session
+//        User user = (User) session.getAttribute("user");
+//
+//        if (user == null) {
+//            return "redirect:/login";  // Nếu chưa đăng nhập, chuyển hướng về trang đăng nhập
+//        }
+        User user = new User();
+        user.setId_user(1);
+        user.setUsername("testuser");
+        user.setPassword("password");
+        user.setEmail("testuser@example.com");
+        user.setPhone("0123456789");
+        user.setFullName("Test User");
+        user.setSignUpDate(new Date());
+        user.setRole("User");
+
+        // Gán id của người dùng hiện tại làm người bán
+        shop.setVendor(user);
+        // Gán ngày đăng ký cửa hàng là ngày hiện tại
+        shop.setSignUpDate(new Date());
+
+        // Lưu logo vào thư mục nếu có
+        if (!logo.isEmpty()) {
+            String logoFilename = saveLogo(logo);
+            shop.setImage(logoFilename);  // Lưu đường dẫn logo vào database
+        }
+
+        // Lưu thông tin cửa hàng vào cơ sở dữ liệu
+        shopService.saveShop(shop);
+
+        // Cập nhật vai trò người dùng thành 'Vendor'
+        user.setRole("Vendor");
+        userService.updateUser(user);
+
+        return "redirect:/shop/" + shop.getId_shop();  // Sau khi đăng ký, chuyển hướng đến trang cửa hàng vừa tạo
+    }
+
+    private String saveLogo(MultipartFile logo) throws IOException {
+        // Tạo thư mục lưu trữ logo nếu chưa có
+        File dir = new File(uploadDir);
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+
+        // Lưu logo vào thư mục và trả về tên file
+        String filename = UUID.randomUUID().toString() + "-" + logo.getOriginalFilename();
+        File file = new File(uploadDir + File.separator + filename);
+        logo.transferTo(file);
+
+        return filename;  // Trả về đường dẫn lưu logo
+    }
+}
+
