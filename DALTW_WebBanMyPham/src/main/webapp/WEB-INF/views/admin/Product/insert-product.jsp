@@ -25,10 +25,11 @@
 			<c:if test="${not empty categories}">
 				<select id="selectShop">
 					<c:forEach items="${categories}" var="${category}">
-						<option value="${shop}">${shop.name}</option>
+						<option value="${category}">${category.name}</option>
 					</c:forEach>
 				</select>
 			</c:if>
+			<label i  = "priceProduct">Gía trị: </label>
 		</div>
 	</form>
 </body>
