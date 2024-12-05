@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Đăng nhập - Cửa hàng mỹ phẩm</title>
+  <title>Xác Thực OTP</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <style>
     body {
@@ -17,7 +17,7 @@
       margin: 0;
     }
 
-    .login-container {
+    .otp-container {
       background-color: #ffffff;
       padding: 40px;
       border-radius: 12px;
@@ -66,7 +66,7 @@
       color: #b0b0b0;
     }
 
-    .login-btn {
+    .otp-btn {
       width: 100%;
       padding: 12px;
       background-color: #ec8493;
@@ -78,7 +78,7 @@
       transition: background-color 0.3s ease;
     }
 
-    .login-btn:hover {
+    .otp-btn:hover {
       background-color: #ec8493;
     }
 
@@ -89,17 +89,17 @@
       font-size: 14px;
     }
 
-    .login-footer {
+    .otp-footer {
       margin-top: 20px;
     }
 
-    .login-footer a {
+    .otp-footer a {
       color: #ec8493;
       text-decoration: none;
       font-weight: bold;
     }
 
-    .login-footer a:hover {
+    .otp-footer a:hover {
       text-decoration: underline;
     }
 
@@ -115,28 +115,28 @@
 </head>
 <body>
 
-<div class="login-container">
+<div class="otp-container">
   <div class="brand-logo">
     <img src="${pageContext.request.contextPath}/templates/images/logo1.jpg"/>
   </div>
-  <h2>Đăng nhập</h2>
-  <form action="/authenticate" method="post">
+  <h2>Xác Thực Mã OTP</h2>
+  <form action="/forgotPassword/verifyOtp" method="post">
     <div class="input-field">
-      <input type="text" name="username" placeholder="Tên người dùng" required />
-      <i class="fas fa-user"></i>
+      <input type="text" name="email" value="${param.email}" readonly />
+      <i class="fas fa-envelope"></i>
     </div>
     <div class="input-field">
-      <input type="password" name="password" placeholder="Mật khẩu" required />
-      <i class="fas fa-lock"></i>
+      <input type="text" id="otp" name="otp" placeholder="Nhập mã OTP" required />
+      <i class="fas fa-key"></i>
     </div>
-    <button type="submit" class="login-btn">Đăng nhập</button>
-    <div class="error-message" style="${param.error == 'true' ? 'display: block;' : 'display: none;'}">
-      <p>Email người dùng hoặc mật khẩu không đúng. Vui lòng thử lại.</p>
+    <button type="submit" class="otp-btn">Xác Thực</button>
+    <div class="error-message" style="${error != null ? 'display: block;' : 'display: none;'}">
+      <p>${error}</p>
     </div>
   </form>
-  <div class="login-footer">
-    <p>Bạn chưa có tài khoản? <a href="/register">Đăng ký ngay</a></p>
-    <p><a href="/forgotPassword/verifyMail">Quên mật khẩu?</a></p>
+  <div class="otp-footer">
+    <p>Chưa nhận được mã? <a href="/resend-otp">Gửi lại mã OTP</a></p>
+    <p><a href="/login">Quay lại đăng nhập</a></p>
   </div>
 </div>
 

@@ -12,7 +12,7 @@
 <!-- header section start -->
 <div class="header_section">
     <div class="logo_and_name">
-        <img src="${pageContext.request.contextPath}/templates/images/logo.png"/>
+        <img src="${pageContext.request.contextPath}/templates/images/logo1.jpg"/>
         <label id="name">Cosmetics</label>
     </div>
     <div class="header-container-fluid">

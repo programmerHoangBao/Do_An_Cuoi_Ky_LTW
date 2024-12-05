@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Header</title>
@@ -15,7 +16,7 @@
         <nav class="navbar navbar-light bg-light justify-content-between">
             <div id="mySidenav" class="sidenav">
                 <div class="logo">
-                    <img src="${pageContext.request.contextPath}/templates/images/logo.png" alt="Logo"/>
+                    <img src="${pageContext.request.contextPath}/templates/images/logo1.jpg" alt="Logo"/>
                 </div>
                 <div class="select-item">
                     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -36,18 +37,18 @@
                     <ul>
                         <li>
                             <c:choose>
-                                <c:when test="${not empty username}">
+                                <c:when test="${not empty pri}">
                                     <!-- Nếu người dùng đã đăng nhập, hiển thị icon logout -->
                                     <a href="/logout">
                                         <i class='bx bx-door-open' style="font-size: 36px; color: black;"></i>
                                     </a>
                                 </c:when>
-                                <c:otherwise>
-                                    <!-- Nếu chưa đăng nhập, hiển thị icon người dùng -->
-                                    <a href="${pageContext.request.contextPath}/login">
-                                        <i class='bx bxs-user-account' style="font-size: 36px; color: black;"></i>
-                                    </a>
-                                </c:otherwise>
+<%--                                <c:otherwise>--%>
+<%--                                    <!-- Nếu chưa đăng nhập, hiển thị icon người dùng -->--%>
+<%--                                    <a href="${pageContext.request.contextPath}/login">--%>
+<%--                                    <i class='bx bxs-user-account' style="font-size: 36px; color: black;"></i>--%>
+<%--                                    </a>--%>
+<%--                                </c:otherwise>--%>
                             </c:choose>
                         </li>
                         <li>
