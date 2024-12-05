@@ -16370,6 +16370,28 @@ select.my-form {
     border: none;
     padding: 0 10px
 }
+/* Thu nhỏ các nút màu */
+.btn-color {
+    font-size: 12px; /* Thay đổi kích thước chữ */
+    padding: 5px 10px; /* Giảm padding */
+    height: 30px; /* Giảm chiều cao */
+    width: auto; /* Để kích thước tự động theo nội dung */
+    border-radius: 4px; /* Tùy chọn: làm tròn góc */
+    margin: 5px; /* Giảm khoảng cách giữa các nút */
+}
+
+/* Nếu cần thu nhỏ các màu nhỏ (icon hoặc vòng tròn) trong nút */
+.btn-color span {
+    font-size: 10px; /* Kích thước icon bên trong nếu có */
+    height: 20px; /* Chiều cao nhỏ hơn cho icon */
+    width: 20px; /* Chiều rộng nhỏ hơn cho icon */
+}
+
+/* Khi nút được chọn, thu nhỏ nhưng giữ hiệu ứng */
+.btn-color.selected {
+    border: 2px solid #007bff; /* Tạo hiệu ứng viền cho nút được chọn */
+    background-color: #f0f0f0; /* Tùy chọn: thay đổi màu nền khi chọn */
+}
 
 .ul-category li.active a:before {
     content: "";
