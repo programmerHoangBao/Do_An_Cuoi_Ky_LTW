@@ -36,27 +36,27 @@ public class RegisterVendorController {
     @GetMapping("/register")
     public String showRegisterPage(HttpSession session, Model model) {
         // Lấy thông tin người dùng đã đăng nhập từ session
-        User user = (User) session.getAttribute("user");
-        if (user == null) {
-            return "redirect:/login";  // Nếu chưa đăng nhập, chuyển hướng về trang đăng nhập
-        }
-//        User user = new User();
-//        user.setId_user(1);
-//        user.setUsername("testuser");
-//        user.setPassword("password");
-//        user.setEmail("testuser@example.com");
-//        user.setPhone("0123456789");
-//        user.setFullName("Test User");
-//        user.setSignUpDate(new Date());
-//        user.setRole("User");
-//        user.setAddress("DongThap");
-//        user.setBirthDate(new Date());
+//        User user = (User) session.getAttribute("user");
+//        if (user == null) {
+//            return "redirect:/login";  // Nếu chưa đăng nhập, chuyển hướng về trang đăng nhập
+//        }
+        User user = new User();
+        user.setId_user(1);
+        user.setUsername("testuser");
+        user.setPassword("password");
+        user.setEmail("testuser@example.com");
+        user.setPhone("0123456789");
+        user.setFullName("Test User");
+        user.setSignUpDate(new Date());
+        user.setRole("User");
+        user.setAddress("DongThap");
+        user.setBirthDate(new Date());
 
         // Chuyển thông tin người dùng vào form đăng ký
         model.addAttribute("user", user);
         model.addAttribute("shop", new Shop());  // Thêm đối tượng shop để sử dụng trong form
 
-        return "User/registerVendor";  // Trả về JSP hiển thị form đăng ký cửa hàng
+        return "user/registerVendor";  // Trả về JSP hiển thị form đăng ký cửa hàng
     }
 
     // Xử lý đăng ký cửa hàng
@@ -65,22 +65,22 @@ public class RegisterVendorController {
                                HttpSession session) throws IOException {
 
         // Lấy thông tin người dùng đã đăng nhập từ session
-        User user = (User) session.getAttribute("user");
-
-        if (user == null) {
-            return "redirect:/login";  // Nếu chưa đăng nhập, chuyển hướng về trang đăng nhập
-        }
-//        User user = new User();
-//        user.setId_user(2);
-//        user.setUsername("testuser1");
-//        user.setPassword("password");
-//        user.setEmail("testuser@example.com");
-//        user.setPhone("0123456789");
-//        user.setFullName("Test User");
-//        user.setSignUpDate(new Date());
-//        user.setRole("User");
-//        user.setBirthDate(new Date());
-//        user.setStatus(1);
+//        User user = (User) session.getAttribute("user");
+//
+//        if (user == null) {
+//            return "redirect:/login";  // Nếu chưa đăng nhập, chuyển hướng về trang đăng nhập
+//        }
+        User user = new User();
+        user.setId_user(2);
+        user.setUsername("testuser1");
+        user.setPassword("password");
+        user.setEmail("testuser@example.com");
+        user.setPhone("0123456789");
+        user.setFullName("Test User");
+        user.setSignUpDate(new Date());
+        user.setRole("User");
+        user.setBirthDate(new Date());
+        user.setStatus(1);
 
         // Gán id của người dùng hiện tại làm người bán
         shop.setVendor(user);

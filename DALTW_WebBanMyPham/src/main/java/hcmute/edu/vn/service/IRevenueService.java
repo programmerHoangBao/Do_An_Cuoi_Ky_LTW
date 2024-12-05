@@ -1,0 +1,12 @@
+package hcmute.edu.vn.service;
+
+import java.util.List;
+
+public interface IRevenueService {
+
+    List<Object[]> getDailyRevenue(int month, int year, int day);
+
+    List<Object[]> getMonthlyRevenue(int year, int month);
+
+    List<Object[]> getYearlyRevenue();
+}

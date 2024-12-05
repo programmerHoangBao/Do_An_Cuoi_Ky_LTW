@@ -27,7 +27,7 @@ public class HomeController {
 
 		List<Product> products = productRepository.findAll();
 		model.addAttribute("products", products);
-		return "User/home";
+		return "user/home";
 	}
 }
 
