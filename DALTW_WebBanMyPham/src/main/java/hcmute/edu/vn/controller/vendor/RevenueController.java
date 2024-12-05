@@ -19,6 +19,23 @@ public class RevenueController {
     @Autowired
     private RevenueService revenueService;
 
+    @GetMapping("/view")
+    public String revenue(Model model,@RequestParam(defaultValue = "day") String type) {
+        // Chuẩn bị dữ liệu cho biểu đồ
+        List<Object[]> data= revenueService.getTodayRevenue();
+        List<String> labels = new ArrayList<>();
+        List<BigDecimal> totals = new ArrayList<>();
+        for (Object[] row : data) {
+            labels.add(row[0].toString()); // Ngày, tháng, hoặc năm
+            totals.add(BigDecimal.valueOf(((Number) row[1]).doubleValue()));
+        }
+
+        model.addAttribute("labels", labels);
+        model.addAttribute("totals", totals);
+        model.addAttribute("type", type);
+        return "vendor/revenue";
+    }
+
     @GetMapping
     public String viewRevenuePage(
             @RequestParam(defaultValue = "day") String type,

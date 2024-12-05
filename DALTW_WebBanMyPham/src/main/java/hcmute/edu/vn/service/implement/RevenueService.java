@@ -5,6 +5,7 @@ import hcmute.edu.vn.service.IRevenueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -29,6 +30,12 @@ public class RevenueService implements IRevenueService {
     @Override
     public List<Object[]> getYearlyRevenue() {
         return orderRepository.getYearlyRevenue();
+    }
+
+    @Override
+    public List<Object[]> getTodayRevenue() {
+        LocalDate today = LocalDate.now();
+        return orderRepository.findRevenueByDate(today, today.plusDays(1)); // ngày hôm nay
     }
 
 }

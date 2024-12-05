@@ -1,13 +1,5 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: GIANG
-  Date: 12/5/2024
-  Time: 12:58 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,26 +12,29 @@
 <body>
 <div class="container mt-5">
   <h3>Biểu đồ doanh thu</h3>
+
+  <!-- Form chọn kiểu doanh thu -->
   <form method="get" action="/revenue" class="mb-3">
-    <!-- Chọn loại doanh thu -->
+    <!-- Combobox chọn ngày/tháng/năm -->
     <select name="type" class="form-select mb-3" id="typeSelect" onchange="updateInputs()">
       <option value="day" ${type == 'day' ? 'selected' : ''}>Doanh thu theo ngày</option>
       <option value="month" ${type == 'month' ? 'selected' : ''}>Doanh thu theo tháng</option>
       <option value="year" ${type == 'year' ? 'selected' : ''}>Doanh thu theo năm</option>
     </select>
 
-    <!-- Chọn ngày/tháng/năm -->
+    <!-- Thêm ô nhập liệu cho ngày/tháng/năm -->
     <div id="inputGroup" class="mb-3"></div>
 
     <button type="submit" class="btn btn-primary">Xem doanh thu</button>
   </form>
 
+  <!-- Biểu đồ doanh thu -->
   <canvas id="revenueChart"></canvas>
 </div>
 
 <script>
-  const labels = ${labels};
-  const totals = ${totals};
+  const labels = ${labels}; // Dữ liệu từ model
+  const totals = ${totals}; // Dữ liệu từ model
 
   const ctx = document.getElementById('revenueChart').getContext('2d');
   new Chart(ctx, {
@@ -62,7 +57,7 @@
     }
   });
 
-  // Hiển thị ô nhập liệu dựa vào loại
+  // Cập nhật các ô nhập liệu tùy theo loại doanh thu
   function updateInputs() {
     const type = document.getElementById('typeSelect').value;
     const inputGroup = document.getElementById('inputGroup');
@@ -86,7 +81,7 @@
     }
   }
 
-  // Gọi hàm cập nhật input ban đầu
+  // Gọi hàm cập nhật input khi trang được tải
   updateInputs();
 </script>
 </body>

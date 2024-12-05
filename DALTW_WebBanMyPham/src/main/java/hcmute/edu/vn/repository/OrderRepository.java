@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -28,4 +29,12 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
     @Query("SELECT FUNCTION('YEAR', o.creationTime) as year, SUM(o.total) as total " +
             "FROM Order o WHERE o.statusOrder = 'Đã nhận' GROUP BY FUNCTION('YEAR', o.creationTime)")
     List<Object[]> getYearlyRevenue();
+
+    //Doanh thu ngày hiện tại
+    @Query("SELECT o.creationTime, SUM(o.total) " +
+            "FROM Order o " +
+            "WHERE o.creationTime >= :startDate AND o.creationTime < :endDate " +
+            "GROUP BY o.creationTime " +
+            "ORDER BY o.creationTime")
+    List<Object[]> findRevenueByDate(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 }
