@@ -13,10 +13,10 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Table(name = "FavoriteShop")
+@Table(name = "HistoryProduct")
 @AllArgsConstructor
 @NoArgsConstructor
-public class FavoriteShop {
+public class HistoryProduct {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id_favorite_shop;
@@ -26,6 +26,6 @@ public class FavoriteShop {
 	private User user;
 	
 	@ManyToOne
-	@JoinColumn(name = "id_shop", nullable = false)
-	private Shop shop;
+	@JoinColumn(name = "id_product", nullable = false)
+	private Product product;
 }

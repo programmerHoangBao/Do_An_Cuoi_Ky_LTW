@@ -76,6 +76,12 @@
                                     <h1 class="title-Product">
                                         ${product.name}
                                     </h1>
+                                    <p><strong>Danh mục:</strong> ${product.category}</p>
+                                    <p><strong>Tên cửa hàng:</strong> ${product.shop.name}</p>
+                                    <!-- Nút Like và Follow Shop -->
+                                    <button type="button" class="btn-bts btn-hea" onclick="followShop(${product.shop.id}, ${userId})">
+                                        <i class='bx bx-heart'></i>
+                                    </button>
                                     <div class="box-price">
                                         <div class="price-drop">
                                             <span>${product.price}₫</span>
@@ -88,11 +94,22 @@
                                         <div class="hide hide min-sch ">
                                             <span class="hide">: <span><b id="load-type"></b></span></span>
                                         </div>
-                                        <div class="select-land hide hide">
-                                            <span class="hide">:</span>
-                                            <ul class="ul-non ul-select">
+                                        <div class="select-land">
+                                            <span><strong>Chọn màu:</strong></span>
+                                            <ul class="ul-non ul-select" style="display: flex; gap: 10px; padding: 0; list-style: none;">
+                                                <c:forEach items="${product.productColors}" var="color">
+                                                    <li>
+                                                        <button
+                                                            type="button"
+                                                            class="btn-color"
+                                                            data-color-id="${color.id_product_color}"
+                                                            onclick="selectColor('${color.id_product_color}', event)">
+                                                            ${color.color}
+                                                        </button>
+                                                    </li>
+                                                </c:forEach>
                                             </ul>
-                                            <div class="clr"></div>
+                                                <div class="clr"></div>
                                         </div>
                                         <div class="inner-load">
                                             <div class="box-add">
@@ -103,15 +120,13 @@
                                                 </div>
                                                 <div class="bst">
                                                     <button type="button" class="btn-bts btn-atc" onclick="AddCard(1)">
-                                                        <i class="fa fa-shopping-cart"></i>
+                                                        <i class='bx bx-cart-add'></i>
                                                         Thêm giỏ hàng
                                                     </button>
                                                     <button type="button" class="btn-bts btn-fs" onclick="AddCard(2)">
                                                         Mua Nhanh
                                                     </button>
-                                                    <button type="button" class="btn-bts btn-hea " onclick="LikeProduct(this, '10326')">
-                                                        <i class="fa fa-heart-o heart_new"></i>
-                                                    </button>
+
                                                     <div class="clr"></div>
                                                 </div>
                                                 <div class="clr"></div>
