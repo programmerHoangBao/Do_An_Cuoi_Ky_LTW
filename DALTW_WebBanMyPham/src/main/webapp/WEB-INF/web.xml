@@ -5,7 +5,6 @@
 	version="6.0">
 	<display-name>DALTW_WebBanMyPham</display-name>
 
-
 	<filter>
 		<filter-name>sitemesh</filter-name>
 		<filter-class>org.sitemesh.config.ConfigurableSiteMeshFilter</filter-class>
