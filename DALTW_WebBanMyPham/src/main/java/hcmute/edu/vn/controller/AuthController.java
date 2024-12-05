@@ -2,8 +2,10 @@ package hcmute.edu.vn.controller;
 
 import hcmute.edu.vn.config.security.UserInfoService;
 import hcmute.edu.vn.entity.UserInfo;
+import hcmute.edu.vn.entity.User;
 import hcmute.edu.vn.model.AuthRequest;
 import hcmute.edu.vn.repository.UserInfoRepository;
+import hcmute.edu.vn.repository.UserRepository;
 import hcmute.edu.vn.service.UserService;
 import hcmute.edu.vn.utils.JwtUtil;
 import jakarta.servlet.http.Cookie;
@@ -23,12 +25,17 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Date;
+
 @Controller
 public class AuthController {
 
     @Autowired
     private UserService userService;
-    
+
+    @Autowired
+    private UserRepository userRepository;
+
     @Autowired
     private AuthenticationManager authenticationManager;
 
@@ -115,9 +122,6 @@ public class AuthController {
                 return "redirect:/vendor/home"; // Điều hướng đến trang vendor
             }
         } catch (AuthenticationException e) {
-            System.out.println(username);
-            System.out.println(password);
-            System.out.println(e.getMessage());
             model.addAttribute("error", "Invalid username or password");
             return "redirect:/login";
         }
@@ -128,13 +132,30 @@ public class AuthController {
     
     @PostMapping("/register/register-verify-otp")
     public String verifyOtp(@RequestParam("otp") Integer otp, @RequestParam("email") String email, Model model) {
-    	UserInfo user = userInfoRepository.findByEmail(email)
+    	UserInfo userInfo = userInfoRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("Please provide a valid email!"));
 
-        if (user != null && user.getOtp().equals(otp)) {
-            user.setEnabled(true);
-            user.setOtp(null); // Clear OTP after successful verification
-            userInfoRepository.save(user);
+        if (userInfo != null && userInfo.getOtp().equals(otp)) {
+            userInfo.setEnabled(true);
+            userInfo.setOtp(null); // Clear OTP after successful verification
+            userInfoRepository.save(userInfo);
+
+            User user = new User();
+
+            user.setUsername(userInfo.getName());
+            user.setPassword(userInfo.getPassword());
+            user.setEmail(userInfo.getEmail());
+            user.setPhone("0912312345");
+            user.setFullName(userInfo.getName()); // name khac voi username can xem lai
+            user.setSignUpDate(new Date());
+            user.setBirthDate(new Date());
+            user.setAddress("UTE");
+            user.setImage("123");
+            user.setRole("ROLE_USER");  // Mặc định là ROLE_USER, có thể thay đổi sau
+            user.setStatus(1);
+
+            // Lưu vào bảng user
+            userRepository.save(user);
             model.addAttribute("message", "Account activated successfully!");
             return "redirect:/login";
         } else {
