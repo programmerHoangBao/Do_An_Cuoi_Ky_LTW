@@ -8,6 +8,7 @@ import hcmute.edu.vn.service.implement.UserService;
 import hcmute.edu.vn.service.implement.FollowShopService;
 import hcmute.edu.vn.service.implement.ProductService;
 import hcmute.edu.vn.service.implement.ShopService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -28,9 +29,11 @@ public class ProductController {
     UserRepository userRepository;
 
     @GetMapping("/product/{id}")
-    public String productDetail(@PathVariable("id") Integer id, ModelMap model) {
+    public String productDetail(@PathVariable("id") Integer id, ModelMap model, HttpSession session) {
         Product product = productService.findProductById(id);
+        User user = (User) session.getAttribute("user");
         model.addAttribute("product", product);
+        model.addAttribute("user", user);
         return "user/product-detail";
     }
 

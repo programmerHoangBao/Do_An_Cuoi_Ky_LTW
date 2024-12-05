@@ -1,13 +1,16 @@
 package hcmute.edu.vn.controller;
 
 import hcmute.edu.vn.config.security.UserInfoService;
+import hcmute.edu.vn.entity.User;
 import hcmute.edu.vn.entity.UserInfo;
 import hcmute.edu.vn.model.AuthRequest;
 import hcmute.edu.vn.repository.UserInfoRepository;
 import hcmute.edu.vn.service.implement.UserService;
+import hcmute.edu.vn.service.implement.UserService1;
 import hcmute.edu.vn.utils.JwtUtil;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -25,10 +28,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class AuthController {
-
     @Autowired
     private UserService userService;
-    
+
+    @Autowired
+    private UserService1 userService1;
+
     @Autowired
     private AuthenticationManager authenticationManager;
 
@@ -77,6 +82,7 @@ public class AuthController {
     @PostMapping("/authenticate")
     public String authenticate(@RequestParam("username") String username,
                                @RequestParam("password") String password,
+                               HttpSession session,
                                HttpServletResponse response, Model model) {
         try {
         	// Tìm người dùng trong cơ sở dữ liệu
@@ -87,7 +93,7 @@ public class AuthController {
                 model.addAttribute("error", "Your account is disabled.");
                 return "redirect:/login";
             }
-        	
+
             // Tiến hành xác thực người dùng
             authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(username, password)
@@ -105,6 +111,13 @@ public class AuthController {
             
             // Lưu token vào model để truyền sang view nếu cần
             model.addAttribute("token", token);
+
+            // Tìm user theo username và password
+            User user1 = userService1.findByUsername(username);
+            if (user1 != null) {
+                // Lưu thông tin user vào session
+                session.setAttribute("user", user1);
+            }
 
             // Điều hướng dựa trên vai trò người dùng
             if (userDetails.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
@@ -147,5 +160,25 @@ public class AuthController {
     public String accessDenied() {
         return "auth/error-403";
     }
-    
+
+//    @PostMapping("/login")
+//    public String handleLogin(@RequestParam String username,
+//                              @RequestParam String password,
+//                              HttpSession session,
+//                              Model model) {
+//        // Tìm user theo username và password
+//        User user = userService1.findByUsername(username);
+//
+//        if (user != null) {
+//            // Lưu thông tin user vào session
+//            session.setAttribute("user", user);
+//
+//            // Chuyển hướng đến trang cần thiết sau khi login
+//            return "redirect:/user/home";
+//        }
+//
+//        // Nếu đăng nhập thất bại, trả về trang login với thông báo lỗi
+//        model.addAttribute("error", "Tên đăng nhập hoặc mật khẩu không đúng!");
+//        return "login";
+//    }
 }

@@ -86,7 +86,7 @@
                                                 id="followButton"
                                                 class="btn-bts btn-hea"
                                                 data-shop-id="${product.shop.id_shop}"
-                                                data-user-id="${userId}">
+                                                data-user-id="${user.id_user}">
                                             <i class='bx bx-heart'></i>
                                         </button>
                                     </div>
@@ -214,7 +214,7 @@
 
                 <h5>Viết bình luận</h5>
                 <form id="comment-form">
-                    <input type="hidden" id="userId" value="<%= userId %>"> <!-- Lấy từ session -->
+                    <input type="hidden" id="userId" value="<%= session.getAttribute("user")%>"> <!-- Lấy từ session -->
                     <input type="hidden" id="productId" value="${product.id_product}"> <!-- ID sản phẩm hiện tại -->
 
                     <!-- Thêm phần đánh giá điểm -->
