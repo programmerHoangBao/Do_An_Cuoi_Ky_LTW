@@ -22,6 +22,7 @@
                 <a href="${pageContext.request.contextPath}/products.html">Cửa hàng</a>
                 <a href="${pageContext.request.contextPath}/login">Tài khoản của tôi</a>
                 <a href="${pageContext.request.contextPath}/contact.html">Hoạt động</a>
+                <a href="${pageContext.request.contextPath}/user/register">Đăng kí bán hàng</a>
             </div>
             <div class="login_text">
                 <ul>

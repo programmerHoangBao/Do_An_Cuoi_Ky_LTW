@@ -1,10 +1,11 @@
-package hcmute.edu.vn.service;
+package hcmute.edu.vn.service.implement;
 
 import hcmute.edu.vn.entity.UserInfo;
 import hcmute.edu.vn.entity.User;
 import hcmute.edu.vn.model.MailBody;
 import hcmute.edu.vn.repository.UserInfoRepository;
 import hcmute.edu.vn.repository.UserRepository;
+import hcmute.edu.vn.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

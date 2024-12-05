@@ -24,7 +24,7 @@ public class FollowShop {
 	
 	@ManyToOne
 	@JoinColumn(name = "id_user", nullable = false)
-	private UserInfo user;
+	private User user;
 	
 	@ManyToOne
 	@JoinColumn(name = "id_shop", nullable = false)

@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
 <!-- Tải jQuery từ CDN -->
 <!-- Tải JavaScript của Owl Carousel từ CDN -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="${pageContext.request.contextPath}/templates/user/js/easyzoom.js"></script>
@@ -76,12 +77,19 @@
                                     <h1 class="title-Product">
                                         ${product.name}
                                     </h1>
-                                    <p><strong>Danh mục:</strong> ${product.category}</p>
-                                    <p><strong>Tên cửa hàng:</strong> ${product.shop.name}</p>
-                                    <!-- Nút Like và Follow Shop -->
-                                    <button type="button" class="btn-bts btn-hea" onclick="followShop(${product.shop.id}, ${userId})">
-                                        <i class='bx bx-heart'></i>
-                                    </button>
+                                    <p><strong>Danh mục:</strong> ${product.category.name}</p>
+
+                                    <div class="shop-follow-wrapper">
+                                        <p><strong>Tên cửa hàng:</strong> ${product.shop.name}</p>
+                                        <button
+                                                type="button"
+                                                id="followButton"
+                                                class="btn-bts btn-hea"
+                                                data-shop-id="${product.shop.id_shop}"
+                                                data-user-id="${user.id_user}">
+                                            <i class='bx bx-heart'></i>
+                                        </button>
+                                    </div>
                                     <div class="box-price">
                                         <div class="price-drop">
                                             <span>${product.price}₫</span>
@@ -141,4 +149,109 @@
             </div>
         </div>
     </div>
+    <div class="container my-4" style="margin-left: -70px;">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="description-tab" data-bs-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true">MÔ TẢ</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="payment-policy-tab" data-bs-toggle="tab" href="#payment-policy" role="tab" aria-controls="payment-policy" aria-selected="false">CHÍNH SÁCH THANH TOÁN</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="return-policy-tab" data-bs-toggle="tab" href="#return-policy" role="tab" aria-controls="return-policy" aria-selected="false">CHÍNH SÁCH ĐỔI TRẢ</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="comments-tab" data-bs-toggle="tab" href="#comments" role="tab" aria-controls="comments" aria-selected="false">BÌNH LUẬN</a>
+            </li>
+        </ul>
+    </div>
+    <div class="tab-content" id="myTabContent" style="color: black; background-color: #fad0c4; padding: 40px; border: 2px solid gray;">
+        <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
+            Mô tả sản phẩm không có sẵn.
+        </div>
+        <div class="tab-pane fade" id="payment-policy" role="tabpanel" aria-labelledby="payment-policy-tab">
+            <h4>Chính Sách Thanh Toán</h4>
+            <p>Chúng tôi cung cấp nhiều phương thức thanh toán tiện lợi để khách hàng có thể dễ dàng thanh toán cho đơn hàng của mình. Dưới đây là các phương thức thanh toán mà UTESHOP hỗ trợ:</p>
+            <h5>1. Thanh Toán Qua Thẻ Tín Dụng</h5>
+            <p>Khách hàng có thể thanh toán trực tuyến bằng thẻ tín dụng hoặc thẻ ghi nợ quốc tế (Visa, MasterCard, JCB,…) qua cổng thanh toán bảo mật của chúng tôi.</p>
+            <h5>2. Thanh Toán Qua Chuyển Khoản Ngân Hàng</h5>
+            <p>Khách hàng có thể thực hiện thanh toán bằng cách chuyển khoản vào tài khoản ngân hàng của UTESHOP. Sau khi thanh toán, vui lòng gửi thông tin chuyển khoản cho chúng tôi qua email hoặc hệ thống để xác nhận đơn hàng.</p>
+            <h5>3. Thanh Toán Khi Nhận Hàng (COD)</h5>
+            <p>Khách hàng có thể lựa chọn thanh toán khi nhận hàng (COD). Sau khi nhận hàng từ đơn vị vận chuyển, khách hàng có thể thanh toán bằng tiền mặt cho nhân viên giao hàng.</p>
+            <h5>4. Chính Sách Hoàn Tiền</h5>
+            <p>Trong trường hợp bạn muốn hoàn lại sản phẩm, chúng tôi sẽ hoàn lại tiền vào tài khoản của bạn theo phương thức thanh toán đã sử dụng. Thời gian hoàn tiền sẽ được thực hiện trong vòng 5-7 ngày làm việc kể từ khi chúng tôi xác nhận yêu cầu hoàn trả.</p>
+            <h5>5. Lưu Ý</h5>
+            <p>- Mọi giao dịch thanh toán đều được bảo mật và mã hóa.</p>
+            <p>- Nếu có bất kỳ vấn đề gì về thanh toán, vui lòng liên hệ với bộ phận chăm sóc khách hàng của chúng tôi để được hỗ trợ.</p>
+        </div>
+        <div class="tab-pane fade" id="return-policy" role="tabpanel" aria-labelledby="return-policy-tab">
+            Nội dung chính sách đổi trả.
+            <p>Chúng tôi cam kết mang lại sự hài lòng cho khách hàng khi mua sắm tại UTESHOP. Nếu bạn không hài lòng với sản phẩm đã mua, bạn có thể đổi trả sản phẩm theo các chính sách dưới đây:</p>
+            <h4>1. Điều Kiện Đổi Trả</h4>
+            <p>- Sản phẩm phải còn nguyên tem, mạc và không bị hư hại, sử dụng hoặc giặt qua.</p>
+            <p>- Sản phẩm phải được đổi trong vòng <strong>7 ngày</strong> kể từ ngày nhận hàng.</p>
+            <p>- Các sản phẩm giảm giá hoặc khuyến mãi không được đổi trả, trừ khi có sự cố do lỗi sản phẩm.</p>
+            <h4>2. Quy Trình Đổi Trả</h4>
+            <p>- Liên hệ với bộ phận chăm sóc khách hàng của UTESHOP qua số điện thoại <strong>0123 456 789</strong> hoặc email <strong>support@uteshop.com</strong> để yêu cầu đổi trả.</p>
+            <p>- Đóng gói sản phẩm cần đổi trả và gửi lại cho chúng tôi theo địa chỉ sau: <strong>UTESHOP, Số 01 Võ Văn Ngân, Phường Linh Chiểu, Thành phố Thủ Đức, Thành phố Hồ Chí Minh</strong>.</p>
+            <p>- Chúng tôi sẽ kiểm tra tình trạng sản phẩm và xác nhận việc đổi trả trong vòng 2-3 ngày làm việc.</p>
+            <h4>3. Phí Vận Chuyển</h4>
+            <p>- Nếu đổi trả do lỗi từ phía UTESHOP, chúng tôi sẽ chịu mọi chi phí vận chuyển.</p>
+            <p>- Nếu đổi trả do lý do cá nhân, khách hàng sẽ chịu phí vận chuyển đối với sản phẩm đổi trả.</p>
+            <h4>4. Hoàn Tiền</h4>
+            <p>- Sau khi sản phẩm được kiểm tra và xác nhận hợp lệ, chúng tôi sẽ hoàn tiền vào tài khoản của bạn trong vòng 5-7 ngày làm việc.</p>
+            <p>- Số tiền hoàn lại sẽ được chuyển qua phương thức thanh toán bạn đã sử dụng khi mua sản phẩm (thẻ tín dụng, chuyển khoản ngân hàng, v.v.).</p>
+            <h4>5. Lưu Ý</h4>
+            <p>- Sản phẩm đã qua sử dụng hoặc bị hư hại không đủ điều kiện đổi trả.</p>
+            <p>- Chúng tôi chỉ chấp nhận đổi trả sản phẩm tại cửa hàng hoặc thông qua đơn vị vận chuyển mà chúng tôi chỉ định.</p>
+            <p>Chúng tôi luôn nỗ lực để mang đến trải nghiệm mua sắm tuyệt vời cho khách hàng. Nếu có bất kỳ thắc mắc nào về chính sách đổi trả, đừng ngần ngại liên hệ với chúng tôi.</p>
+        </div>
+        <div class="tab-pane fade" id="comments" role="tabpanel" aria-labelledby="comments-tab">
+
+            <div>
+                <% String userId = (String) request.getAttribute("userId"); %>
+                <% String productId = (String) request.getAttribute("productId"); %>
+
+                <h5>Viết bình luận</h5>
+                <form id="comment-form">
+                    <input type="hidden" id="userId" value="<%= session.getAttribute("user")%>"> <!-- Lấy từ session -->
+                    <input type="hidden" id="productId" value="${product.id_product}"> <!-- ID sản phẩm hiện tại -->
+
+                    <!-- Thêm phần đánh giá điểm -->
+                    <div class="mb-3">
+                        <label for="point">Điểm đánh giá:</label>
+                        <select id="point" name="point" class="form-control">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+
+                    <!-- Thêm phần nội dung bình luận -->
+                    <div class="mb-3">
+                        <label for="comment">Nội dung bình luận:</label>
+                        <textarea id="comment" name="comment" rows="3" class="form-control"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Gửi bình luận</button>
+                </form>
+
+                <h5 class="mt-4">Các bình luận</h5>
+                <div id="comment-list">
+
+                </div>
+            </div>
+            <template id="comment-template">
+                <div class="comment-item mb-3">
+                    <strong class="userName"></strong><br>
+                    <span class="productQuality"></span>
+                    <span class="reviewContent"></span>
+                    <span class="imageUrls"></span>
+                </div>
+            </template>
+        </div>
+    </div>
+
 </main>
