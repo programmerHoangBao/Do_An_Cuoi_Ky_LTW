@@ -11,13 +11,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
-public class UserService implements IUserService {
+public class UserService1 implements IUserService {
 
     @Autowired
     private UserRepository userRepository;
 
-    public UserService(UserRepository userRepository) {
+    public UserService1(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
@@ -54,5 +56,10 @@ public class UserService implements IUserService {
         } catch (NoResultException e) {
             return null;
         }
+    }
+
+    @Override
+    public Optional<User> getByUserNameOrEmail(String username) {
+        return userRepository.findByUsernameOrEmail(username);
     }
 }
