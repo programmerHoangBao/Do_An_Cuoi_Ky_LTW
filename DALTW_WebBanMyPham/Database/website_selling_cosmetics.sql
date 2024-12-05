@@ -22,7 +22,7 @@ CREATE TABLE Users(
 -- Cửa hàng
 CREATE TABLE Shops (
     id_shop INT PRIMARY KEY AUTO_INCREMENT,
-    id_salesman INT NOT NULL, -- Mã người bán hàng
+    id_vendor INT NOT NULL, -- Mã người bán hàng
     name_shop NVARCHAR(100) NOT NULL,
     sign_up_date DATE NOT NULL,
 	address NVARCHAR(250) NOT NULL,

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="/common/taglib.jsp" %>
+<%@ include file="/common/taglib.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,17 +10,22 @@
 	href="${pageContext.request.contextPath}/templates/admin/css/list-product.css" />
 </head>
 <body>
-	<form action="/admin/list-product"
-		method="get">
+	<form action="/admin/list-product" method="get">
 		<div class="contain">
 			<div class="search-container">
 				<input type="text" class="search-input"
 					placeholder="Nhập chuỗi tìm kiếm...">
 				<button class="search-button">Tìm kiếm</button>
 			</div>
-			<div class = div_InsertProduct>
-				<button id = btnInsertProduct>Thêm</button>
+			<div class=div_InsertProduct>
+				<button id=btnInsertProduct>Thêm</button>
 			</div>
+			<script>
+				document.getElementById("btnInsertProduct").addEventListener(
+						"click", function() {
+							window.open("/admin/insert-product", "_blank");
+						});
+			</script>
 			<div class="table_product">
 				<table>
 					<thead>
@@ -32,6 +37,7 @@
 							<th>Gía trị</th>
 							<th>Số lượng</th>
 							<th>Hình ảnh</th>
+							<th>Trạng thái</th>
 							<th>Thao tác</th>
 						</tr>
 					</thead>
@@ -58,13 +64,18 @@
 											</button>
 										</div>
 									</td>
-									<td><a href="#">Cập nhật</a> <a href="#">Xóa</a></td>
+									<td><c:if test='${product.status_product}'>
+											<p>Hiển thị</p>
+										</c:if> <c:if test='${!product.status_product}'>
+											<p>Ẩn</p>
+										</c:if></td>
+									<td><a href="#">Cập nhật</a></td>
 								</tr>
 							</c:forEach>
 						</c:if>
 						<c:if test="${empty products}">
 							<tr>
-								<td colspan="8" style="text-align: center;">Không có sản
+								<td colspan="9" style="text-align: center;">Không có sản
 									phẩm nào để hiển thị.</td>
 							</tr>
 						</c:if>

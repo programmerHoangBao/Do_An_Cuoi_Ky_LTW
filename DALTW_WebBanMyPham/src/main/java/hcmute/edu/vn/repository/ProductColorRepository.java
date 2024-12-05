@@ -13,5 +13,8 @@ import hcmute.edu.vn.entity.ProductColor;
 public interface ProductColorRepository extends JpaRepository<ProductColor, Integer>{
 	@Query("SELECT pc FROM ProductColor pc WHERE pc.product.id_product = :id_product")
 	List<ProductColor> findProductColorByIdProduct(@Param("id_product") Integer id_product);
+	
+	@Query("SELECT color FROM ProductColor GROUP BY color")
+	List<String> getAllColor();
 }
 
