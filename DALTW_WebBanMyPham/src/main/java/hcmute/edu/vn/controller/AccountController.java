@@ -1,7 +1,7 @@
 package hcmute.edu.vn.controller;
 
 import hcmute.edu.vn.entity.UserInfo;
-import hcmute.edu.vn.service.UserService;
+import hcmute.edu.vn.service.implement.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

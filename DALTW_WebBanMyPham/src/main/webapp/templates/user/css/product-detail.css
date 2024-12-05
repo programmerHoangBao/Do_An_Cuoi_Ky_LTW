@@ -166,7 +166,27 @@ a:not([href]):not([tabindex]):focus,a:not([href]):not([tabindex]):hover {
 a:not([href]):not([tabindex]):focus {
     outline: 0
 }
+.shop-follow-wrapper {
+    display: flex;            /* Đặt các phần tử trong cùng hàng */
+    align-items: center;      /* Căn giữa theo chiều dọc */
+    gap: 10px;                /* Khoảng cách giữa các phần tử */
+}
 
+.shop-follow-wrapper p {
+    margin: 0;                /* Loại bỏ margin mặc định của thẻ <p> */
+}
+
+#followButton {
+    border: none;             /* Loại bỏ viền */
+    background: none;         /* Loại bỏ màu nền */
+    cursor: pointer;          /* Thay đổi con trỏ chuột khi hover */
+    padding: 5px;             /* Thêm khoảng cách bên trong */
+}
+.nav-tabs .nav-link {
+    color: black;
+    font-weight: bold;
+    background-color: #fad0c4;
+}
 code,kbd,pre,samp {
     font-family: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
     font-size: 1em
