@@ -12,7 +12,7 @@
 <!-- header section start -->
 <div class="header_section">
     <div class="logo_and_name">
-        <img src="${pageContext.request.contextPath}/templates/images/logo.png"/>
+        <img src="${pageContext.request.contextPath}/templates/images/logo1.jpg"/>
         <label id="name">Cosmetics</label>
     </div>
     <div class="header-container-fluid">
@@ -22,6 +22,7 @@
                 <a href="${pageContext.request.contextPath}/products.html">Cửa hàng</a>
                 <a href="${pageContext.request.contextPath}/login">Tài khoản của tôi</a>
                 <a href="${pageContext.request.contextPath}/contact.html">Hoạt động</a>
+                <a href="${pageContext.request.contextPath}/user/register">Đăng kí bán hàng</a>
             </div>
             <div class="login_text">
                 <ul>
@@ -30,23 +31,21 @@
                             <c:when test="${not empty username}">
                                 <!-- Nếu người dùng đã đăng nhập, hiển thị icon logout -->
                                 <a href="/logout">
-                                    <img src="${pageContext.request.contextPath}/templates/images/logout.png"
-                                         alt="Logout"/>
+                                    <i class='bx bx-door-open' style="font-size: 36px; color: black;"></i>
                                 </a>
                             </c:when>
                             <c:otherwise>
                                 <!-- Nếu chưa đăng nhập, hiển thị icon người dùng -->
                                 <a href="${pageContext.request.contextPath}/login">
-                                    <img src="${pageContext.request.contextPath}/templates/images/user-regular-24.png"
-                                         alt="User"/>
+                                    <i class='bx bxs-user-account' style="font-size: 36px; color: black;"></i>
                                 </a>
                             </c:otherwise>
                         </c:choose>
                     </li>
                     <li>
-                        <a href="#"><img
-                                src="${pageContext.request.contextPath}/templates/images/shopping-bag-regular-24.png"
-                                alt="Cart"/></a>
+                        <a href="#">
+                            <i class='bx bx-shopping-bag' style="font-size: 36px; color: black;"></i>
+                        </a>
                     </li>
                 </ul>
             </div>
