@@ -30,23 +30,21 @@
                             <c:when test="${not empty username}">
                                 <!-- Nếu người dùng đã đăng nhập, hiển thị icon logout -->
                                 <a href="/logout">
-                                    <img src="${pageContext.request.contextPath}/templates/images/logout.png"
-                                         alt="Logout"/>
+                                    <i class='bx bx-door-open' style="font-size: 36px; color: black;"></i>
                                 </a>
                             </c:when>
                             <c:otherwise>
                                 <!-- Nếu chưa đăng nhập, hiển thị icon người dùng -->
                                 <a href="${pageContext.request.contextPath}/login">
-                                    <img src="${pageContext.request.contextPath}/templates/images/user-regular-24.png"
-                                         alt="User"/>
+                                    <i class='bx bxs-user-account' style="font-size: 36px; color: black;"></i>
                                 </a>
                             </c:otherwise>
                         </c:choose>
                     </li>
                     <li>
-                        <a href="#"><img
-                                src="${pageContext.request.contextPath}/templates/images/shopping-bag-regular-24.png"
-                                alt="Cart"/></a>
+                        <a href="#">
+                            <i class='bx bx-shopping-bag' style="font-size: 36px; color: black;"></i>
+                        </a>
                     </li>
                 </ul>
             </div>
