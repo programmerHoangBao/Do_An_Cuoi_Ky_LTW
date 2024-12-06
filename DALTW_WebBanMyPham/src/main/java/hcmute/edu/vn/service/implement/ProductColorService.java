@@ -25,12 +25,9 @@ public class ProductColorService implements IProductColorService{
 	}
 
 	@Override
-	public boolean saveProductColor(ProductColor productColor) {
+	public ProductColor saveProductColor(ProductColor productColor) {
 		// TODO Auto-generated method stub
-		if (this.productColorRepository.save(productColor) == null) {
-			return false;
-		}
-		return true;
+		return this.productColorRepository.save(productColor);
 	}
 
 	@Override
@@ -41,6 +38,12 @@ public class ProductColorService implements IProductColorService{
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public List<String> getAllColor() {
+		// TODO Auto-generated method stub
+		return this.productColorRepository.getAllColor();
 	}
 
 }

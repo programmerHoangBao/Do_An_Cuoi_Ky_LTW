@@ -3,9 +3,9 @@ package hcmute.edu.vn.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import hcmute.edu.vn.entity.Shop;
+import hcmute.edu.vn.entity.Category;
 
 @Repository
-public interface ShopRepository extends JpaRepository<Shop, Integer>{
-	
+public interface CategoryRepository extends JpaRepository<Category, Integer>{
+
 }
