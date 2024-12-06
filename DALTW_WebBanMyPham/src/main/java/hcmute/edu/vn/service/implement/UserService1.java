@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -66,5 +67,15 @@ public class UserService1 implements IUserService {
     @Override
     public User findById(Integer id) {
         return userRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
+
+    @Override
+    public List<User> findAllByRole(String role) {
+        return userRepository.findAllByRole(role);
     }
 }

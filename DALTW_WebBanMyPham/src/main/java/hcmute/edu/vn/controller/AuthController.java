@@ -17,6 +17,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -24,10 +25,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 
@@ -38,8 +36,8 @@ public class AuthController {
 
     @Autowired
     private UserService1 userService1;
-@Autowired
 
+    @Autowired
     private UserRepository userRepository;
 
     @Autowired
@@ -109,7 +107,7 @@ public class AuthController {
 
             final UserDetails userDetails = userDetailsService.loadUserByUsername(username);
             String token = jwtUtil.generateToken(userDetails.getUsername());
-            
+
             // Thiết lập token dưới dạng cookie
             Cookie jwtCookie = new Cookie("JWT", token);
             jwtCookie.setHttpOnly(true); // Bảo mật cookie, không truy cập được từ JavaScript
@@ -137,7 +135,7 @@ public class AuthController {
             } else {
                 return "redirect:/vendor/home"; // Điều hướng đến trang vendor
             }
-        } catch (AuthenticationException e) {
+        } catch (Exception e) {
             model.addAttribute("error", "Invalid username or password");
             return "redirect:/login";
         }
