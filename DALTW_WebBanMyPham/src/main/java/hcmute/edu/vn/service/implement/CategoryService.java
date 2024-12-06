@@ -20,6 +20,12 @@ public class CategoryService implements ICategoryService{
 		// TODO Auto-generated method stub
 		return this.categoryRepository.findAll();
 	}
+
+	@Override
+	public Category findCategoryById(Integer id_category) {
+		// TODO Auto-generated method stub
+		return this.categoryRepository.getReferenceById(id_category);
+	}
 	
 	
 }
