@@ -62,30 +62,39 @@ public class ProductController {
     public String showProductForm(Model model) {
         model.addAttribute("shops", shopService.findAllShop());
         model.addAttribute("categories", categoryService.findAllCategory());
-        model.addAttribute("product", new Product());
-        model.addAttribute("productColors", new ArrayList<ProductColor>());
         return "admin/Product/insert-product";
     }
 
     @PostMapping("/admin/insert-product")
-    public String insertProduct(@ModelAttribute Product product,
-                                @RequestParam("colorList") String colorList,
-                                @RequestParam("imageUrlList") String imageUrlList,
+    public String insertProduct(@RequestParam("nameProduct") String name,
+    							@RequestParam("idShop") Integer id_shop,
+    							@RequestParam("idCategory") Integer id_category,
+    							@RequestParam("price") Double price,
+    							@RequestParam("quantity") Integer quantity,
+    							@RequestParam("statusProduct") Integer status,
                                 Model model) {
         try {
             // Lưu sản phẩm
+        	Product product = new Product();
+        	product.setName(name);
+        	product.setShop(this.shopService.findShopById(id_shop));
+        	product.setCategory(this.categoryService.findCategoryById(id_category));
+        	product.setPrice(price);
+        	product.setQuantity(quantity);
+        	if(status == 1) {
+        		product.setStatus_product(true);
+        	} else {
+        		product.setStatus_product(false);
+        	}
             product = productService.saveProduct(product);
 
-            // Lưu các màu sắc và hình ảnh
-            List<String> colors = Arrays.asList(colorList.split(","));
-            List<String> imageUrls = Arrays.asList(imageUrlList.split(","));
-            for (int i = 0; i < colors.size(); i++) {
-                ProductColor productColor = new ProductColor();
-                productColor.setProduct(product);
-                productColor.setColor(colors.get(i));
-                productColor.setImageProduct(imageUrls.get(i));
-                productColorService.saveProductColor(productColor);
-            }
+			/*
+			 * for (int i = 0; i < colors.size(); i++) { ProductColor productColor = new
+			 * ProductColor(); productColor.setProduct(product);
+			 * productColor.setColor(colors.get(i));
+			 * productColor.setImageProduct(imageUrls.get(i));
+			 * productColorService.saveProductColor(productColor); }
+			 */
 
             model.addAttribute("message", "Sản phẩm được thêm thành công!");
         } catch (Exception e) {

@@ -17,13 +17,13 @@
 		method="POST">
 		<label for="nameProduct">Tên sản phẩm:</label> <input type="text"
 			id="nameProduct" name="nameProduct" required> <label
-			for="shop">Cửa hàng:</label> <select id="shop" name="idShop">
+			for="shop">Cửa hàng:</label> <select id="idShop" name="idShop">
 			<c:if test="${not empty shops}">
 				<c:forEach var="shop" items="${shops}">
 					<option value="${shop.id_shop}">${shop.name}</option>
 				</c:forEach>
 			</c:if>
-		</select> <label for="category">Danh mục:</label> <select id="category"
+		</select> <label for="category">Danh mục:</label> <select id="idCategory"
 			name="idCategory">
 			<c:if test="${not empty categories}">
 				<c:forEach var="category" items="${categories}">
@@ -37,16 +37,15 @@
 			id="quantity" name="quantity" required> <label
 			for="statusProduct">Trạng thái sản phẩm:</label> <select
 			id="statusProduct" name="statusProduct">
-			<option value="true">Hiển thị</option>
-			<option value="false">Ẩn</option>
+			<option value=1>Hiển thị</option>
+			<option value=0>Ẩn</option>
 		</select> <label for="colorList">Màu sắc:</label> <select id="colorList"
 			name="colorList">
 			<option value="Đỏ">Đỏ</option>
 			<option value="Hồng">Hồng</option>
 			<option value="Xanh">Xanh</option>
 			<option value="Vàng">Vàng</option>
-		</select> <label for="imageUrlList">Hình ảnh:</label> <input type="text"
-			id="imageUrlList" name="imageUrlList">
+		</select>
 
 		<button type="button" id="addColorButton" onclick="addColor()">Thêm
 			màu</button>

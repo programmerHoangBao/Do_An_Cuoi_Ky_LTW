@@ -40,4 +40,10 @@ public class ShopService implements IShopService {
 		// TODO Auto-generated method stub
 		return this.shopRepository.findAll();
 	}
+
+	@Override
+	public Shop findShopById(Integer id_shop) {
+		// TODO Auto-generated method stub
+		return this.shopRepository.getReferenceById(id_shop);
+	}
 }
