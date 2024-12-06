@@ -14,15 +14,15 @@ import java.util.List;
 import java.util.Random;
 
 @Service
-public record UserService(UserInfoRepository repository, PasswordEncoder passwordEncoder, EmailService emailService) {
+public record UserService(UserInfoRepository repository, PasswordEncoder passwordEncoder, EmailService emailService,UserRepository userRepository,UserInfoRepository userInfoRepository) {
 
-    @Autowired
-    private static UserRepository userRepository;
+    //@Autowired
+    //private static UserRepository userRepository;
 
-    @Autowired
-    private static UserInfoRepository userInfoRepository;
+//    @Autowired
+//    private static UserInfoRepository userInfoRepository;
 
-	public String registerUser(UserInfo userInfo) {
+    public String registerUser(UserInfo userInfo) {
 		userInfo.setPassword(passwordEncoder.encode(userInfo.getPassword()));
 		userInfo.setRoles("ROLE_USER"); // Đặt mặc định là USER, có thể thay đổi nếu cần
 		
@@ -66,5 +66,9 @@ public record UserService(UserInfoRepository repository, PasswordEncoder passwor
 
             userRepository.save(user);  // Lưu vào bảng users
         }
+    }
+
+    public void updateUser(UserInfo user) {
+        userInfoRepository.save(user);
     }
 }
