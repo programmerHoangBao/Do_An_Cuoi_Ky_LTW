@@ -123,6 +123,8 @@ public class AuthController {
             if (user1 != null) {
                 // Lưu thông tin user vào session
                 session.setAttribute("user", user1);
+                // Đặt thời gian hết hạn cho session (đơn vị: giây)
+                session.setMaxInactiveInterval(30 * 60); // 30 phút
             }
 
             // Điều hướng dựa trên vai trò người dùng

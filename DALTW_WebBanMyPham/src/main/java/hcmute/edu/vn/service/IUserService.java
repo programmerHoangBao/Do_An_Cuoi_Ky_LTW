@@ -13,4 +13,5 @@ public interface IUserService {
     User checkLogin(String email, String pass);
     Optional<User> getByUserNameOrEmail(String username);
     List<User> findAllByRole(String role);
+    User findById(Integer id);
 }
