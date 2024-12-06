@@ -68,7 +68,13 @@ public class UserService1 implements IUserService {
     public User findById(Integer id) {
         return userRepository.findById(id).orElse(null);
     }
-  @Override
+
+    @Override
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
+
+    @Override
     public List<User> findAllByRole(String role) {
         return userRepository.findAllByRole(role);
     }

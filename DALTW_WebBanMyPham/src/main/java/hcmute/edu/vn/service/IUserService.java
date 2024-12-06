@@ -14,4 +14,5 @@ public interface IUserService {
     Optional<User> getByUserNameOrEmail(String username);
     List<User> findAllByRole(String role);
     User findById(Integer id);
+    List<User> findAll();
 }
