@@ -62,4 +62,9 @@ public class UserService1 implements IUserService {
     public Optional<User> getByUserNameOrEmail(String username) {
         return userRepository.findByUsernameOrEmail(username);
     }
+
+    @Override
+    public User findById(Integer id) {
+        return userRepository.findById(id).orElse(null);
+    }
 }

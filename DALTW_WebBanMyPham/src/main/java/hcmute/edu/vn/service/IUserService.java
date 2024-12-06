@@ -12,4 +12,5 @@ public interface IUserService {
     User checkLogin(String email, String pass);
     Optional<User> getByUserNameOrEmail(String username);
 
+    User findById(Integer id);
 }

@@ -13,8 +13,8 @@ import java.util.List;
 @Repository
 public interface ReviewUserRepository extends JpaRepository<ReviewUser, Long> {
 
-    @Query("SELECT new hcmute.edu.vn.dto.ReviewDTO(ru.user.fullName, ru.reviewContent, ru.productQuality, " +
-            "  (SELECT ri.image FROM ReviewImage ri WHERE ri.reviewUser.id_review_user = ru.id_review_user ORDER BY ri.id_review_image ASC) ) " +
-            "FROM ReviewUser ru WHERE ru.product.id_product = :productId")
+    @Query("SELECT new hcmute.edu.vn.dto.ReviewDTO(ru.user.fullName, ru.creationTime, ru.reviewContent, ru.productQuality, ru.reviewImage) " +
+            "FROM ReviewUser ru WHERE ru.product.id_product = :productId " +
+            "ORDER BY ru.creationTime DESC")
     List<ReviewDTO> findReviewDetailsByProductId(@Param("productId") Integer productId);
 }

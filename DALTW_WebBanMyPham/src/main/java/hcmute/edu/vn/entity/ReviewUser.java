@@ -47,7 +47,7 @@ public class ReviewUser {
 	@Column(name = "creation_time") 
 	@Temporal(TemporalType.TIMESTAMP) 
 	private Date creationTime;
-	
-	@OneToMany(mappedBy = "reviewUser", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<ReviewImage> reviewImgae;
+
+	@Column(name = "image", length = 500)
+	private String reviewImage;
 }
