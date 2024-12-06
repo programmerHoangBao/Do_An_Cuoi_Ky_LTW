@@ -316,3 +316,47 @@ function addReview() {
             alert('Không thể gửi bình luận. Vui lòng thử lại sau.');
         });
 }
+function addToCart() {
+    // Lấy số lượng từ input
+    const quantityInput = document.getElementById("quantity");
+    const quantity = parseInt(quantityInput.value);
+    const productId = document.getElementById("product_id").value; // ID sản phẩm từ thuộc tính data
+    const userId = document.getElementById("userId-cart").value; // Lấy từ input ẩn
+
+    if (!quantity || quantity < 1) {
+        alert("Số lượng phải lớn hơn 0");
+        return;
+    }
+
+    // API endpoint
+    const url = `/api/cart-add`;
+
+    // Payload gửi đến API
+    const payload = new URLSearchParams({
+        userId: userId, // Thay bằng ID người dùng (nếu có cơ chế đăng nhập, lấy từ session)
+        productId: productId,
+        quantity: quantity
+    });
+
+    // Gửi yêu cầu POST
+    fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: payload
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Lỗi khi thêm sản phẩm vào giỏ hàng.");
+            }
+            return response.text();
+        })
+        .then(data => {
+            alert(data); // Hiển thị thông báo thành công từ server
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("Không thể thêm sản phẩm vào giỏ hàng. Vui lòng thử lại.");
+        });
+}
