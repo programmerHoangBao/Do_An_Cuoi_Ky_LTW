@@ -26,7 +26,7 @@
                     <a href="${pageContext.request.contextPath}/client.html">Tài khoản của tôi</a>
                     <a href="${pageContext.request.contextPath}/client.html">Tài khoản người dùng</a>
                     <a href="${pageContext.request.contextPath}/contact.html">Hoạt động</a>
-                    <a href="${pageContext.request.contextPath}/page-admin">Quản trị</a>
+                    <a href="${pageContext.request.contextPath}/admin/page-admin">Quản trị</a>
                 </div>
             </div>
             <span class="toggle_icon" onclick="openNav()">
