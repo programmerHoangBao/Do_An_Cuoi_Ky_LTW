@@ -59,6 +59,28 @@ public class ProductController {
             return "{\"status\":\"error\", \"message\":\"An error occurred while processing the request\"}";
         }
     }
+    @GetMapping("/deletefollowshop/{idShop}&{idUser}")
+    @ResponseBody
+    public String deleteFollowShop(@PathVariable("idShop") Integer idShop, @PathVariable("idUser") Integer idUser) {
+        try {
+            // Lấy đối tượng Shop và User từ cơ sở dữ liệu
+            Shop shop = shopService.findById(idShop); // Thay thế shopService bằng service thực tế của bạn
+            User user = userRepository.getReferenceById(idUser); // Thay thế userService bằng service thực tế của bạn
+
+            if (shop == null) {
+                return "{\"status\":\"error\", \"message\":\"Shop or User not found\"}";
+            }
+
+            // Lưu vào cơ sở dữ liệu
+            followShopService.deleteFollowShopByUserAndShop(user,shop); // Thay thế followShopService bằng service thực tế của bạn
+
+            return "{\"status\":\"success\", \"message\":\"Followed the shop successfully\"}";
+        } catch (Exception e) {
+            // Xử lý lỗi nếu xảy ra
+            e.printStackTrace();
+            return "{\"status\":\"error\", \"message\":\"An error occurred while processing the request\"}";
+        }
+    }
     @GetMapping("/api/check-follow/{shopId}/{userId}")
     @ResponseBody
     public boolean isFollowed(@PathVariable("shopId") Integer shopId, @PathVariable("userId") Integer userId) {
