@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.List;
 
 @Service
 public class ShopService implements IShopService {
@@ -81,4 +82,20 @@ public class ShopService implements IShopService {
 //        }
 //        return result;
 //    }
+
+	public Shop findById(Integer id) {
+        return shopRepository.findById(id)
+                .orElse(null); // Trả về null nếu không tìm thấy
+    }
+	@Override
+	public List<Shop> findAllShop() {
+		// TODO Auto-generated method stub
+		return this.shopRepository.findAll();
+	}
+
+	@Override
+	public Shop findShopById(Integer id_shop) {
+		// TODO Auto-generated method stub
+		return this.shopRepository.getReferenceById(id_shop);
+	}
 }

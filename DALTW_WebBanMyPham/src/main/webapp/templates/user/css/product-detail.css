@@ -166,7 +166,27 @@ a:not([href]):not([tabindex]):focus,a:not([href]):not([tabindex]):hover {
 a:not([href]):not([tabindex]):focus {
     outline: 0
 }
+.shop-follow-wrapper {
+    display: flex;            /* Đặt các phần tử trong cùng hàng */
+    align-items: center;      /* Căn giữa theo chiều dọc */
+    gap: 10px;                /* Khoảng cách giữa các phần tử */
+}
 
+.shop-follow-wrapper p {
+    margin: 0;                /* Loại bỏ margin mặc định của thẻ <p> */
+}
+
+#followButton {
+    border: none;             /* Loại bỏ viền */
+    background: none;         /* Loại bỏ màu nền */
+    cursor: pointer;          /* Thay đổi con trỏ chuột khi hover */
+    padding: 5px;             /* Thêm khoảng cách bên trong */
+}
+.nav-tabs .nav-link {
+    color: black;
+    font-weight: bold;
+    background-color: #fad0c4;
+}
 code,kbd,pre,samp {
     font-family: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
     font-size: 1em
@@ -16370,6 +16390,28 @@ select.my-form {
     border: none;
     padding: 0 10px
 }
+/* Thu nhỏ các nút màu */
+.btn-color {
+    font-size: 12px; /* Thay đổi kích thước chữ */
+    padding: 5px 10px; /* Giảm padding */
+    height: 30px; /* Giảm chiều cao */
+    width: auto; /* Để kích thước tự động theo nội dung */
+    border-radius: 4px; /* Tùy chọn: làm tròn góc */
+    margin: 5px; /* Giảm khoảng cách giữa các nút */
+}
+
+/* Nếu cần thu nhỏ các màu nhỏ (icon hoặc vòng tròn) trong nút */
+.btn-color span {
+    font-size: 10px; /* Kích thước icon bên trong nếu có */
+    height: 20px; /* Chiều cao nhỏ hơn cho icon */
+    width: 20px; /* Chiều rộng nhỏ hơn cho icon */
+}
+
+/* Khi nút được chọn, thu nhỏ nhưng giữ hiệu ứng */
+.btn-color.selected {
+    border: 2px solid #007bff; /* Tạo hiệu ứng viền cho nút được chọn */
+    background-color: #f0f0f0; /* Tùy chọn: thay đổi màu nền khi chọn */
+}
 
 .ul-category li.active a:before {
     content: "";
@@ -18396,4 +18438,18 @@ select.my-form {
 
 .a-span:hover {
     color: #00f
+}
+.bxs-star {
+    color: #4800fd; /* Màu ngôi sao chưa chọn */
+}
+
+.bxs-star-filled {
+    color: #ff0000; /* Màu ngôi sao đã chọn (màu vàng) */
+}
+.bxs-star.hover {
+    color: #ff0059; /* Màu khi hover (vàng) */
+}
+.imageUrls img {
+    max-width: 100%;  /* Đảm bảo hình ảnh không vượt quá chiều rộng của phần tử chứa */
+    height: auto;     /* Giữ tỷ lệ chiều cao của hình ảnh */
 }

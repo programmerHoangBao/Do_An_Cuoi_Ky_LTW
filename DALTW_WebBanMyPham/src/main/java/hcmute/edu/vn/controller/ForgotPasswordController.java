@@ -38,19 +38,19 @@ public class ForgotPasswordController {
     // Trang để người dùng nhập email để nhận OTP
     @GetMapping("/verifyMail")
     public String showVerifyMailPage() {
-        return "forgot-password";
+        return "auth/forgot-password";
     }
 
     // Trang để người dùng nhập OTP
     @GetMapping("/verifyOtp")
     public String showVerifyOtpPage() {
-        return "verify-otp";
+        return "auth/verify-otp";
     }
     
     // Trang để người dùng nhập mật khẩu mới
     @GetMapping("/changePassword")
     public String showChangePasswordPage() {
-        return "change-password";
+        return "auth/change-password";
     }
     
 	// send mail for email verification
@@ -67,13 +67,29 @@ public class ForgotPasswordController {
                 .build();
 
         // Kiểm tra nếu đã tồn tại bản ghi ForgotPassword cho user
+//        ForgotPassword fp = forgotPasswordRepository.findByUser(user)
+//                .orElse(ForgotPassword.builder().user(user).build());
+//
+//        // Cập nhật OTP và thời gian hết hạn
+//        fp.setOtp(otp);
+//        fp.setExpirationTime(new Date(System.currentTimeMillis() + 5 * 60 * 1000));
+//
+//        emailService.sendSimpleMessage(mailBody);
+//        forgotPasswordRepository.save(fp);
+
         ForgotPassword fp = forgotPasswordRepository.findByUser(user)
                 .orElse(ForgotPassword.builder().user(user).build());
-        
-        // Cập nhật OTP và thời gian hết hạn
+
+// Nếu fp chưa tồn tại, cần phải lưu fp trước khi cập nhật OTP
+        if (fp.getFpid() == null) {
+            forgotPasswordRepository.save(fp);  // Persist the new ForgotPassword instance
+        }
+
+// Cập nhật OTP và thời gian hết hạn
         fp.setOtp(otp);
-        fp.setExpirationTime(new Date(System.currentTimeMillis() + 30 * 1000));
-        
+        fp.setExpirationTime(new Date(System.currentTimeMillis() + 5 * 60 * 1000));
+
+// Gửi mail và lưu lại thông tin
         emailService.sendSimpleMessage(mailBody);
         forgotPasswordRepository.save(fp);
         
@@ -94,7 +110,7 @@ public class ForgotPasswordController {
         if (fp.getExpirationTime().before(Date.from(Instant.now()))) {
             forgotPasswordRepository.deleteById(fp.getFpid());
             model.addAttribute("error", "OTP has expired!");
-            return "verify-otp";
+            return "auth/verify-otp";
         }
         
         //model.addAttribute("message", "OTP verified!");
@@ -110,7 +126,7 @@ public class ForgotPasswordController {
                                         Model model) {
         if (!password.equals(repeatPassword)) {
             model.addAttribute("error", "Please enter the password again!");
-            return "change-password";
+            return "auth/change-password";
         }
         
         String encodedPassword = passwordEncoder.encode(password);

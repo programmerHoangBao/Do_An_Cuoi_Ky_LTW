@@ -44,12 +44,9 @@ public class ProductService implements IProductService{
 	}
 	
 	@Override
-	public boolean saveProduct(Product product) {
+	public Product saveProduct(Product product) {
 		// TODO Auto-generated method stub
-		if(this.productRepository.save(product) == null) {
-			return false;
-		}
-		return true;
+		return this.productRepository.save(product);
 	}
 
 	@Override

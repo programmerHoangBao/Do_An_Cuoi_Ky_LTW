@@ -3,9 +3,12 @@ package hcmute.edu.vn.controller;
 import hcmute.edu.vn.config.security.UserInfoService;
 import hcmute.edu.vn.entity.User;
 import hcmute.edu.vn.entity.UserInfo;
+import hcmute.edu.vn.entity.User;
 import hcmute.edu.vn.model.AuthRequest;
 import hcmute.edu.vn.repository.UserInfoRepository;
-import hcmute.edu.vn.service.UserService;
+
+import hcmute.edu.vn.repository.UserRepository;
+import hcmute.edu.vn.service.implement.UserService;
 import hcmute.edu.vn.service.implement.UserService1;
 import hcmute.edu.vn.utils.JwtUtil;
 import jakarta.servlet.http.Cookie;
@@ -14,6 +17,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -21,10 +25,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Date;
 
 @Controller
 public class AuthController {
@@ -33,6 +36,9 @@ public class AuthController {
 
     @Autowired
     private UserService1 userService1;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -101,7 +107,7 @@ public class AuthController {
 
             final UserDetails userDetails = userDetailsService.loadUserByUsername(username);
             String token = jwtUtil.generateToken(userDetails.getUsername());
-            
+
             // Thiết lập token dưới dạng cookie
             Cookie jwtCookie = new Cookie("JWT", token);
             jwtCookie.setHttpOnly(true); // Bảo mật cookie, không truy cập được từ JavaScript
@@ -129,10 +135,7 @@ public class AuthController {
             } else {
                 return "redirect:/vendor/home"; // Điều hướng đến trang vendor
             }
-        } catch (AuthenticationException e) {
-            System.out.println(username);
-            System.out.println(password);
-            System.out.println(e.getMessage());
+        } catch (Exception e) {
             model.addAttribute("error", "Invalid username or password");
             return "redirect:/login";
         }
@@ -143,13 +146,30 @@ public class AuthController {
     
     @PostMapping("/register/register-verify-otp")
     public String verifyOtp(@RequestParam("otp") Integer otp, @RequestParam("email") String email, Model model) {
-    	UserInfo user = userInfoRepository.findByEmail(email)
+    	UserInfo userInfo = userInfoRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("Please provide a valid email!"));
 
-        if (user != null && user.getOtp().equals(otp)) {
-            user.setEnabled(true);
-            user.setOtp(null); // Clear OTP after successful verification
-            userInfoRepository.save(user);
+        if (userInfo != null && userInfo.getOtp().equals(otp)) {
+            userInfo.setEnabled(true);
+            userInfo.setOtp(null); // Clear OTP after successful verification
+            userInfoRepository.save(userInfo);
+
+            User user = new User();
+
+            user.setUsername(userInfo.getName());
+            user.setPassword(userInfo.getPassword());
+            user.setEmail(userInfo.getEmail());
+            user.setPhone("0912312345");
+            user.setFullName(userInfo.getName()); // name khac voi username can xem lai
+            user.setSignUpDate(new Date());
+            user.setBirthDate(new Date());
+            user.setAddress("UTE");
+            user.setImage("123");
+            user.setRole("ROLE_USER");  // Mặc định là ROLE_USER, có thể thay đổi sau
+            user.setStatus(1);
+
+            // Lưu vào bảng user
+            userRepository.save(user);
             model.addAttribute("message", "Account activated successfully!");
             return "redirect:/login";
         } else {

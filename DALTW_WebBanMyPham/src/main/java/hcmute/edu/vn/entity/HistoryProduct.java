@@ -1,8 +1,6 @@
 package hcmute.edu.vn.entity;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -15,18 +13,19 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Table(name = "Review_Image")
+@Table(name = "HistoryProduct")
 @AllArgsConstructor
 @NoArgsConstructor
-public class ReviewImage {
+public class HistoryProduct {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id_review_image;
+	private Integer id_favorite_shop;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_review_user", nullable = false)
-	private ReviewUser reviewUser;
+	@ManyToOne
+	@JoinColumn(name = "id_user", nullable = false)
+	private User user;
 	
-	@Column(name = "image", length = 500)
-	private String image;
+	@ManyToOne
+	@JoinColumn(name = "id_product", nullable = false)
+	private Product product;
 }

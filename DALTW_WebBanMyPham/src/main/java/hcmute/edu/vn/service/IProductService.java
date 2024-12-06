@@ -13,6 +13,6 @@ public interface IProductService {
 	List<Product> findProductByNameContaining(String nameProduct);
 	Page<Product> findProductPageable(Pageable pageable);
 	Product findProductById(Integer id);
-	boolean saveProduct(Product product);
+	Product saveProduct(Product product);
 	boolean deleteProduct(Integer idProduct);
 }

@@ -16,7 +16,7 @@
         <nav class="navbar navbar-light bg-light justify-content-between">
             <div id="mySidenav" class="sidenav">
                 <div class="logo">
-                    <img src="${pageContext.request.contextPath}/templates/images/logo.png" alt="Logo"/>
+                    <img src="${pageContext.request.contextPath}/templates/images/logo1.jpg" alt="Logo"/>
                 </div>
                 <div class="select-item">
                     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -26,6 +26,7 @@
                     <a href="${pageContext.request.contextPath}/client.html">Tài khoản của tôi</a>
                     <a href="${pageContext.request.contextPath}/client.html">Tài khoản người dùng</a>
                     <a href="${pageContext.request.contextPath}/contact.html">Hoạt động</a>
+                    <a href="${pageContext.request.contextPath}/admin/page-admin">Quản trị</a>
                 </div>
             </div>
             <span class="toggle_icon" onclick="openNav()">
