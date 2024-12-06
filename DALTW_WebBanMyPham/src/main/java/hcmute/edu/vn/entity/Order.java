@@ -41,7 +41,11 @@ public class Order {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_product_color", nullable = false)
 	private ProductColor productColor;
-	
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_shop", nullable = false) // Thêm liên kết đến Shop
+	private Shop shop;
+
 	@Column(name = "quantity", nullable = false)
 	private Integer quantity;
 	
