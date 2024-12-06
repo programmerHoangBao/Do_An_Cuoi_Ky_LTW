@@ -13,6 +13,7 @@ public class CustomSiteMeshFilter extends ConfigurableSiteMeshFilter{
 		.addExcludedPath("/login*").addExcludedPath("/login/*")
 		.addExcludedPath("/register*").addExcludedPath("/register/*")
 		.addExcludedPath("/forgotPassword*").addExcludedPath("/forgotPassword/*")
+//		.addExcludedPath("/admin*").addExcludedPath("/admin/*")
 		.addExcludedPath("/api/**").addExcludedPath("/api/**");
 	}
 }
