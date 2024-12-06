@@ -18439,3 +18439,17 @@ select.my-form {
 .a-span:hover {
     color: #00f
 }
+.bxs-star {
+    color: #4800fd; /* Màu ngôi sao chưa chọn */
+}
+
+.bxs-star-filled {
+    color: #ff0000; /* Màu ngôi sao đã chọn (màu vàng) */
+}
+.bxs-star.hover {
+    color: #ff0059; /* Màu khi hover (vàng) */
+}
+.imageUrls img {
+    max-width: 100%;  /* Đảm bảo hình ảnh không vượt quá chiều rộng của phần tử chứa */
+    height: auto;     /* Giữ tỷ lệ chiều cao của hình ảnh */
+}

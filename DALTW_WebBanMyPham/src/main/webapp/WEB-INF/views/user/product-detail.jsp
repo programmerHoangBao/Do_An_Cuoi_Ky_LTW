@@ -140,6 +140,30 @@
                                                 <div class="clr"></div>
                                             </div>
                                         </div>
+                                        <div class="rate-star">
+                                            <div class='rating-stars' data-star="">
+                                                <ul id='star'>
+                                                    <li class='star' title='Tệ' data-value='1' onclick="chooseReview(this)">
+                                                        <i class='bx bx-star'></i>
+                                                    </li>
+                                                    <li class='star' title='Tạm được' data-value='2' onclick="chooseReview(this)">
+                                                        <i class='bx bx-star'></i>
+                                                    </li>
+                                                    <li class='star' title='Tốt' data-value='3' onclick="chooseReview(this)">
+                                                        <i class='bx bx-star'></i>
+                                                    </li>
+                                                    <li class='star' title='Rất tốt' data-value='4' onclick="chooseReview(this)">
+                                                        <i class='bx bx-star'></i>
+                                                    </li>
+                                                    <li class='star' title='Tuyệt vời' data-value='5' onclick="chooseReview(this)">
+                                                        <i class='bx bx-star'></i>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="text-rating">
+                                                <p><span>4</span> sao - <span>1</span> lượt đánh giá</p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -171,11 +195,11 @@
         </div>
         <div class="tab-pane fade" id="payment-policy" role="tabpanel" aria-labelledby="payment-policy-tab">
             <h4>Chính Sách Thanh Toán</h4>
-            <p>Chúng tôi cung cấp nhiều phương thức thanh toán tiện lợi để khách hàng có thể dễ dàng thanh toán cho đơn hàng của mình. Dưới đây là các phương thức thanh toán mà UTESHOP hỗ trợ:</p>
+            <p>Chúng tôi cung cấp nhiều phương thức thanh toán tiện lợi để khách hàng có thể dễ dàng thanh toán cho đơn hàng của mình. Dưới đây là các phương thức thanh toán mà ONESHOP hỗ trợ:</p>
             <h5>1. Thanh Toán Qua Thẻ Tín Dụng</h5>
             <p>Khách hàng có thể thanh toán trực tuyến bằng thẻ tín dụng hoặc thẻ ghi nợ quốc tế (Visa, MasterCard, JCB,…) qua cổng thanh toán bảo mật của chúng tôi.</p>
             <h5>2. Thanh Toán Qua Chuyển Khoản Ngân Hàng</h5>
-            <p>Khách hàng có thể thực hiện thanh toán bằng cách chuyển khoản vào tài khoản ngân hàng của UTESHOP. Sau khi thanh toán, vui lòng gửi thông tin chuyển khoản cho chúng tôi qua email hoặc hệ thống để xác nhận đơn hàng.</p>
+            <p>Khách hàng có thể thực hiện thanh toán bằng cách chuyển khoản vào tài khoản ngân hàng của ONESHOP. Sau khi thanh toán, vui lòng gửi thông tin chuyển khoản cho chúng tôi qua email hoặc hệ thống để xác nhận đơn hàng.</p>
             <h5>3. Thanh Toán Khi Nhận Hàng (COD)</h5>
             <p>Khách hàng có thể lựa chọn thanh toán khi nhận hàng (COD). Sau khi nhận hàng từ đơn vị vận chuyển, khách hàng có thể thanh toán bằng tiền mặt cho nhân viên giao hàng.</p>
             <h5>4. Chính Sách Hoàn Tiền</h5>
@@ -186,17 +210,17 @@
         </div>
         <div class="tab-pane fade" id="return-policy" role="tabpanel" aria-labelledby="return-policy-tab">
             Nội dung chính sách đổi trả.
-            <p>Chúng tôi cam kết mang lại sự hài lòng cho khách hàng khi mua sắm tại UTESHOP. Nếu bạn không hài lòng với sản phẩm đã mua, bạn có thể đổi trả sản phẩm theo các chính sách dưới đây:</p>
+            <p>Chúng tôi cam kết mang lại sự hài lòng cho khách hàng khi mua sắm tại ONESHOP. Nếu bạn không hài lòng với sản phẩm đã mua, bạn có thể đổi trả sản phẩm theo các chính sách dưới đây:</p>
             <h4>1. Điều Kiện Đổi Trả</h4>
             <p>- Sản phẩm phải còn nguyên tem, mạc và không bị hư hại, sử dụng hoặc giặt qua.</p>
             <p>- Sản phẩm phải được đổi trong vòng <strong>7 ngày</strong> kể từ ngày nhận hàng.</p>
             <p>- Các sản phẩm giảm giá hoặc khuyến mãi không được đổi trả, trừ khi có sự cố do lỗi sản phẩm.</p>
             <h4>2. Quy Trình Đổi Trả</h4>
-            <p>- Liên hệ với bộ phận chăm sóc khách hàng của UTESHOP qua số điện thoại <strong>0123 456 789</strong> hoặc email <strong>support@uteshop.com</strong> để yêu cầu đổi trả.</p>
-            <p>- Đóng gói sản phẩm cần đổi trả và gửi lại cho chúng tôi theo địa chỉ sau: <strong>UTESHOP, Số 01 Võ Văn Ngân, Phường Linh Chiểu, Thành phố Thủ Đức, Thành phố Hồ Chí Minh</strong>.</p>
+            <p>- Liên hệ với bộ phận chăm sóc khách hàng của ONESHOP qua số điện thoại <strong>0123 456 789</strong> hoặc email <strong>support@ONESHOP.com</strong> để yêu cầu đổi trả.</p>
+            <p>- Đóng gói sản phẩm cần đổi trả và gửi lại cho chúng tôi theo địa chỉ sau: <strong>ONESHOP, Số 01 Võ Văn Ngân, Phường Linh Chiểu, Thành phố Thủ Đức, Thành phố Hồ Chí Minh</strong>.</p>
             <p>- Chúng tôi sẽ kiểm tra tình trạng sản phẩm và xác nhận việc đổi trả trong vòng 2-3 ngày làm việc.</p>
             <h4>3. Phí Vận Chuyển</h4>
-            <p>- Nếu đổi trả do lỗi từ phía UTESHOP, chúng tôi sẽ chịu mọi chi phí vận chuyển.</p>
+            <p>- Nếu đổi trả do lỗi từ phía ONESHOP, chúng tôi sẽ chịu mọi chi phí vận chuyển.</p>
             <p>- Nếu đổi trả do lý do cá nhân, khách hàng sẽ chịu phí vận chuyển đối với sản phẩm đổi trả.</p>
             <h4>4. Hoàn Tiền</h4>
             <p>- Sau khi sản phẩm được kiểm tra và xác nhận hợp lệ, chúng tôi sẽ hoàn tiền vào tài khoản của bạn trong vòng 5-7 ngày làm việc.</p>
@@ -209,33 +233,46 @@
         <div class="tab-pane fade" id="comments" role="tabpanel" aria-labelledby="comments-tab">
 
             <div>
-                <% String userId = (String) request.getAttribute("userId"); %>
-                <% String productId = (String) request.getAttribute("productId"); %>
-
                 <h5>Viết bình luận</h5>
-                <form id="comment-form">
-                    <input type="hidden" id="userId" value="<%= session.getAttribute("user")%>"> <!-- Lấy từ session -->
+                <form id="comment-form" enctype="multipart/form-data">
+                    <input type="hidden" id="userId" value="${user.id_user}"> <!-- Lấy từ session -->
                     <input type="hidden" id="productId" value="${product.id_product}"> <!-- ID sản phẩm hiện tại -->
 
-                    <!-- Thêm phần đánh giá điểm -->
-                    <div class="mb-3">
-                        <label for="point">Điểm đánh giá:</label>
-                        <select id="point" name="point" class="form-control">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                        </select>
+                    <!-- Đánh giá điểm -->
+                    <div class='rating-stars' data-star="0">
+                        <strong> Đánh giá </strong>
+                        <ul id='stars'>
+                            <li class='star' title='Tệ' data-value='1' onclick="chooseReview(this)">
+                                <i class='bx bxs-star'></i>
+                            </li>
+                            <li class='star' title='Tạm được' data-value='2' onclick="chooseReview(this)">
+                                <i class='bx bxs-star'></i>
+                            </li>
+                            <li class='star' title='Tốt' data-value='3' onclick="chooseReview(this)">
+                                <i class='bx bxs-star'></i>
+                            </li>
+                            <li class='star' title='Rất tốt' data-value='4' onclick="chooseReview(this)">
+                                <i class='bx bxs-star'></i>
+                            </li>
+                            <li class='star' title='Tuyệt vời' data-value='5' onclick="chooseReview(this)">
+                                <i class='bx bxs-star'></i>
+                            </li>
+                        </ul>
                     </div>
 
-                    <!-- Thêm phần nội dung bình luận -->
+                    <!-- Nội dung bình luận -->
                     <div class="mb-3">
                         <label for="comment">Nội dung bình luận:</label>
                         <textarea id="comment" name="comment" rows="3" class="form-control"></textarea>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Gửi bình luận</button>
+                    <!-- Thêm hình ảnh bình luận -->
+                    <div class="mb-3">
+                        <label for="commentImages">Hình ảnh (tùy chọn):</label>
+                        <input type="file" id="commentImages" name="commentImages[]" multiple accept="image/*" class="form-control">
+                    </div>
+
+                    <button type="button" class="btn btn-primary" onclick="addReview()">Gửi bình luận</button>
                 </form>
 
                 <h5 class="mt-4">Các bình luận</h5>
@@ -245,10 +282,11 @@
             </div>
             <template id="comment-template">
                 <div class="comment-item mb-3">
-                    <strong class="userName"></strong><br>
+                    <strong class="userName"></strong>
+                    <span class="reviewDate"></span><br>
                     <span class="productQuality"></span>
-                    <span class="reviewContent"></span>
-                    <span class="imageUrls"></span>
+                    <span class="reviewContent"></span><br>
+                    <div class="imageUrls"></div> <!-- Sửa thành div để chứa hình ảnh -->
                 </div>
             </template>
         </div>
