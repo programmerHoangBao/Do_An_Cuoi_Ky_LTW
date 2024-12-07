@@ -4,17 +4,14 @@ import hcmute.edu.vn.entity.Product;
 import hcmute.edu.vn.entity.Shop;
 import hcmute.edu.vn.entity.User;
 import hcmute.edu.vn.repository.UserRepository;
-import hcmute.edu.vn.service.implement.UserService;
-import hcmute.edu.vn.service.implement.FollowShopService;
-import hcmute.edu.vn.service.implement.ProductService;
-import hcmute.edu.vn.service.implement.ShopService;
+import hcmute.edu.vn.service.implement.*;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class ProductController {
@@ -27,6 +24,7 @@ public class ProductController {
     FollowShopService followShopService;
     @Autowired
     UserRepository userRepository;
+
 
     @GetMapping("/product/{id}")
     public String productDetail(@PathVariable("id") Integer id, ModelMap model, HttpSession session) {
@@ -88,4 +86,6 @@ public class ProductController {
         User user = userRepository.getReferenceById(userId); // Thay thế userService bằng service thực tế của bạn
         return followShopService.isFollowed(shop, user); // Trả về true nếu đã follow, false nếu chưa
     }
+
+
 }

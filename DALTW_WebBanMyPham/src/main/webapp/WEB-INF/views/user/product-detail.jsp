@@ -127,7 +127,9 @@
                                                     <div class="clr"></div>
                                                 </div>
                                                 <div class="bst">
-                                                    <button type="button" class="btn-bts btn-atc" onclick="AddCard(1)">
+                                                    <input type="hidden" id="userId-cart" value="${user.id_user}">
+                                                    <input type="hidden" id="product_id" value="${product.id_product}">
+                                                    <button type="button" class="btn-bts btn-atc" onclick="addToCart()">
                                                         <i class='bx bx-cart-add'></i>
                                                         Thêm giỏ hàng
                                                     </button>
