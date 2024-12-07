@@ -59,12 +59,19 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public String registerUser(@ModelAttribute("userInfo") @Validated UserInfo userInfo, BindingResult result) {
+    public String registerUser(@ModelAttribute("userInfo") @Validated UserInfo userInfo, BindingResult result, Model model) {
     	// Validation
         if (result.hasErrors()) {
             return "auth/register";
         }
-        
+
+        if (userInfo != null && userInfo.getEmail() != null) {
+            if (userInfoRepository.findByEmail(userInfo.getEmail()).isPresent()) {
+                model.addAttribute("error", true);
+                return "auth/register";
+            }
+        }
+
         // Add user to Database
         userService.registerUser(userInfo);
         return "redirect:/register/register-verify-otp?email=" + userInfo.getEmail();
