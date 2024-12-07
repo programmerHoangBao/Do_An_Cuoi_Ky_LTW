@@ -11,7 +11,9 @@ import hcmute.edu.vn.service.IShoppingCartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -66,5 +68,23 @@ public class ShoppingCartService implements IShoppingCartService {
             return true;
         }
         return false;
+    }
+
+    // Thêm phương thức xóa tất cả sản phẩm trong giỏ hàng của người dùng
+    public String clearCart(Integer userId) {
+        // Tìm User theo userId
+        User user = userRepository.getReferenceById(userId);
+
+        // Tìm tất cả các sản phẩm trong giỏ hàng của người dùng
+        List<ShoppingCart> cartItems = shoppingCartRepository.findByUser(user);
+
+        // Kiểm tra nếu giỏ hàng có sản phẩm
+        if (!cartItems.isEmpty()) {
+            // Xóa tất cả sản phẩm trong giỏ hàng của người dùng
+            shoppingCartRepository.deleteAll(cartItems);
+            return "Đã xóa tất cả sản phẩm trong giỏ hàng.";
+        }
+
+        return "Giỏ hàng trống, không có sản phẩm nào để xóa.";
     }
 }

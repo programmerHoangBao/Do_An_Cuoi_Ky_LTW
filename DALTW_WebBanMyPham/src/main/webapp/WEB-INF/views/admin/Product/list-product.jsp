@@ -10,21 +10,23 @@
 	href="${pageContext.request.contextPath}/templates/admin/css/list-product.css" />
 </head>
 <body>
+	<form action="/admin/search-product" method="get">
+		<div class="search-container">
+			<input type="text" name="name" class="search-input"
+				placeholder="Nhập chuỗi tìm kiếm...">
+			<button type="submit" class="search-button">Tìm kiếm</button>
+		</div>
+	</form>
 	<form action="/admin/list-product" method="get">
 		<div class="contain">
-			<div class="search-container">
-				<input type="text" class="search-input"
-					placeholder="Nhập chuỗi tìm kiếm...">
-				<button class="search-button">Tìm kiếm</button>
-			</div>
 			<div class=div_InsertProduct>
-				<button id=btnInsertProduct>Thêm</button>
+				<button id=btnInsertProduct type="button">Thêm</button>
 			</div>
 			<script>
 				document.getElementById("btnInsertProduct").addEventListener(
 						"click", function() {
 							window.open("/admin/insert-product", "_blank");
-						});
+						});}
 			</script>
 			<div class="table_product">
 				<table>

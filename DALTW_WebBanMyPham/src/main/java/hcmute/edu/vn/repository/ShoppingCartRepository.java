@@ -11,6 +11,7 @@ import java.util.List;
 
 public interface ShoppingCartRepository extends JpaRepository<ShoppingCart, Integer> {
     ShoppingCart findByUserAndProduct(User user, Product product);
+    List<ShoppingCart> findByUser(User user);
 
     // Truy vấn thông tin giỏ hàng của người dùng theo userId
     @Query("SELECT new hcmute.edu.vn.dto.ShoppingCartDTO(" +
