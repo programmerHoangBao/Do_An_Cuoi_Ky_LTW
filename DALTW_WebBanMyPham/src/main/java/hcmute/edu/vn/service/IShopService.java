@@ -9,4 +9,5 @@ public interface IShopService {
 	List<Shop> findAllShop();
     <S extends Shop> S save(S entity);
     Shop createShop(Shop shop, User salesman);
+    Shop findShopById(Integer id_shop);
 }

@@ -1,0 +1,134 @@
+/* Đặt nền cho toàn trang */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container cho toàn bộ form */
+form {
+    max-width: 800px;
+    margin: 50px auto;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Tiêu đề */
+h1 {
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Nhóm các trường form */
+.form-group {
+    margin-bottom: 20px;
+}
+
+/* Label cho các trường */
+label {
+    display: block;
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+/* Trường nhập liệu */
+textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    resize: vertical;
+}
+
+/* Điều chỉnh để các label nằm cùng hàng với radio button */
+.payment-label {
+    display: inline-block; /* Đặt label trên cùng hàng với radio button */
+    margin-left: 10px; /* Thêm khoảng cách giữa radio button và label */
+    font-size: 16px; /* Cỡ chữ cho label */
+}
+
+/* Các button lựa chọn phương thức thanh toán */
+input[type="radio"] {
+    margin-right: 0px;
+}
+
+/* Bảng danh sách sản phẩm */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+}
+
+th {
+    background-color: #f8f8f8;
+    font-weight: bold;
+}
+
+td {
+    background-color: #fff;
+}
+
+/* Tổng tiền */
+h3 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Nút thanh toán */
+.btn-pay {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 24px;
+    font-size: 18px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.btn-pay:hover {
+    background-color: #45a049;
+}
+
+.order-items {
+    margin-top: 30px;
+}
+
+/* Các thành phần input, button hover */
+input[type="radio"]:hover, .btn-pay:hover {
+    opacity: 0.8;
+}
+
+/* Tạo khoảng cách giữa các phần tử trong form */
+form > div {
+    margin-bottom: 20px;
+}
+.payment-details {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+}
+.payment-details img {
+    max-width: 200px;
+    margin-top: 10px;
+}
