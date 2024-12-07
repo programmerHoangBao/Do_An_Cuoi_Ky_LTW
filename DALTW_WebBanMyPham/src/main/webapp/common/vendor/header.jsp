@@ -23,6 +23,7 @@
                     <a href="/vendor/home">Trang chủ</a>
                     <a href="/vendor/shop">Cửa hàng</a>
                     <a href="/vendor/list-product">Sản phẩm</a>
+                    <a href="/vendor/revenue">Doanh thu</a>
                     <a href="${pageContext.request.contextPath}/client.html">Tài khoản của tôi</a>
                     <a href="${pageContext.request.contextPath}/client.html">Tài khoản người dùng</a>
                     <a href="${pageContext.request.contextPath}/contact.html">Hoạt động</a>

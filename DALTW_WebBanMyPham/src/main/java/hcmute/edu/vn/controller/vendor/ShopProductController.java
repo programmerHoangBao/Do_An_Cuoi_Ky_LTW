@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.File;
 import java.io.IOException;
@@ -47,7 +48,12 @@ public class ShopProductController {
 
         Pageable pageable = PageRequest.of(page, size);
         Shop shop = (Shop) session.getAttribute("shop");
+        session.setMaxInactiveInterval(60 * 60);
         Page<Product> productPage = this.productService.findProductByShopId(shop.getId_shop(),pageable);
+        //model.addAttribute("id_shop", idShop);
+        //Page<Product> productPage = this.productService.findProductByShopId(idShop,pageable);
+
+
         List<ProductColor> productColors;
         int index = 0;
         for (Product product : productPage) {
@@ -60,6 +66,7 @@ public class ShopProductController {
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", productPage.getTotalPages());
         return "vendor/Product/list-product";
+        //return "redirect:vendor/list-product";
     }
 
     @GetMapping("/search-product")
@@ -88,6 +95,7 @@ public class ShopProductController {
     @GetMapping("/insert-product")
     public String showProductForm(Model model,HttpSession session) {
         Shop shop = (Shop) session.getAttribute("shop");
+        session.setMaxInactiveInterval(30 * 60);
         model.addAttribute("shops", shopService.findShopById(shop.getId_shop()));
         model.addAttribute("categories", categoryService.findAllCategory());
         return "vendor/Product/insert-product";

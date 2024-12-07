@@ -1,6 +1,8 @@
 package hcmute.edu.vn.controller.vendor;
 
+import hcmute.edu.vn.entity.Shop;
 import hcmute.edu.vn.service.implement.RevenueService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,9 +22,10 @@ public class RevenueController {
     private RevenueService revenueService;
 
     @GetMapping("/view")
-    public String revenue(Model model,@RequestParam(defaultValue = "day") String type) {
+    public String revenue(Model model,@RequestParam(defaultValue = "day") String type, HttpSession session) {
         // Chuẩn bị dữ liệu cho biểu đồ
-        List<Object[]> data= revenueService.getTodayRevenue();
+        Shop shop = (Shop) session.getAttribute("shop");
+        List<Object[]> data= revenueService.getTodayRevenue(shop.getId_shop());
         List<String> labels = new ArrayList<>();
         List<BigDecimal> totals = new ArrayList<>();
         for (Object[] row : data) {
@@ -42,25 +45,27 @@ public class RevenueController {
             @RequestParam(required = false) Integer month,
             @RequestParam(required = false) Integer year,
             @RequestParam(required = false) Integer day,
-            Model model) {
+            Model model, HttpSession session) {
 
+        Shop shop = (Shop) session.getAttribute("shop");
+        session.setMaxInactiveInterval(3600);
         List<Object[]> data;
         if (type.equals("day")) {
             // Doanh thu theo ngày
             int currentYear = LocalDate.now().getYear();
             int currentMonth = LocalDate.now().getMonthValue();
             int selectedDay = day != null ? day : LocalDate.now().getDayOfMonth();
-            data = revenueService.getDailyRevenue(currentMonth, currentYear, selectedDay);
+            data = revenueService.getDailyRevenue(currentMonth, currentYear, selectedDay, shop.getId_shop());
 
         } else if (type.equals("month")) {
             // Doanh thu theo tháng
             int currentYear = LocalDate.now().getYear();
             int selectedMonth = month != null ? month : LocalDate.now().getMonthValue();
-            data = revenueService.getMonthlyRevenue(currentYear, selectedMonth);
+            data = revenueService.getMonthlyRevenue(currentYear, selectedMonth, shop.getId_shop());
 
         } else {
             // Doanh thu theo năm
-            data = revenueService.getYearlyRevenue();
+            data = revenueService.getYearlyRevenue(shop.getId_shop());
         }
 
         // Chuẩn bị dữ liệu cho biểu đồ

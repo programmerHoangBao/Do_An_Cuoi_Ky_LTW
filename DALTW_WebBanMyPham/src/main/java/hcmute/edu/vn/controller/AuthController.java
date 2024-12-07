@@ -28,6 +28,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Date;
 
@@ -94,16 +95,18 @@ public class AuthController {
     public String authenticate(@RequestParam("username") String username,
                                @RequestParam("password") String password,
                                HttpSession session,
-                               HttpServletResponse response, Model model) {
+                               HttpServletResponse response, Model model, RedirectAttributes redirectAttributes) {
         try {
         	// Tìm người dùng trong cơ sở dữ liệu
             UserInfo user = userInfoRepository.findByName(username)
                     .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
-            session.setAttribute("user1", user);
-            User user10 = userService1.findByUsername(user.getName());
-            Shop shop = shopService.findShopByIdUser(user10.getId_user());
-            session.setAttribute("shop", shop);
+//            session.setAttribute("user1", user);
+//
+//            User user10 = userService1.findByUsername(user.getName());
+//            Shop shop = shopService.findShopByIdUser(user10.getId_user());
+//            session.setAttribute("shop", shop);
+//            //redirectAttributes.addAttribute("id_shop", shop.getId_shop());
 
             if (!user.isEnabled()) {
                 model.addAttribute("error", "Your account is disabled.");
@@ -130,6 +133,11 @@ public class AuthController {
 
             // Tìm user theo username và password
             User user1 = userService1.findByUsername(username);
+            session.setAttribute("user1", user);
+
+            Shop shop = shopService.findShopByIdUser(user1.getId_user());
+            session.setAttribute("shop", shop);
+
             if (user1 != null) {
                 // Lưu thông tin user vào session
                 session.setAttribute("user", user1);
@@ -139,7 +147,7 @@ public class AuthController {
 
             // Điều hướng dựa trên vai trò người dùng
             if (userDetails.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
-                return "redirect:/admin/home";  // Điều hướng đến trang admin
+                return "redirect:/admin/home?=";  // Điều hướng đến trang admin
             } else if (userDetails.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_USER"))) {
                 return "redirect:/user/home";   // Điều hướng đến trang user
             } else {
