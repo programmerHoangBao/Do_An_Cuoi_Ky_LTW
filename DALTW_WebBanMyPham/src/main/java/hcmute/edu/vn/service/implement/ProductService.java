@@ -2,6 +2,8 @@ package hcmute.edu.vn.service.implement;
 
 import java.util.List;
 
+import hcmute.edu.vn.entity.Category;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -14,6 +16,9 @@ import hcmute.edu.vn.service.IProductService;
 public class ProductService implements IProductService{
 
 	private final ProductRepository productRepository;
+
+	@Autowired
+	CategoryService categoryService;
 	
 	public ProductService(ProductRepository productRepository) {
 		this.productRepository = productRepository;
@@ -37,6 +42,7 @@ public class ProductService implements IProductService{
 		return this.productRepository.findProductByNameContaining(name, pageable);
 	}
 
+
 	@Override
 	public Product findProductById(Integer id) {
 		// TODO Auto-generated method stub
@@ -58,5 +64,7 @@ public class ProductService implements IProductService{
 		}
 		return false;
 	}
+
+
 }
 
