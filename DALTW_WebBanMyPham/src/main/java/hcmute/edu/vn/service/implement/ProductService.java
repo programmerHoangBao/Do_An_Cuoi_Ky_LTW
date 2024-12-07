@@ -24,17 +24,17 @@ public class ProductService implements IProductService{
 		// TODO Auto-generated method stub
 		return this.productRepository.findAll();
 	}
-
-	@Override
-	public List<Product> findProductByNameContaining(String nameProduct) {
-		// TODO Auto-generated method stub
-		return this.productRepository.findProductByNameContaining(nameProduct);
-	}
 	
 	@Override
 	public Page<Product> findProductPageable(Pageable pageable) {
 		// TODO Auto-generated method stub
 		return this.productRepository.findAll(pageable);
+	}
+	
+	@Override
+	public Page<Product> findProductByNameContaining(String name, Pageable pageable) {
+		// TODO Auto-generated method stub
+		return this.productRepository.findProductByNameContaining(name, pageable);
 	}
 
 	@Override
