@@ -75,6 +75,11 @@ public class UserService1 implements IUserService {
     }
 
     @Override
+    public Optional<User> findByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
+    @Override
     public List<User> findAllByRole(String role) {
         return userRepository.findAllByRole(role);
     }

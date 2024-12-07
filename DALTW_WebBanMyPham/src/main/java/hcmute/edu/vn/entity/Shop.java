@@ -2,19 +2,11 @@ package hcmute.edu.vn.entity;
 
 import java.util.Date;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Data
 @Entity
@@ -26,13 +18,14 @@ public class Shop {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id_shop;
 	
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name = "id_vendor", nullable = false)
 	private User vendor;
 	
 	@Column(name = "name_shop", length = 100, nullable = false)
 	private String name;
-	
+
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "sign_up_date", nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Date signUpDate;

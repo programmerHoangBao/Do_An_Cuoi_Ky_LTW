@@ -65,6 +65,10 @@ public class ProductService implements IProductService{
 		return false;
 	}
 
-
+	@Override
+	public Page<Product> findProductByShopId(Integer shopId, Pageable pageable) {
+		// TODO Auto-generated method stub
+		return this.productRepository.findProductsByShopId(shopId,pageable);
+	}
 }
 

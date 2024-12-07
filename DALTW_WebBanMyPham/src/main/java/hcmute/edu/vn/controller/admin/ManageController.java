@@ -33,6 +33,8 @@ public class ManageController {
         List<Shop> shopList = shopService.findAllShop();
         System.out.println(shopList);
         model.addAttribute("userList", userList);
+        model.addAttribute("shopList", shopList);
+
         return "admin/Manage/page-admin";
     }
 }
