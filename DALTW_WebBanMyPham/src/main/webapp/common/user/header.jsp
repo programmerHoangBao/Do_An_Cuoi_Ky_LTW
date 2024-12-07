@@ -18,7 +18,7 @@
     <div class="header-container-fluid">
         <nav class="header-navbar navbar-light header-bg-light">
             <div class="navbar-links">
-                <a href="${pageContext.request.contextPath}/index.html">Trang chủ</a>
+                <a href="${pageContext.request.contextPath}/user/home">Trang chủ</a>
                 <a href="${pageContext.request.contextPath}/products.html">Cửa hàng</a>
                 <a href="${pageContext.request.contextPath}/login">Tài khoản của tôi</a>
                 <a href="${pageContext.request.contextPath}/contact.html">Hoạt động</a>

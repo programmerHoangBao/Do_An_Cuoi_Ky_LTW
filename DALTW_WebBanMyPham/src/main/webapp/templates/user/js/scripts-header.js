@@ -36,17 +36,16 @@ function closeNav() {
 
 // Hàm để hiển thị sản phẩm trong giỏ hàng
 function loadShoppingCart(items) {
-    const shoppingNavbar = document.getElementById("shoppingNavbar");
     const cartItemsBody = document.getElementById("cart-items-body");
+    const shoppingNavbar = document.getElementById("shoppingNavbar");
+    const userId = document.getElementById("userId-cart").value; // Lấy userId từ input ẩn
 
-    // Kiểm tra xem phần tử có tồn tại không
     if (!cartItemsBody) {
         console.error("Không tìm thấy phần tử cart-items-body.");
-        return; // Dừng hàm nếu không tìm thấy phần tử
+        return;
     }
 
-    // Làm sạch giỏ hàng hiện tại
-    cartItemsBody.innerHTML = "";  // Đảm bảo xóa phần tử cũ trước khi thêm mới
+    cartItemsBody.innerHTML = ""; // Xóa nội dung cũ
 
     if (items.length === 0) {
         cartItemsBody.innerHTML = "<tr><td colspan='2'>Giỏ hàng của bạn trống.</td></tr>";
@@ -54,25 +53,56 @@ function loadShoppingCart(items) {
         items.forEach(item => {
             const row = document.createElement("tr");
 
-            // Tính tổng tiền
-            const totalPrice = item.shoppingCartQuantity * item.productPrice;
-
             row.innerHTML = `
                 <td class="product-image">
                     <img src="${item.productImage}" alt="${item.productName}" class="product-image" />
                 </td>
                 <td class="product-details">
-                    <div class="product-name">${item.productName}</div>
+                    <div class="product-name">
+                        ${item.productName}
+                        <button class="delete-btn" onclick="deleteCartItem(${userId}, ${item.productId})">Xóa</button>
+                    </div>
                     <div class="product-price-quantity">
                         <span class="product-quantity">Số lượng: ${item.shoppingCartQuantity}</span>
                         <span class="product-price">Giá: ${item.productPrice} VNĐ</span>
-                    </div>
-                    <div class="product-total-price">
-                        <span><strong>Tổng tiền: ${totalPrice.toFixed(2)} VNĐ</strong></span>
+                        <span class="product-total">Tổng: ${item.shoppingCartQuantity * item.productPrice} VNĐ</span>
                     </div>
                 </td>
             `;
             cartItemsBody.appendChild(row);
         });
     }
+
+    // Thêm nút "Xem giỏ hàng" dưới bảng
+    const viewCartButton = document.createElement("div");
+    viewCartButton.classList.add("view-cart-button-container");
+    viewCartButton.innerHTML = `
+        <button class="view-cart-button" onclick="redirectToCart(${userId})">Xem giỏ hàng</button>
+    `;
+    shoppingNavbar.appendChild(viewCartButton);
+}
+
+// Hàm để xóa sản phẩm khỏi giỏ hàng
+function deleteCartItem(userId, productId) {
+    fetch(`/api/delete-cart/${userId}&${productId}`, {
+        method: "POST"
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Không thể xóa sản phẩm.");
+            }
+            return response.text(); // Lấy phản hồi dạng text thay vì JSON
+        })
+        .then(data => {
+            console.log("Xóa thành công:", data);
+            alert(data); // Hiển thị thông báo từ server
+            // Tải lại giỏ hàng hoặc cập nhật giao diện
+            loadShoppingCart(data);
+        })
+        .catch(error => {
+            console.error("Lỗi khi xóa sản phẩm:", error);
+        });
+}
+function redirectToCart(userId) {
+    window.location.href = `/ShoppingCart/${userId}`;
 }

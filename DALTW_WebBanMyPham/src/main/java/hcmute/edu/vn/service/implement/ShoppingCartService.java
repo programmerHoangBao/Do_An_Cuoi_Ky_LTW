@@ -53,4 +53,18 @@ public class ShoppingCartService implements IShoppingCartService {
     public List<ShoppingCartDTO> getShoppingCartItemsByUserId(Integer userId) {
         return shoppingCartRepository.findShoppingCartItemsByUserId(userId);
     }
+
+    // Logic xóa sản phẩm
+    public boolean deleteCartItem(Integer userId, Integer productId) {
+        // Kiểm tra xem sản phẩm có trong giỏ hàng không
+        User user = userRepository.getReferenceById(userId);
+        Product product = productRepository.getReferenceById(productId);
+        ShoppingCart cartItem = shoppingCartRepository.findByUserAndProduct(user, product);
+
+        if (cartItem != null) {
+            shoppingCartRepository.delete(cartItem); // Xóa sản phẩm
+            return true;
+        }
+        return false;
+    }
 }
