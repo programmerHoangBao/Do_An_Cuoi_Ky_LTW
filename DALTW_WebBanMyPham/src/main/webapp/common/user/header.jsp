@@ -30,11 +30,11 @@
 
                         <c:choose>
                             <c:when test="${not empty username}">
-                                <a href="">
+                                <a href="${pageContext.request.contextPath}/user/history">
                                     <i class='bx bx-time' style="font-size: 36px; color: black;"></i>
                                 </a>
 
-                                <a href="">
+                                <a href="${pageContext.request.contextPath}/user/follow-shop?userId=${sessionScope.user.id_user}">
                                     <i class='bx bx-heart' style="font-size: 36px; color: black;"></i>
                                 </a>
 

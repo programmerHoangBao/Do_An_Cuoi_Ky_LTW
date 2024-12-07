@@ -83,10 +83,6 @@ public class ShopService implements IShopService {
 //        return result;
 //    }
 
-	public Shop findById(Integer id) {
-        return shopRepository.findById(id)
-                .orElse(null); // Trả về null nếu không tìm thấy
-    }
 	@Override
 	public List<Shop> findAllShop() {
 		// TODO Auto-generated method stub

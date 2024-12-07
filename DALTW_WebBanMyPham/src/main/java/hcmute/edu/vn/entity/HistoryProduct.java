@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 public class HistoryProduct {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id_favorite_shop;
+	private Integer id_history;
 	
 	@ManyToOne
 	@JoinColumn(name = "id_user", nullable = false)
