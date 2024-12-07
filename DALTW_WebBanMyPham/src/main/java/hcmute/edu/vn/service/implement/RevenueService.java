@@ -18,24 +18,24 @@ public class RevenueService implements IRevenueService {
     }
 
     @Override
-    public List<Object[]> getDailyRevenue(int month, int year, int day)  {
-        return orderRepository.getDailyRevenue(month, year, day);
+    public List<Object[]> getDailyRevenue(int month, int year, int day, int idShop)  {
+        return orderRepository.getDailyRevenue(month, year, day, idShop);
     }
 
     @Override
-    public List<Object[]> getMonthlyRevenue(int year, int month) {
-        return orderRepository.getMonthlyRevenue(year, month);
+    public List<Object[]> getMonthlyRevenue(int year, int month, int idShop) {
+        return orderRepository.getMonthlyRevenue(year, month, idShop);
     }
 
     @Override
-    public List<Object[]> getYearlyRevenue() {
-        return orderRepository.getYearlyRevenue();
+    public List<Object[]> getYearlyRevenue(int idShop) {
+        return orderRepository.getYearlyRevenue(idShop);
     }
 
     @Override
-    public List<Object[]> getTodayRevenue() {
+    public List<Object[]> getTodayRevenue(int idShop) {
         LocalDate today = LocalDate.now();
-        return orderRepository.findRevenueByDate(today, today.plusDays(1)); // ngày hôm nay
+        return orderRepository.findRevenueByDate(today, today.plusDays(1),idShop); // ngày hôm nay
     }
 
 }
