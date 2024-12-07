@@ -94,4 +94,3 @@ public class RegisterVendorController {
         return "/vendor/home";  // Sau khi đăng ký, chuyển hướng đến trang cửa hàng vừa tạo
     }
 }
-

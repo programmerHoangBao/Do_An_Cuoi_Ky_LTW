@@ -27,8 +27,17 @@
             <div class="login_text">
                 <ul>
                     <li>
+
                         <c:choose>
                             <c:when test="${not empty username}">
+                                <a href="">
+                                    <i class='bx bx-time' style="font-size: 36px; color: black;"></i>
+                                </a>
+
+                                <a href="">
+                                    <i class='bx bx-heart' style="font-size: 36px; color: black;"></i>
+                                </a>
+
                                 <!-- Nếu người dùng đã đăng nhập, hiển thị icon logout -->
                                 <a href="/logout">
                                     <i class='bx bx-door-open' style="font-size: 36px; color: black;"></i>
