@@ -26,12 +26,16 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	@Modifying
 	@Transactional
 	@Query("""
-        UPDATE User u 
-        SET u.fullName = :fullName, u.username = :username, u.role = :role 
-        WHERE u.email = :email
-    """)
+    UPDATE User u 
+    SET u.fullName = :fullName, u.phone = :phone, u.role = :role, u.address = :address, u.status = :status 
+    WHERE u.email = :email
+""")
 	void updateUserByEmail(
 			@Param("email") String email,
-			@Param("user") User user
+			@Param("fullName") String fullName,
+			@Param("phone") String phone,
+			@Param("role") String role,
+			@Param("address") String address,
+			@Param("status") int status
 	);
 }

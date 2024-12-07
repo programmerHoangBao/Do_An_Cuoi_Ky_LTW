@@ -56,10 +56,9 @@
                 <td>${u.role}</td>
                 <td>
                     <!-- Nút để chuyển đến trang chi tiết người dùng -->
-                    <a href="${pageContext.request.contextPath}/admin/view-detail/${u.email}">
+                    <a href="${pageContext.request.contextPath}/admin/view-detail-user/${u.email}">
                         <button class="btn btn-edit">Sửa</button>
                     </a>
-                    <button class="btn btn-delete">Xóa</button>
                 </td>
             </tr>
         </c:forEach>
@@ -90,8 +89,10 @@
                 <td>${s.name}</td>
                 <td>${s.address}</td>
                 <td>
-                    <button class="btn btn-edit">Sửa</button>
-                    <button class="btn btn-delete">Xóa</button>
+                    <!-- Nút để chuyển đến trang chi tiết shop -->
+                    <a href="${pageContext.request.contextPath}/admin/view-detail-shop/${s.id_shop}">
+                        <button class="btn btn-edit">Sửa</button>
+                    </a>
                 </td>
             </tr>
         </c:forEach>
