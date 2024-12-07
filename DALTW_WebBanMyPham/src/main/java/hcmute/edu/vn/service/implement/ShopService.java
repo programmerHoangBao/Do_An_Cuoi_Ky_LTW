@@ -7,7 +7,8 @@ import hcmute.edu.vn.service.IShopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.util.*;
+import java.util.stream.Collectors;
 import java.util.List;
 
 @Service
@@ -30,6 +31,57 @@ public class ShopService implements IShopService {
         shop.setSignUpDate(new Date()); // Ngày tạo shop
         return shopRepository.save(shop); // Lưu vào DB
     }
+
+
+    @Override
+    public List<Map<String, Object>> getTopShops(Integer month, Integer year) {
+//        List<Object[]> topShops = shopRepository.findTopShopsByMonthOrYear(month, year);
+//
+//        return topShops.stream().map(data -> {
+//            Map<String, Object> map = new HashMap<>();
+//            map.put("id_shop", data[0]);
+//            map.put("totalRevenue", data[1]);
+//            return map;
+//        }).collect(Collectors.toList());
+        List<Object[]> topShops = shopRepository.findTopShopsByMonthOrYear(month, year);
+
+        return topShops.stream().map(data -> {
+            Map<String, Object> map = new HashMap<>();
+            map.put("shopName", data[0]); // Tên shop
+            map.put("totalRevenue", data[1]); // Doanh thu
+            return map;
+        }).collect(Collectors.toList());
+    }
+
+//    @Override
+//    public List<Map<String, Object>> getTopShopsByRevenue(String timePeriod) {
+//        List<Map<String, Object>> result = new ArrayList<>();
+//        List<Object[]> data = new ArrayList<>();
+//
+//        if ("month".equals(timePeriod)) {
+//            data = shopRepository.findTopShopsByMonth();
+//        } else if ("year".equals(timePeriod)) {
+//            data = shopRepository.findTopShopsByYear();
+//        }
+//
+//        // Xử lý kết quả trả về và thêm thông tin shop
+//        for (Object[] row : data) {
+//            Map<String, Object> shopData = new HashMap<>();
+//            Integer shopId = (Integer) row[0];
+//            Double totalRevenue = (Double) row[1];
+//
+//            // Lấy thông tin shop từ ShopRepository
+//            Optional<Shop> shop = shopRepository.findById(shopId);
+//            if (shop.isPresent()) {
+//                shopData.put("shopName", shop.get().getName());
+//            }
+//
+//            shopData.put("shopId", shopId);
+//            shopData.put("totalRevenue", totalRevenue);
+//            result.add(shopData);
+//        }
+//        return result;
+//    }
 
 	public Shop findById(Integer id) {
         return shopRepository.findById(id)

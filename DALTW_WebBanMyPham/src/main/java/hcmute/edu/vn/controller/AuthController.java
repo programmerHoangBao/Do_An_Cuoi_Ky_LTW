@@ -94,7 +94,7 @@ public class AuthController {
         	// Tìm người dùng trong cơ sở dữ liệu
             UserInfo user = userInfoRepository.findByName(username)
                     .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-
+            session.setAttribute("user1", user);
             if (!user.isEnabled()) {
                 model.addAttribute("error", "Your account is disabled.");
                 return "redirect:/login";

@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping("/revenue")
+@RequestMapping("/vendor/revenue")
 public class RevenueController {
     @Autowired
     private RevenueService revenueService;

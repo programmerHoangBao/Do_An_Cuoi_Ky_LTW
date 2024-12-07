@@ -2,7 +2,9 @@ package hcmute.edu.vn.controller.user;
 
 import hcmute.edu.vn.entity.Shop;
 import hcmute.edu.vn.entity.User;
+import hcmute.edu.vn.entity.UserInfo;
 import hcmute.edu.vn.service.implement.ShopService;
+import hcmute.edu.vn.service.implement.UserService;
 import hcmute.edu.vn.service.implement.UserService1;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +31,11 @@ public class RegisterVendorController {
 
     @Value("${app.upload.dir}")
     private String uploadDir; // Đường dẫn lưu logo cửa hàng
+    @Autowired
+    private UserService userService;
 
     // Hiển thị form đăng ký cửa hàng
-    @GetMapping("/register")
+    @GetMapping("/vendor-register")
     public String showRegisterPage(HttpSession session, Model model) {
         // Lấy thông tin người dùng đã đăng nhập từ session
         User user = (User) session.getAttribute("user");
@@ -47,7 +51,7 @@ public class RegisterVendorController {
     }
 
     // Xử lý đăng ký cửa hàng
-    @PostMapping("/register")
+    @PostMapping("/vendor-register")
     public String registerShop(@ModelAttribute("shop") Shop shop,
                                HttpSession session) throws IOException {
 
@@ -78,8 +82,13 @@ public class RegisterVendorController {
         shopService.save(shop);
 
         // Cập nhật vai trò người dùng thành 'Vendor'
-        user.setRole("Vendor");
+        user.setRole("vendor");
         userService1.updateUser(user);
+
+        //cập nhật lại thông tin trong bảng UserInfor
+        UserInfo userInfo = (UserInfo) session.getAttribute("user1");
+        userInfo.setRoles("ROLE_VENDOR");
+        userService.updateUser(userInfo);
 
         //return "/Home/home/?id=" + shop.getId_shop();  // Sau khi đăng ký, chuyển hướng đến trang cửa hàng vừa tạo
         return "/vendor/home";  // Sau khi đăng ký, chuyển hướng đến trang cửa hàng vừa tạo
