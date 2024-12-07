@@ -18,7 +18,7 @@
     <div class="header-container-fluid">
         <nav class="header-navbar navbar-light header-bg-light">
             <div class="navbar-links">
-                <a href="${pageContext.request.contextPath}/index.html">Trang chủ</a>
+                <a href="${pageContext.request.contextPath}/user/home">Trang chủ</a>
                 <a href="${pageContext.request.contextPath}/products.html">Cửa hàng</a>
                 <a href="${pageContext.request.contextPath}/login">Tài khoản của tôi</a>
                 <a href="${pageContext.request.contextPath}/contact.html">Hoạt động</a>
@@ -43,12 +43,28 @@
                         </c:choose>
                     </li>
                     <li>
-                        <a href="#">
-                            <i class='bx bx-shopping-bag' style="font-size: 36px; color: black;"></i>
-                        </a>
+                        <!-- Sidebar -->
+                        <!-- Lấy userId từ session và lưu vào input ẩn -->
+                        <input type="hidden" id="userId-cart" value="${sessionScope.user.id_user}">
+                        <div id="shoppingNavbar">
+                            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                            <h2>Giỏ hàng</h2>
+
+                            <table class="shopping-cart-table">
+                                <tbody id="cart-items-body">
+                                <!-- Các sản phẩm sẽ được thêm ở đây -->
+                                </tbody>
+                            </table>
+                        </div>
+
+
+                        <span class="toggle_icon" onclick="openNav()">
+                            <i id="shoppingBagToggle" class='bx bx-shopping-bag' style="font-size: 36px; color: black; cursor: pointer;"></i>
+                        </span>
                     </li>
                 </ul>
             </div>
+
         </nav>
     </div>
 </div>
