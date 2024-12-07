@@ -1,6 +1,7 @@
 package hcmute.edu.vn.controller;
 
 import hcmute.edu.vn.config.security.UserInfoService;
+import hcmute.edu.vn.entity.Shop;
 import hcmute.edu.vn.entity.User;
 import hcmute.edu.vn.entity.UserInfo;
 import hcmute.edu.vn.entity.User;
@@ -8,6 +9,7 @@ import hcmute.edu.vn.model.AuthRequest;
 import hcmute.edu.vn.repository.UserInfoRepository;
 
 import hcmute.edu.vn.repository.UserRepository;
+import hcmute.edu.vn.service.implement.ShopService;
 import hcmute.edu.vn.service.implement.UserService;
 import hcmute.edu.vn.service.implement.UserService1;
 import hcmute.edu.vn.utils.JwtUtil;
@@ -51,6 +53,9 @@ public class AuthController {
     
     @Autowired
     private UserInfoRepository userInfoRepository;
+
+    @Autowired
+    private ShopService shopService;
     
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
@@ -94,7 +99,12 @@ public class AuthController {
         	// Tìm người dùng trong cơ sở dữ liệu
             UserInfo user = userInfoRepository.findByName(username)
                     .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
             session.setAttribute("user1", user);
+            User user10 = userService1.findByUsername(user.getName());
+            Shop shop = shopService.findShopByIdUser(user10.getId_user());
+            session.setAttribute("shop", shop);
+
             if (!user.isEnabled()) {
                 model.addAttribute("error", "Your account is disabled.");
                 return "redirect:/login";
