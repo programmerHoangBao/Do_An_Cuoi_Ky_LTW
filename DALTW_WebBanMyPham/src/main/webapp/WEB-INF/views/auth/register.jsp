@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%@ include file="/common/taglib.jsp" %>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -138,9 +139,10 @@
             <i class="fas fa-lock"></i>
         </div>
         <button type="submit" class="login-btn">Đăng ký</button>
-        <div class="error-message" style="${param.error == 'true' ? 'display: block;' : 'display: none;'}">
-            <p>Thông tin đăng ký không hợp lệ. Vui lòng thử lại.</p>
+        <div class="error-message" style="<c:if test="${error}">display: block;</c:if><c:if test="${!error}">display: none;</c:if>">
+            <p>Email đã được đăng ký.</p>
         </div>
+
     </form>
     <div class="login-footer">
         <p>Đã có tài khoản? <a href="/login">Đăng nhập ngay</a></p>

@@ -13,6 +13,7 @@ import jakarta.persistence.TemporalType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Data
 @Entity
@@ -38,11 +39,13 @@ public class User {
 	
 	@Column(name = "full_name", length = 100, nullable = false)
 	private String fullName;
-	
+
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "sign_up_date", nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Date signUpDate;
-	
+
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "birth_date", nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Date birthDate;

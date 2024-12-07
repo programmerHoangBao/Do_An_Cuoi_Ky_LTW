@@ -15,6 +15,7 @@ import jakarta.persistence.TemporalType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Data
 @Entity
@@ -32,7 +33,8 @@ public class Shop {
 	
 	@Column(name = "name_shop", length = 100, nullable = false)
 	private String name;
-	
+
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "sign_up_date", nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Date signUpDate;
