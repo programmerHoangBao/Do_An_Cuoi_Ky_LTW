@@ -77,9 +77,8 @@
 							<td>
 								<img id="image_product_color" alt="Hình ảnh sản phẩm"
 												src="${productColor.imageProduct}"> <br>
-								<input type="file" name="images[]">
 							</td>
-							<td><button type="button">Xóa</button></td>
+							<td></td>
 						</tr>
 					</c:forEach>
 			</tbody>

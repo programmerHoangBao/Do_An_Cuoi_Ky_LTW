@@ -24,6 +24,7 @@ public class HomeController {
 		if (authentication != null) {
 			model.addAttribute("username", authentication.getName()); // Lưu tên người dùng vào model
 		}
+		
 		return "Home/home";
 	}
 }

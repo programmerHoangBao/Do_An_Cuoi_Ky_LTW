@@ -116,7 +116,7 @@
 										</c:if> <c:if test='${!product.status_product}'>
 											<p>Ẩn</p>
 										</c:if></td>
-									<td><a href="/admin/update-product?id=${product.id_product}">Cập nhật</a></td>
+									<td><a href="/admin/update-product?id=${product.id_product}">Chi tiết</a></td>
 								</tr>
 							</c:forEach>
 						</c:if>
