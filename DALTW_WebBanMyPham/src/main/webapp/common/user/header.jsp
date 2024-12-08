@@ -21,7 +21,6 @@
                 <a href="${pageContext.request.contextPath}/user/home">Trang chủ</a>
                 <a href="${pageContext.request.contextPath}/user/products">Sản phẩm</a>
                 <a href="${pageContext.request.contextPath}/login">Tài khoản của tôi</a>
-                <a href="${pageContext.request.contextPath}/contact.html">Hoạt động</a>
                 <a href="${pageContext.request.contextPath}/user/vendor-register">Đăng kí bán hàng</a>
             </div>
             <div class="login_text">
@@ -34,12 +33,17 @@
                                     <i class='bx bx-time' style="font-size: 36px; color: black;"></i>
                                 </a>
 
-                                <a href="${pageContext.request.contextPath}/user/follow-shop?userId=${sessionScope.user.id_user}">
+                                <a href="${pageContext.request.contextPath}/user/follow-shop">
                                     <i class='bx bx-heart' style="font-size: 36px; color: black;"></i>
                                 </a>
 
+                                <a href="${pageContext.request.contextPath}/user/orders">
+                                    <i class='bx bxs-receipt' style="font-size: 36px; color: black;"></i>
+                                </a>
+
+
                                 <!-- Nếu người dùng đã đăng nhập, hiển thị icon logout -->
-                                <a href="/logout">
+                                <a href="${pageContext.request.contextPath}/logout">
                                     <i class='bx bx-door-open' style="font-size: 36px; color: black;"></i>
                                 </a>
                             </c:when>

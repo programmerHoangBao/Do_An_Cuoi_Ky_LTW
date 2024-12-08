@@ -1,6 +1,7 @@
 package hcmute.edu.vn.repository;
 
 import hcmute.edu.vn.entity.Order;
+import hcmute.edu.vn.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -71,5 +72,7 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
             "ORDER BY o.creationTime")
     List<Object[]> findRevenueByDate(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate,
                                      @Param("idShop") Integer idShop);
+
+    List<Order> findByUser(User user);
 
 }

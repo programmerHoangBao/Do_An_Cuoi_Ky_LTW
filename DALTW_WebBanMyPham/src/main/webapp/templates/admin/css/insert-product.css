@@ -152,3 +152,10 @@ button[type="submit"] {
         font-size: 16px;
     }
 }
+
+#colorTable img 
+{ 
+	width: 100px; /* Chiều rộng của hình ảnh */ 
+	height: auto; /* Tự động điều chỉnh chiều cao theo tỷ lệ của hình ảnh */ 
+}
+
