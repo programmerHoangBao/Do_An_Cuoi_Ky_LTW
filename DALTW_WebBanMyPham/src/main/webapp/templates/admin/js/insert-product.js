@@ -1,50 +1,62 @@
-function addColor() {
-    const color = document.getElementById('colorList').value;
-    const tableBody = document.querySelector('#colorTable tbody');
-    const row = document.createElement('tr');
+document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('addColorButton').addEventListener('click', function () {
+        const colorList = document.getElementById('colorList');
+        const selectedColor = colorList.value;
 
-    row.innerHTML = `
-        <td>${color}</td>
-        <td><input type="file" name="imageUpload[]" accept="image/*" /></td>
-        <td><button type="button" onclick="deleteRow(this)">Xóa</button></td>
-    `;
+        const colorTable = document.getElementById('colorTable').getElementsByTagName('tbody')[0];
+        const existingColors = Array.from(colorTable.rows)
+            .map(row => row.cells[0] ? row.cells[0].innerText : null) // Bảo vệ trước khi truy cập cells[0]
+            .filter(Boolean); // Loại bỏ giá trị null hoặc undefined
 
-    tableBody.appendChild(row);
-}
+        // Kiểm tra xem màu đã tồn tại trong bảng chưa
+        if (existingColors.includes(selectedColor)) {
+            alert('Màu này đã tồn tại trong bảng!');
+            return;
+        }
 
-function deleteRow(button) {
-    const row = button.parentNode.parentNode;
-    row.parentNode.removeChild(row);
-}
+        // Thêm hàng mới vào bảng
+        const newRow = colorTable.insertRow();
 
-function addProduct() {
-    var table = document.getElementById("colorTable");
-	var rows = table.getElementsByTagName("tr");
-	var formData = new FormData();
-	
-	for (var i = 1; i < rows.length; i++){
-		var cells = rows[i].getElementsByTagName("td");
-		
-		var color = cells[0].textContent;
-		
-		var fileInput = cells[1].querySelector('input[type="file"]');
-		if (fileInput.files.length > 0){
-			var file = fileInput.files[0];
-			formData.append('file' +i, file);
-		}
-		
-		formData.append('color' + i, color);
-	}
-	
-	fetch('/admin/insert-product', {
-		method: 'POST',
-		body: formData
-	})
-	.then(response => response.json())
-	.then(data => {
-		console.log("Dữ liệu đã được gửi thành công", data);
-	})
-	.catch(error => {
-		console.error("Có lỗi xãy ra: ", error);
-	});
-}
+        // Cột "Màu"
+        const colorCell = newRow.insertCell(0);
+        colorCell.innerText = selectedColor;
+
+        // Cột "Hình ảnh"
+        const imageCell = newRow.insertCell(1);
+        const imageInput = document.createElement('input');
+        imageInput.type = 'file';
+        imageInput.name = `images[${selectedColor}]`; // Đặt tên để gửi ảnh
+        imageInput.accept = 'image/*';
+        imageCell.appendChild(imageInput);
+
+        // Cột "Xóa"
+        const deleteCell = newRow.insertCell(2);
+        const deleteButton = document.createElement('button');
+        deleteButton.type = 'button';
+        deleteButton.innerText = 'Xóa';
+        deleteButton.addEventListener('click', function () {
+            colorTable.deleteRow(newRow.rowIndex - 1); // Xóa hàng tương ứng
+        });
+        deleteCell.appendChild(deleteButton);
+    });
+
+    document.getElementById('btnAddProduct').addEventListener('click', function () {
+        const form = document.querySelector('form');
+        const colorTableRows = document.getElementById('colorTable').getElementsByTagName('tbody')[0].rows;
+
+        // Thêm dữ liệu từ bảng vào form dưới dạng input ẩn
+        Array.from(colorTableRows).forEach(row => {
+            const colorValue = row.cells[0] ? row.cells[0].innerText : ''; // Bảo vệ trước khi truy cập cells[0]
+            if (colorValue) {
+                const hiddenInput = document.createElement('input');
+                hiddenInput.type = 'hidden';
+                hiddenInput.name = 'colors[]';
+                hiddenInput.value = colorValue;
+                form.appendChild(hiddenInput);
+            }
+        });
+
+        // Submit form
+        form.submit();
+    });
+});

@@ -23,6 +23,7 @@
                     <a href="/admin/home">Trang chủ</a>
                     <a href="/admin/shop">Cửa hàng</a>
                     <a href="/admin/list-product">Sản phẩm</a>
+                    <a href="/admin/top-shops">Doanh thu</a>
                     <a href="${pageContext.request.contextPath}/client.html">Tài khoản của tôi</a>
                     <a href="${pageContext.request.contextPath}/admin/top-shops">Top Shop</a>
                     <a href="${pageContext.request.contextPath}/contact.html">Hoạt động</a>

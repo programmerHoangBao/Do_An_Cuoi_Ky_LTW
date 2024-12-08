@@ -53,4 +53,7 @@ public interface ShopRepository extends JpaRepository<Shop, Integer> {
             @Param("address") String address,
             @Param("introduce") String introduce
             );
+
+  @Query("SELECT s FROM Shop s WHERE s.vendor.id_user = :userId")
+    Shop findShopByUserId(@Param("userId") Integer userId);
 }

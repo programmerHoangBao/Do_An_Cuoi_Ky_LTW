@@ -1,19 +1,24 @@
 package hcmute.edu.vn.controller.user;
 
-import hcmute.edu.vn.entity.HistoryProduct;
-import hcmute.edu.vn.entity.Product;
-import hcmute.edu.vn.entity.Shop;
-import hcmute.edu.vn.entity.User;
+import hcmute.edu.vn.entity.*;
+import hcmute.edu.vn.repository.ProductRepository;
 import hcmute.edu.vn.repository.ShopRepository;
 import hcmute.edu.vn.repository.UserRepository;
 import hcmute.edu.vn.service.implement.*;
+
 import jakarta.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+
+import java.util.List;
 
 @Controller
 public class ProductController {
@@ -30,6 +35,10 @@ public class ProductController {
     ShopRepository shopRepository;
     @Autowired
     HistoryProductService historyProductService;
+    @Autowired
+    private CategoryService categoryService;
+    @Autowired
+    private ProductRepository productRepository;
 
 
     @GetMapping("/product/{id}")
@@ -56,6 +65,49 @@ public class ProductController {
         model.addAttribute("user", user);
 
         return "user/product-detail";
+    }
+
+    @GetMapping("/user/products")
+    public String getProducts(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(required = false) String searchType,
+            @RequestParam(required = false) String keyword,
+            @RequestParam(required = false) Double minPrice,
+            @RequestParam(required = false) Double maxPrice,
+            @RequestParam(required = false) String sortBy,
+            @RequestParam(required = false) Integer categoryId, // Thêm tham số categoryId
+            ModelMap model,
+            HttpSession session) {
+
+        User user = (User) session.getAttribute("user");
+
+        // Xác định số lượng sản phẩm mỗi trang
+        int pageSize = 12;
+
+        // Tạo Sort theo yêu cầu (sắp xếp theo giá, ngày)
+        Sort sort = Sort.unsorted();
+        if ("priceAsc".equals(sortBy)) {
+            sort = Sort.by(Sort.Order.asc("price"));
+        } else if ("priceDesc".equals(sortBy)) {
+            sort = Sort.by(Sort.Order.desc("price"));
+        }
+
+        // Tạo Pageable với Sort
+        Pageable pageable = PageRequest.of(page, pageSize, sort);
+
+        // Gọi phương thức service để tìm kiếm sản phẩm theo các tham số
+        Page<Product> productPage;
+        productPage = productRepository.searchProducts(categoryId,keyword,minPrice,maxPrice,pageable);
+
+        // Truyền dữ liệu vào model
+        model.addAttribute("categoryId", categoryId);
+        model.addAttribute("products", productPage.getContent()); // Sản phẩm hiện tại
+        model.addAttribute("currentPage", page); // Trang hiện tại
+        model.addAttribute("totalPages", productPage.getTotalPages()); // Tổng số trang
+        model.addAttribute("user", user); // Thông tin người dùng
+        model.addAttribute("categories", categoryService.findAllCategory()); // Lấy danh sách danh mục sản phẩm
+
+        return "user/product-list";
     }
 
     @GetMapping("/followshop/{idShop}&{idUser}")

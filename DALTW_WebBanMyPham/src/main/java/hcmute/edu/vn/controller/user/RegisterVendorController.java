@@ -61,17 +61,6 @@ public class RegisterVendorController {
         if (user == null) {
             return "redirect:/login";  // Nếu chưa đăng nhập, chuyển hướng về trang đăng nhập
         }
-//        User user = new User();
-//        user.setId_user(2);
-//        user.setUsername("testuser1");
-//        user.setPassword("password");
-//        user.setEmail("testuser@example.com");
-//        user.setPhone("0123456789");
-//        user.setFullName("Test User");
-//        user.setSignUpDate(new Date());
-//        user.setRole("User");
-//        user.setBirthDate(new Date());
-//        user.setStatus(1);
 
         // Gán id của người dùng hiện tại làm người bán
         shop.setVendor(user);
@@ -80,9 +69,10 @@ public class RegisterVendorController {
 
         // Lưu thông tin cửa hàng vào cơ sở dữ liệu
         shopService.save(shop);
+        session.setAttribute("shop", shop);
 
         // Cập nhật vai trò người dùng thành 'Vendor'
-        user.setRole("vendor");
+        user.setRole("Vendor");
         userService1.updateUser(user);
 
         //cập nhật lại thông tin trong bảng UserInfor
@@ -91,6 +81,6 @@ public class RegisterVendorController {
         userService.updateUser(userInfo);
 
         //return "/Home/home/?id=" + shop.getId_shop();  // Sau khi đăng ký, chuyển hướng đến trang cửa hàng vừa tạo
-        return "/vendor/home";  // Sau khi đăng ký, chuyển hướng đến trang cửa hàng vừa tạo
+        return "redirect:/vendor/list-product?id=" +shop.getId_shop();  // Sau khi đăng ký, chuyển hướng đến trang cửa hàng vừa tạo
     }
 }

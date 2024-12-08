@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.repository.query.Param;
 
 import hcmute.edu.vn.entity.Product;
 
@@ -16,4 +15,6 @@ public interface IProductService {
 	Product findProductById(Integer id);
 	Product saveProduct(Product product);
 	boolean deleteProduct(Integer idProduct);
+
+	Page<Product> findProductByShopId(Integer shopId, Pageable pageable);
 }

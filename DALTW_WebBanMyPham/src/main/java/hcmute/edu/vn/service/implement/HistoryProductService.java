@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class HistoryProductService implements IHistoryProductService {
@@ -33,6 +34,17 @@ public class HistoryProductService implements IHistoryProductService {
     }
 
     public void saveHistoryProduct(HistoryProduct historyProduct) {
-        historyProductRepository.save(historyProduct);  // Lưu thông tin vào cơ sở dữ liệu
+        // Kiểm tra xem bản ghi đã tồn tại chưa
+        Optional<HistoryProduct> existingHistory = historyProductRepository.findByUserAndProduct(
+                historyProduct.getUser(), historyProduct.getProduct());
+
+        // Nếu bản ghi đã tồn tại, không lưu lại
+        if (existingHistory.isPresent()) {
+            System.out.println("This product has already been viewed by the user.");
+        } else {
+            // Nếu chưa có bản ghi, thực hiện lưu mới
+            historyProductRepository.save(historyProduct);
+            System.out.println("Product history saved successfully.");
+        }
     }
 }
