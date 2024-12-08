@@ -81,6 +81,8 @@ public class RegisterVendorController {
         userService.updateUser(userInfo);
 
         //return "/Home/home/?id=" + shop.getId_shop();  // Sau khi đăng ký, chuyển hướng đến trang cửa hàng vừa tạo
-        return "redirect:/vendor/list-product?id=" +shop.getId_shop();  // Sau khi đăng ký, chuyển hướng đến trang cửa hàng vừa tạo
+//        return "redirect:/vendor/list-product?id=" +shop.getId_shop();  // Sau khi đăng ký, chuyển hướng đến trang cửa hàng vừa tạo
+        return "redirect:/logout";
     }
+
 }
