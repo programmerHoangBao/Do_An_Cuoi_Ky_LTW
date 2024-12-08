@@ -5,6 +5,9 @@ import hcmute.edu.vn.entity.User;
 import hcmute.edu.vn.repository.ShopRepository;
 import hcmute.edu.vn.service.IShopService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -100,4 +103,16 @@ public class ShopService implements IShopService {
     {
         return this.shopRepository.findShopByUserId(id_user);
     }
+
+	@Override
+	public Page<Shop> findShopPageable(Pageable pageable) {
+		// TODO Auto-generated method stub
+		return this.shopRepository.findAll(pageable);
+	}
+
+	@Override
+	public Page<Shop> findShopByNameContaining(String name, Pageable pageable) {
+		// TODO Auto-generated method stub
+		return this.shopRepository.findShopByNameContaining(name, pageable);
+	}
 }
