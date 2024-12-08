@@ -98,15 +98,15 @@
 
     											</script>
 										<div class="list_image">
-											<button type = "button" id="btnLeft" onclick="prevValue()">
+<!-- 											<button type = "button" id="btnLeft" onclick="prevValue()">
 												<i class='bx bxs-caret-left-circle'></i>
-											</button>
+											</button> -->
 											<img id="image_product_color" alt="Hình ảnh sản phẩm"
 												src="${product.productColors[index].imageProduct}"> <label
 												id="color_product">${product.productColors[index].color}</label>
-											<button type = "button" id="btnRight" onclick="nextValue()">
+<!-- 											<button type = "button" id="btnRight" onclick="nextValue()">
 												<i class='bx bxs-caret-right-circle'></i>
-											</button>
+											</button> -->
 
 										</div>
 									</td>
@@ -115,7 +115,7 @@
 										</c:if> <c:if test='${!product.status_product}'>
 											<p>Ẩn</p>
 										</c:if></td>
-									<td><a href="#">Cập nhật</a></td>
+									<td><a href="/admin/update-product?id=${product.id_product}">Cập nhật</a></td>
 								</tr>
 							</c:forEach>
 						</c:if>
