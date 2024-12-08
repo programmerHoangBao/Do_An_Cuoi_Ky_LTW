@@ -80,19 +80,20 @@ public class ForgotPasswordController {
         ForgotPassword fp = forgotPasswordRepository.findByUser(user)
                 .orElse(ForgotPassword.builder().user(user).build());
 
-// Nếu fp chưa tồn tại, cần phải lưu fp trước khi cập nhật OTP
+        // Nếu fp chưa tồn tại, lưu fp mới với OTP và thời gian hết hạn
         if (fp.getFpid() == null) {
-            forgotPasswordRepository.save(fp);  // Persist the new ForgotPassword instance
+            fp.setOtp(otp);
+            fp.setExpirationTime(new Date(System.currentTimeMillis() + 5 * 60 * 1000));
+            forgotPasswordRepository.save(fp);
+        } else {
+            // Nếu đã có, chỉ cập nhật OTP và thời gian hết hạn
+            fp.setOtp(otp);
+            fp.setExpirationTime(new Date(System.currentTimeMillis() + 5 * 60 * 1000));
         }
-
-// Cập nhật OTP và thời gian hết hạn
-        fp.setOtp(otp);
-        fp.setExpirationTime(new Date(System.currentTimeMillis() + 5 * 60 * 1000));
-
-// Gửi mail và lưu lại thông tin
         emailService.sendSimpleMessage(mailBody);
-        forgotPasswordRepository.save(fp);
-        
+//        forgotPasswordRepository.save(fp);
+
+
         //model.addAttribute("message", "Email sent for verification!");
         model.addAttribute("email", email);
         return "redirect:/forgotPassword/verifyOtp?email=" + email;
@@ -112,7 +113,7 @@ public class ForgotPasswordController {
             model.addAttribute("error", "OTP has expired!");
             return "auth/verify-otp";
         }
-        
+
         //model.addAttribute("message", "OTP verified!");
         model.addAttribute("email", email);
         return "redirect:/forgotPassword/changePassword?email=" + email; // Chuyển hướng đến trang đổi mật khẩu
@@ -128,10 +129,10 @@ public class ForgotPasswordController {
             model.addAttribute("error", "Please enter the password again!");
             return "auth/change-password";
         }
-        
+
         String encodedPassword = passwordEncoder.encode(password);
         userRepository.updatePassword(email, encodedPassword);
-        
+        forgotPasswordRepository.deleteAllForgotPasswordData();
         model.addAttribute("message", "Password has been changed!");
         return "redirect:/login"; // Chuyển hướng đến trang login sau khi đổi mật khẩu thành công
     }

@@ -140,7 +140,7 @@
         </div>
         <button type="submit" class="login-btn">Đăng ký</button>
         <div class="error-message" style="<c:if test="${error}">display: block;</c:if><c:if test="${!error}">display: none;</c:if>">
-            <p>Email đã được đăng ký.</p>
+            <p>Username hoặc Email đã được đăng ký.</p>
         </div>
 
     </form>

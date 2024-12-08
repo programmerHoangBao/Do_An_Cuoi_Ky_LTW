@@ -1,18 +1,42 @@
-$(document).ready(function(){
-    const owl = $('.owl-carousel.special-sale');  // Lấy Owl Carousel
-    owl.owlCarousel({
-    loop: true,           // Chế độ lặp
-    margin: 10,           // Khoảng cách giữa các item
-    items: 4,             // Số lượng item hiển thị
-    nav: false,            // Hiển thị nút điều hướng
-    navText: ['<i class="fa fa-angle-left" aria-hidden="true"></i>', '<i class="fa fa-angle-right" aria-hidden="true"></i>'],  // Nút điều hướng mặc định
+$(document).ready(function() {
+    // Khởi tạo carousel cho sản phẩm nổi bật
+    $("#top-sale-carousel").owlCarousel({
+        items: 4, // Số lượng item trong carousel
+        loop: true, // Cho phép lặp
+        margin: 10,
+        nav: false, // Hiển thị nút điều hướng
+        navText: ['<', '>'],
+        autoplay: true, // Tự động chạy
+        autoplayTimeout: 3000, // Thời gian mỗi slide
+
     });
 
-    // Liên kết các nút "Previous" và "Next" với Owl Carousel
-    $('.special-pre').click(function() {
-    owl.trigger('prev.owl.carousel');
+    // Khởi tạo carousel cho sản phẩm mới nhất
+    $("#newest-sale-carousel").owlCarousel({
+        items: 4, // Số lượng item trong carousel
+        loop: true, // Cho phép lặp
+        margin: 10,
+        nav: false, // Hiển thị nút điều hướng
+        navText: ['<', '>'],
+        autoplay: true, // Tự động chạy
+        autoplayTimeout: 3000, // Thời gian mỗi slide
+
     });
-    $('.special-nex').click(function() {
-    owl.trigger('next.owl.carousel');
+
+    // Điều khiển riêng biệt cho từng nút "next"
+    $("#next-top-sale").click(function() {
+        $("#top-sale-carousel").trigger('next.owl.carousel');
+    });
+
+    $("#prev-top-sale").click(function() {
+        $("#top-sale-carousel").trigger('prev.owl.carousel');
+    });
+
+    $("#next-newest-sale").click(function() {
+        $("#newest-sale-carousel").trigger('next.owl.carousel');
+    });
+
+    $("#prev-newest-sale").click(function() {
+        $("#newest-sale-carousel").trigger('prev.owl.carousel');
     });
 });

@@ -17,4 +17,9 @@ public interface UserInfoRepository extends JpaRepository<UserInfo, Integer> {
 	@Modifying
 	@Query("UPDATE UserInfo u SET u.password = ?2 WHERE u.email = ?1")
 	void updatePassword(String email, String password);
+
+	@Transactional
+	@Modifying
+	@Query("UPDATE UserInfo u SET u.otp = ?2 WHERE u.email = ?1")
+	void updateOTP(String email, Integer otp);
 }

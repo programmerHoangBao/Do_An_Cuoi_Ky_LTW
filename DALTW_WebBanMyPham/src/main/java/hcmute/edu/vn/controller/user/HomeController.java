@@ -36,18 +36,33 @@ public class HomeController {
 	OrderService orderService;
 
 	@GetMapping(value = {"/", "/user/home"})
-	public String Home(HttpServletRequest request, Model model, Authentication authentication) {
+	public String Home(Model model, Authentication authentication) {
 		if (authentication != null) {
 			model.addAttribute("username", authentication.getName()); // Lưu tên người dùng vào model
 		}
 
 		List<Product> products = productRepository.findAll();
-		model.addAttribute("products", products);
+
+		// Lấy 10 sản phẩm đầu tiên
+		List<Product> products1 = products.stream().limit(10).collect(Collectors.toList());
+
+		// Lấy 10 sản phẩm cuối cùng
+		List<Product> products2 = products.size() > 10 ? products.subList(products.size() - 10, products.size()) : products;
+
+		// Thêm vào model
+		model.addAttribute("products1", products1);
+		model.addAttribute("products2", products2);
+
 		return "user/home";
 	}
 
+
 	@GetMapping("/user/follow-shop")
-	public String followShop(HttpSession session, ModelMap model) {
+	public String followShop(HttpSession session, ModelMap model, Authentication authentication) {
+
+		if (authentication != null) {
+			model.addAttribute("username", authentication.getName()); // Lưu tên người dùng vào model
+		}
 
 		// Lấy thông tin người dùng từ session
 		User user = (User) session.getAttribute("user");
@@ -64,7 +79,12 @@ public class HomeController {
 	}
 
 	@GetMapping("/user/history")
-	public String viewHistory(ModelMap model, HttpSession session) {
+	public String viewHistory(ModelMap model, HttpSession session, Authentication authentication) {
+
+		if (authentication != null) {
+			model.addAttribute("username", authentication.getName()); // Lưu tên người dùng vào model
+		}
+
 		// Lấy thông tin người dùng từ session
 		User user = (User) session.getAttribute("user");
 
@@ -87,7 +107,12 @@ public class HomeController {
 			@RequestParam(value = "status", required = false) String status,
 			@RequestParam(value = "sort", required = false) String sort,
 			HttpSession session,
+			Authentication authentication,
 			Model model) {
+
+		if (authentication != null) {
+			model.addAttribute("username", authentication.getName()); // Lưu tên người dùng vào model
+		}
 
 		User user = (User) session.getAttribute("user");
 		if (user == null) {

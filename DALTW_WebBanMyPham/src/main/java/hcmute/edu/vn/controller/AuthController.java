@@ -72,7 +72,8 @@ public class AuthController {
         }
 
         if (userInfo != null && userInfo.getEmail() != null) {
-            if (userInfoRepository.findByEmail(userInfo.getEmail()).isPresent()) {
+            if (userInfoRepository.findByEmail(userInfo.getEmail()).isPresent()
+            || userInfoRepository.findByName(userInfo.getName()).isPresent()) {
                 model.addAttribute("error", true);
                 return "auth/register";
             }

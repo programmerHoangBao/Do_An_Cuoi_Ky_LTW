@@ -4,7 +4,9 @@ import hcmute.edu.vn.entity.ForgotPassword;
 import hcmute.edu.vn.entity.UserInfo;
 import hcmute.edu.vn.entity.ForgotPassword;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import jakarta.transaction.Transactional;
 
 import java.util.Optional;
 
@@ -15,4 +17,9 @@ public interface ForgotPasswordRepository extends JpaRepository<ForgotPassword, 
 	
 	@Query("SELECT fp FROM ForgotPassword fp WHERE fp.user = ?1")
     Optional<ForgotPassword> findByUser(UserInfo user);
+
+	@Modifying
+	@Transactional
+	@Query("DELETE FROM ForgotPassword")
+	void deleteAllForgotPasswordData();
 }

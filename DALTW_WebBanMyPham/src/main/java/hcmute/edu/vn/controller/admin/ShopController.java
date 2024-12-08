@@ -47,4 +47,15 @@ public class ShopController {
         model.addAttribute("totalPages", shops.getTotalPages());
 		return "admin/Shop/list-shop";
 	}
+	
+	@GetMapping("/admin/shop-details")
+	public String shopDetail(
+			Model model, 
+			@RequestParam(name = "id", required = false, defaultValue = "") Integer id_shop
+			)
+	{
+		Shop shop = this.shopService.findShopById(id_shop);
+		model.addAttribute("shop", shop);
+		return "admin/Shop/shop-details";
+	}
 }

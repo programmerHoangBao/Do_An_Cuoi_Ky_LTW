@@ -51,7 +51,7 @@
 								<tr>
 									<td>${stt.index + 1}</td>
 									<td>${product.name}</td>
-									<td><a href="#">${product.shop.name}</a></td>
+									<td><a href="/admin/shop-details?id=${product.shop.id_shop}">${product.shop.name}</a></td>
 									<td><a href="#">${product.category.name}</a></td>
 									<td id="price_product">${product.price}</td>
 									<td>${product.quantity}</td>
@@ -107,6 +107,7 @@
 <!-- 											<button type = "button" id="btnRight" onclick="nextValue()">
 												<i class='bx bxs-caret-right-circle'></i>
 											</button> -->
+
 
 										</div>
 									</td>

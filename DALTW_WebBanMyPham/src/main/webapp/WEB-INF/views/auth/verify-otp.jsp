@@ -135,7 +135,7 @@
     </div>
   </form>
   <div class="otp-footer">
-    <p>Chưa nhận được mã? <a href="/resend-otp">Gửi lại mã OTP</a></p>
+<%--    <p>Chưa nhận được mã? <a href="/resend-otp">Gửi lại mã OTP</a></p>--%>
     <p><a href="/login">Quay lại đăng nhập</a></p>
   </div>
 </div>
