@@ -1,0 +1,75 @@
+/* Đặt chung cho toàn bộ trang */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Form shop details */
+#ShopDetails {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Style cho nhãn */
+#ShopDetails label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    margin-top: 15px;
+    color: #333;
+}
+
+/* Style cho input */
+#ShopDetails input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+/* Style cho phần định dạng ngày */
+#ShopDetails p {
+    font-size: 14px;
+    color: #555;
+    margin: 0;
+    padding: 0;
+}
+
+/* Style cho ảnh */
+#imageShopAdmin {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin-top: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+/* Định dạng tiêu đề */
+#ShopDetails h1 {
+    font-size: 24px;
+    text-align: center;
+    color: #444;
+    margin-bottom: 20px;
+}
+
+/* Đáp ứng trên màn hình nhỏ */
+@media (max-width: 768px) {
+    #ShopDetails {
+        padding: 15px;
+    }
+
+    #ShopDetails input[type="text"] {
+        font-size: 12px;
+    }
+}
