@@ -5,10 +5,10 @@ body {
 
 /* Header Section */
 .header_section {
-    background-color: #f8f9fa;
-    padding: 20px 0;
+    margin-bottom: 20px; /* Tạo khoảng cách giữa header và nội dung bên dưới */
+    position: relative; /* Đảm bảo phần header không bị ảnh hưởng bởi các phần tử khác */
+    z-index: 100; /* Đặt header ở trên cùng nếu cần */
 }
-
 .navbar {
     display: flex;
     justify-content: space-between;

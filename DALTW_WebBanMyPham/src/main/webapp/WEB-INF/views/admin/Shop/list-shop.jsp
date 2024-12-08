@@ -28,6 +28,7 @@
 					<th>Địa chỉ</th>
 					<th>Giới thiệu</th>
 					<th>Hình ảnh</th>
+					<th>Chi tiết</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -41,6 +42,7 @@
 							<td>${shop.address}</td>
 							<td>${shop.introduce}</td>
 							<td><img id = "imageShopAdmin" src="${shop.image}" alt="Shop Image" width="100"></td>
+							<td><a href="/admin/update-shop?id=${shop.id_shop}">Chi tiết</a></td>
 						</tr>
 					</c:forEach>
 				</c:if>
