@@ -41,7 +41,7 @@
                                     <div class="box-img-detail">
                                         <div class="config-alige">
                                             <div class="easyzoom easyzoom--overlay easyzoom--with-thumbnails">
-                                                <a href="${pageContext.request.contextPath}/templates/images/logo.png">
+                                                <a href="${product.productColors[0].imageProduct}">
                                                     <img src="${product.productColors[0].imageProduct}"
                                                     <%-- data-src="${pageContext.request.contextPath}/templates/images/logo.png"--%>
                                                          alt="${product.name}" class="img-reponsive" />
@@ -51,7 +51,7 @@
                                     </div>
                                     <div class="box-thumnail-detail">
                                         <a href="javascript:void(0)" class="thumnail-pre btn-thumail">
-                                            <i class="fa fa-angle-left" aria-hidden="true"></i>
+                                            <i class='bx bx-chevron-left' aria-hidden="true"></i>
                                         </a>
                                         <div class="thumbnails owl-carousel">
                                             <c:forEach items="${product.productColors}" var="color">
@@ -66,7 +66,7 @@
                                             </c:forEach>
                                         </div>
                                         <a href="javascript:void(0)" class="thumnail-nex btn-thumail">
-                                            <i class="fa fa-angle-right" aria-hidden="true"></i>
+                                            <i class='bx bx-chevron-right' aria-hidden="true"></i>
                                         </a>
                                     </div>
 

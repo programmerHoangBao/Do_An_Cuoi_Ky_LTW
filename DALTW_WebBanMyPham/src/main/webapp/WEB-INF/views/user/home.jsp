@@ -23,18 +23,18 @@
                     </h2>
                 </div>
                 <div class="arrow-slider">
-                    <a href="javascript:void(0)" class="special-pre btn-pre bnts">
+                    <a href="javascript:void(0)" class="special-pre btn-pre bnts" id="prev-top-sale">
                         <i class='bx bx-chevron-left' aria-hidden="true"></i>
                     </a>
-                    <a href="javascript:void(0)" class="special-nex btn-next bnts">
+                    <a href="javascript:void(0)" class="special-nex btn-next bnts" id="next-top-sale">
                         <i class='bx bx-chevron-right' aria-hidden="true"></i>
                     </a>
                 </div>
                 <div class="clr"></div>
             </div>
             <div class="body-box">
-                <div class="owl-carousel special-sale">
-                    <c:forEach items="${products}" var="product">
+                <div class="owl-carousel special-sale" id="top-sale-carousel">
+                    <c:forEach items="${products1}" var="product">
                         <div class="item">
                             <div class="pd-box">
                                 <div class="box-images">
@@ -58,7 +58,7 @@
                                     </h3>
                                     <div>
                                         <span class="price-drop">${product.price}</span>
-                                        <span class="price">${product.price}</span>
+                                        <span class="price hide">${product.price}</span>
                                     </div>
                                     <div class="cd-content">
                                         <div class="timer-view" data-countdown="countdown" data-date="12-04-2024-12-24-49" data-start="12-04-2024-12-24-49" data-active="true"></div>
@@ -73,4 +73,65 @@
     </div>
 </div>
 
-
+<!-- Phần sản phẩm mới nhất -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="box-products">
+            <div class="head-box">
+                <div class="title-box">
+                    <h2>
+                        <a title="">
+                            SẢN PHẨM MỚI NHẤT
+                        </a>
+                    </h2>
+                </div>
+                <div class="arrow-slider">
+                    <a href="javascript:void(0)" class="special-pre btn-pre bnts" id="prev-newest-sale">
+                        <i class='bx bx-chevron-left' aria-hidden="true"></i>
+                    </a>
+                    <a href="javascript:void(0)" class="special-nex btn-next bnts" id="next-newest-sale">
+                        <i class='bx bx-chevron-right' aria-hidden="true"></i>
+                    </a>
+                </div>
+                <div class="clr"></div>
+            </div>
+            <div class="body-box">
+                <div class="owl-carousel special-sale" id="newest-sale-carousel">
+                    <c:forEach items="${products2}" var="product">
+                        <div class="item">
+                            <div class="pd-box">
+                                <div class="box-images">
+                                    <a href="${pageContext.request.contextPath}/product/${product.id_product}" title="${product.name}">
+                                        <img width="206" height="230"
+                                            <c:choose>
+                                                <c:when test="${not empty product.productColors}">
+                                                    src="${product.productColors[0].imageProduct}"
+                                                </c:when>
+                                                <c:otherwise>
+                                                    src="/templates/images/logo.png"
+                                                </c:otherwise>
+                                            </c:choose>
+                                            alt="${product.name}" />
+                                    </a>
+                                    <div class="sale-off hide"></div>
+                                </div>
+                                <div class="box-content">
+                                    <h3>
+                                        <a href="${pageContext.request.contextPath}/product/${product.id_product}" >${product.name}</a>
+                                    </h3>
+                                    <div>
+                                        <span class="price-drop">${product.price}</span>
+                                        <span class="price hide">${product.price}</span>
+                                    </div>
+                                    <div class="cd-content">
+                                        <div class="timer-view" data-countdown="countdown" data-date="12-04-2024-12-24-49" data-start="12-04-2024-12-24-49" data-active="true"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </c:forEach>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

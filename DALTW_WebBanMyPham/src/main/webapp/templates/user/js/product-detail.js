@@ -322,6 +322,7 @@ function addToCart() {
     const quantity = parseInt(quantityInput.value);
     const productId = document.getElementById("product_id").value; // ID sản phẩm từ thuộc tính data
     const userId = document.getElementById("userId-cart").value; // Lấy từ input ẩn
+    const colorId = selectedColor;
 
     if (!quantity || quantity < 1) {
         alert("Số lượng phải lớn hơn 0");
@@ -360,3 +361,32 @@ function addToCart() {
             alert("Không thể thêm sản phẩm vào giỏ hàng. Vui lòng thử lại.");
         });
 }
+
+let selectedColorId = null;
+function initializeDefaultColor() {
+    // Lấy nút màu đầu tiên
+    const firstColorButton = document.querySelector('.btn-color');
+    if (firstColorButton) {
+        const defaultColorId = firstColorButton.getAttribute('data-color-id');
+        selectColor(defaultColorId, { target: firstColorButton });
+    }
+}
+function selectColor(colorId, event) {
+    // Cập nhật giá trị selectedColorId
+    selectedColorId = colorId;
+    console.log("Màu đã chọn (ID):", selectedColorId);
+    // Xóa class 'selected' khỏi tất cả các nút
+    document.querySelectorAll('.btn-color').forEach(button => {
+        button.classList.remove('selected');
+    });
+    // Thêm class 'selected' vào nút được nhấn
+    if (event && event.target) {
+        event.target.classList.add('selected');
+    } else {
+        console.error('EasyZoom is not loaded.');
+        console.error("Event hoặc event.target không tồn tại.");
+    }
+}
+document.addEventListener('DOMContentLoaded', () => {
+    initializeDefaultColor();
+});
