@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class OrderService implements IOrderService {
@@ -53,5 +54,17 @@ public class OrderService implements IOrderService {
         orderRepository.save(order);
 
         return "Đơn hàng đã được thêm thành công!";
+    }
+
+    public List<Order> getOrdersByUser(User user) {
+        return orderRepository.findByUser(user);
+    }
+
+    public Order save(Order order) {
+        return orderRepository.save(order);
+    }
+
+    public Order findById(Integer id) {
+        return orderRepository.findById(id).orElse(null);
     }
 }

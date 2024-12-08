@@ -25,8 +25,6 @@
                     <a href="/admin/list-product">Sản phẩm</a>
                     <a href="/admin/top-shops">Doanh thu</a>
                     <a href="${pageContext.request.contextPath}/client.html">Tài khoản của tôi</a>
-                    <a href="${pageContext.request.contextPath}/client.html">Tài khoản người dùng</a>
-                    <a href="${pageContext.request.contextPath}/contact.html">Hoạt động</a>
                     <a href="${pageContext.request.contextPath}/admin/page-admin">Quản trị</a>
                 </div>
             </div>
