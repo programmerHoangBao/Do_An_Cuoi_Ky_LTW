@@ -1,6 +1,7 @@
 package hcmute.edu.vn.repository;
 
 import hcmute.edu.vn.entity.Order;
+import hcmute.edu.vn.entity.Shop;
 import hcmute.edu.vn.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -74,5 +75,6 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
                                      @Param("idShop") Integer idShop);
 
     List<Order> findByUser(User user);
+    List<Order> findByShop(Shop shop);
 
 }

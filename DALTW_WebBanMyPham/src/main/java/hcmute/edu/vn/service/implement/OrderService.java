@@ -1,9 +1,6 @@
 package hcmute.edu.vn.service.implement;
 
-import hcmute.edu.vn.entity.Order;
-import hcmute.edu.vn.entity.Product;
-import hcmute.edu.vn.entity.ProductColor;
-import hcmute.edu.vn.entity.User;
+import hcmute.edu.vn.entity.*;
 import hcmute.edu.vn.repository.OrderRepository;
 import hcmute.edu.vn.repository.ProductColorRepository;
 import hcmute.edu.vn.repository.ProductRepository;
@@ -30,6 +27,7 @@ public class OrderService implements IOrderService {
     private ProductColorRepository productColorRepository;
 
     // Phương thức thêm đơn hàng
+    @Override
     public String addOrder(Integer userId, Integer productId, Integer productColorId, Integer quantity) {
         // Tìm người dùng, sản phẩm và màu sản phẩm từ cơ sở dữ liệu
         User user = userRepository.getReferenceById(userId);
@@ -56,14 +54,22 @@ public class OrderService implements IOrderService {
         return "Đơn hàng đã được thêm thành công!";
     }
 
+    @Override
     public List<Order> getOrdersByUser(User user) {
         return orderRepository.findByUser(user);
     }
 
+    @Override
+    public List<Order> getOrdersByShop(Shop shop) {
+        return orderRepository.findByShop(shop);
+    }
+
+    @Override
     public Order save(Order order) {
         return orderRepository.save(order);
     }
 
+    @Override
     public Order findById(Integer id) {
         return orderRepository.findById(id).orElse(null);
     }

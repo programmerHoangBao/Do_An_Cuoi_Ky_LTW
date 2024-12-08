@@ -45,13 +45,13 @@
 <c:if test="${not empty message}">
     <div class="message">${message}</div>
 </c:if>
-<form method="GET" action="/user/orders" style="margin-bottom: 20px;">
+<form method="GET" action="/vendor/myorder" style="margin-bottom: 20px;">
     <label for="status">Trạng thái:</label>
     <select id="status" name="status">
         <option value="">Tất cả</option>
         <option value="Chờ xác nhận" ${param.status == 'Chờ xác nhận' ? 'selected' : ''}>Chờ xác nhận</option>
         <option value="Đang giao hàng" ${param.status == 'Đang giao hàng' ? 'selected' : ''}>Đang giao hàng</option>
-        <option value="Đã nhận hàng" ${param.status == 'Đã nhận hàng' ? 'selected' : ''}>Đã nhận</option>
+        <option value="Đã nhận" ${param.status == 'Đã nhận' ? 'selected' : ''}>Đã nhận</option>
         <option value="Chờ phản hồi" ${param.status == 'Chờ phản hồi' ? 'selected' : ''}>Chờ phản hồi</option>
         <option value="Đã trả hàng" ${param.status == 'Đã trả hàng' ? 'selected' : ''}>Đã trả hàng</option>
         <option value="Đã hủy" ${param.status == 'Đã hủy' ? 'selected' : ''}>Đã hủy</option> <!-- Thêm trạng thái "Đã hủy" -->
@@ -90,32 +90,18 @@
                 <td>${order.statusOrder}</td>
                 <td>${order.total} VND</td>
                 <td>
-                    <!-- Nút Hủy đơn khi trạng thái là "Chờ xác nhận" -->
                     <c:if test="${order.statusOrder == 'Chờ xác nhận'}">
-                        <form method="POST" action="/user/orders/update-order-status">
+                        <form method="POST" action="/vendor/update-order-status">
                             <input type="hidden" name="orderId" value="${order.id_order}">
-                            <button type="submit" name="action" value="Đã hủy" class="action-button">Hủy đơn</button>
+                            <button type="submit" name="action" value="Đang giao hàng" class="action-button">Giao hàng</button>
+                            <button type="submit" name="action" value="Đã hủy" class="action-button">Hủy</button>
                         </form>
                     </c:if>
-
-                    <!-- Nút Xác nhận khi trạng thái là "Đang giao hàng" -->
-                    <c:if test="${order.statusOrder == 'Đang giao hàng'}">
-                        <form method="POST" action="/user/orders/update-order-status">
-                            <input type="hidden" name="orderId" value="${order.id_order}">
-                            <button type="submit" name="action" value="Đã nhận" class="action-button">Xác nhận</button>
+                    <c:if test="${order.statusOrder == 'Chờ phản hồi'}">
+                        <form method="POST" action="/vendor/update-order-status">
+                            <input type="hidden" name="orderId" value="${order.id_order}"> <!-- Only pass the ID -->
+                            <button type="submit" name="action" value="Đã trả hàng" class="action-button">Xác nhận trả hàng</button>
                         </form>
-                    </c:if>
-
-                    <!-- Nút Trả hàng khi trạng thái là "Đã nhận" và thời gian dưới 30 ngày -->
-                    <c:if test="${order.statusOrder == 'Đã nhận'}">
-                        <c:set var="currentDate" value="<%= new java.util.Date() %>" />
-                        <fmt:parseDate value="${order.creationTime}" var="creationDate" pattern="yyyy-MM-dd HH:mm:ss" />
-                        <c:if test="${(currentDate.time - creationDate.time) / (1000 * 60 * 60 * 24) <= 30}">
-                            <form method="POST" action="/user/orders/update-order-status">
-                                <input type="hidden" name="orderId" value="${order.id_order}">
-                                <button type="submit" name="action" value="Chờ phản hồi" class="action-button">Trả hàng</button>
-                            </form>
-                        </c:if>
                     </c:if>
                 </td>
             </tr>

@@ -1,12 +1,10 @@
 package hcmute.edu.vn.controller.vendor;
 
+import hcmute.edu.vn.entity.Order;
 import hcmute.edu.vn.entity.Product;
 import hcmute.edu.vn.entity.ProductColor;
 import hcmute.edu.vn.entity.Shop;
-import hcmute.edu.vn.service.ICategoryService;
-import hcmute.edu.vn.service.IProductColorService;
-import hcmute.edu.vn.service.IProductService;
-import hcmute.edu.vn.service.IShopService;
+import hcmute.edu.vn.service.*;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -41,6 +39,9 @@ public class ShopProductController {
 
     @Autowired
     private ICategoryService categoryService;
+
+    @Autowired
+    private IOrderService orderService;
 
     @GetMapping("/list-product")
     public String GetAllProduct(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "20") int size,
@@ -154,5 +155,69 @@ public class ShopProductController {
             e.printStackTrace();
         }
         return ResponseEntity.ok("Dữ liệu và tệp đã được nhận thành công!");
+    }
+
+    @GetMapping("/order")
+    public String getOrders(HttpSession session, Model model, RedirectAttributes redirectAttributes) {
+        // Lấy thông tin shop từ session
+        Shop shop = (Shop) session.getAttribute("shop");
+
+        if (shop == null) {
+            // Nếu không tìm thấy shop trong session, có thể điều hướng đến trang login hoặc thông báo lỗi
+            redirectAttributes.addFlashAttribute("message", "Bạn cần đăng nhập trước.");
+            return "redirect:/login";
+        }
+
+        // Lấy tất cả hóa đơn của shop dựa trên id_shop
+        List<Order> orders = orderService.getOrdersByShop(shop);
+
+        // Truyền danh sách hóa đơn vào model để hiển thị
+        model.addAttribute("orders", orders);
+
+        // Trả về view chứa danh sách hóa đơn
+        return "vendor/order";
+    }
+
+    @PostMapping("/update-order-status")
+    public String updateOrderStatus(@RequestParam("orderId") Integer orderId,
+                                    @RequestParam("action") String action,
+                                    Model model) {
+        Order order = orderService.findById(orderId);
+
+        if (order != null) {
+            // Lấy thông tin sản phẩm liên quan đến đơn hàng
+            Product product = order.getProduct();
+
+            // Kiểm tra xem số lượng đơn hàng có lớn hơn số lượng sản phẩm không
+            if (order.getQuantity() > product.getQuantity()) {
+                // Nếu số lượng đơn hàng lớn hơn số lượng sản phẩm, không cập nhật trạng thái
+                model.addAttribute("message", "Không thể cập nhật trạng thái vì số lượng đơn hàng vượt quá số lượng sản phẩm.");
+                return "redirect:/vendor/order"; // Quay lại trang danh sách đơn hàng
+            }
+
+            // Xử lý theo trạng thái đơn hàng
+            if ("Đang giao hàng".equals(action)) {
+                // Trừ số lượng sản phẩm khi trạng thái là "Đang giao hàng"
+                product.setQuantity(product.getQuantity() - order.getQuantity());
+            } else if ("Đã trả hàng".equals(action)) {
+                // Cộng số lượng sản phẩm khi trạng thái là "Đã trả hàng"
+                product.setQuantity(product.getQuantity() + order.getQuantity());
+            }
+
+            // Cập nhật sản phẩm mới với số lượng đã thay đổi
+            productService.saveProduct(product);
+
+            // Cập nhật trạng thái đơn hàng
+            order.setStatusOrder(action);
+
+            // Lưu lại đơn hàng với trạng thái mới
+            orderService.save(order);
+
+            model.addAttribute("message", "Trạng thái đơn hàng đã được cập nhật.");
+        } else {
+            model.addAttribute("message", "Không tìm thấy đơn hàng.");
+        }
+
+        return "redirect:/vendor/order";  // Điều hướng lại trang danh sách đơn hàng
     }
 }

@@ -74,39 +74,31 @@ public class OrderController {
         return "redirect:/user/home";
     }
 
-    @PostMapping("/user/orders/confirm-status")
-    public String confirmOrder(@RequestParam("orderId") Integer orderId, HttpSession session, RedirectAttributes redirectAttributes) {
-        User user = (User) session.getAttribute("loggedUser");
+    @PostMapping("/user/orders/update-order-status")
+    public String updateOrderStatus(@RequestParam("orderId") Integer orderId,
+                                    @RequestParam("action") String action,
+                                    HttpSession session,
+                                    RedirectAttributes redirectAttributes,
+                                    ModelMap model) {
+        User user = (User) session.getAttribute("user");
         if (user == null) {
             redirectAttributes.addFlashAttribute("message", "Bạn cần đăng nhập để thực hiện hành động này.");
             return "redirect:/login";
         }
+        // Tìm đơn hàng theo ID
         Order order = orderService.findById(orderId);
-        if (order != null && order.getUser().getId_user().equals(user.getId_user())) {
-            order.setStatusOrder("Đã nhận hàng");
-            orderService.save(order);
-            redirectAttributes.addFlashAttribute("message", "Đã xác nhận đơn hàng.");
-        } else {
-            redirectAttributes.addFlashAttribute("message", "Đơn hàng không tồn tại hoặc không thuộc quyền sở hữu của bạn.");
-        }
-        return "redirect:/user/orders";
-    }
 
-    @PostMapping("/user/orders/return-status")
-    public String returnOrder(@RequestParam("orderId") Integer orderId, HttpSession session, RedirectAttributes redirectAttributes) {
-        User user = (User) session.getAttribute("loggedUser");
-        if (user == null) {
-            redirectAttributes.addFlashAttribute("message", "Bạn cần đăng nhập để thực hiện hành động này.");
-            return "redirect:/login";
-        }
-        Order order = orderService.findById(orderId);
-        if (order != null && order.getUser().getId_user().equals(user.getId_user())) {
-            order.setStatusOrder("Chờ phản hồi");
+        if (order != null) {
+
+            // Cập nhật trạng thái đơn hàng
+            order.setStatusOrder(action);
             orderService.save(order);
-            redirectAttributes.addFlashAttribute("message", "Đã yêu cầu trả hàng.");
+
+            model.addAttribute("message", "Trạng thái đơn hàng đã được cập nhật.");
         } else {
-            redirectAttributes.addFlashAttribute("message", "Đơn hàng không tồn tại hoặc không thuộc quyền sở hữu của bạn.");
+            model.addAttribute("message", "Không tìm thấy đơn hàng.");
         }
+
         return "redirect:/user/orders";
     }
 
