@@ -24,21 +24,30 @@ public interface ShopRepository extends JpaRepository<Shop, Integer> {
             "ORDER BY totalRevenue DESC LIMIT 10", nativeQuery = true)
     List<Object[]> findTopShopsByMonthOrYear(@Param("month") Integer month, @Param("year") Integer year);
 
-    @Query(value = "SELECT s.name_shop, SUM(o.total) AS totalRevenue " +
+    @Query(value = "SELECT " +
+            "    s.name_shop, " +
+            "    IFNULL(SUM(o.total), 0) AS totalRevenue, " +
+            "    CASE " +
+            "        WHEN :day IS NULL AND :month IS NULL THEN MONTH(o.creation_time) " +
+            "        WHEN :day IS NULL THEN DAY(o.creation_time) " +
+            "        ELSE YEAR(o.creation_time) " +
+            "    END AS period " + // period là ngày, tháng, hoặc năm tùy vào điều kiện
             "FROM Orders o " +
-            "JOIN Shops s ON o.id_shop = s.id_shop " + // Kết nối với bảng Shops
-            "WHERE (:day IS NULL OR DAY(o.creation_time) = :day) " +
+            "RIGHT JOIN Shops s ON o.id_shop = s.id_shop " +
+            "WHERE s.id_shop = :id_shop " +
+            "AND (:day IS NULL OR DAY(o.creation_time) = :day) " +
             "AND (:month IS NULL OR MONTH(o.creation_time) = :month) " +
             "AND (:year IS NULL OR YEAR(o.creation_time) = :year) " +
-            "AND o.status_order = 'Đã nhận' " +
-            "AND s.id_shop = :id_shop " +
-            "GROUP BY s.name_shop ", nativeQuery = true)
+            "AND (o.status_order = 'Đã nhận' OR o.status_order IS NULL) " +
+            "GROUP BY s.id_shop, period", nativeQuery = true)
     Object revenueByDayOrMonthOrYear(
             @Param("id_shop") Integer id_shop,
             @Param("day") Integer day,
             @Param("month") Integer month,
             @Param("year") Integer year
     );
+
+
 
     @Modifying
     @Transactional

@@ -58,21 +58,47 @@ public class ViewShopDetailController {
     }
 
     @GetMapping("/revenue/{id}")
-    public String getTopShops(
-            @PathVariable("id") Integer id,
+    public String revenueShop(
+            @PathVariable("id") String id,
             @RequestParam(required = false) Integer day,
             @RequestParam(required = false) Integer month,
             @RequestParam(required = false) Integer year,
             Model model
     ) {
+        try {
+            Integer id_shop = Integer.parseInt(id);
+            System.out.println("ID Shop received: " + id_shop);
+            System.out.println("Day received: " + day);
+            System.out.println("Month received: " + month);
+            System.out.println("Year received: " + year);
 
-        Object shop = shopRepository.revenueByDayOrMonthOrYear(id, day, month, year);
-        model.addAttribute("shop", shop);
-        model.addAttribute("id", id);
-        model.addAttribute("selectedDay", day);
-        model.addAttribute("selectedMonth", month);
-        model.addAttribute("selectedYear", year);
-        return "admin/Manage/revenue-shop";
+
+            // Lấy shop từ truy vấn
+            Object result = shopRepository.revenueByDayOrMonthOrYear(id_shop, day, month, year);
+
+            if (result == null) {
+                model.addAttribute("errorMessage", "No revenue data available for the selected filters.");
+                return "admin/Manage/page-admin";
+            }
+
+            Object[] shop = (Object[]) result; // Cast về Object[] để truy xuất các cột
+            String shopName = (String) shop[0];
+            Double shopRevenue = shop[1] != null ? ((Number) shop[1]).doubleValue() : 0.0;
+
+            System.out.println("Shop name: " + shopName);
+            System.out.println("Shop revenue: " + shopRevenue);
+
+            model.addAttribute("shopName", shopName);
+            model.addAttribute("shopRevenue", shopRevenue);
+            model.addAttribute("id", id_shop);
+            model.addAttribute("selectedDay", day);
+            model.addAttribute("selectedMonth", month);
+            model.addAttribute("selectedYear", year);
+
+            return "admin/Manage/revenue-shop";
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Invalid shop ID: " + id);
+        }
     }
 
 }

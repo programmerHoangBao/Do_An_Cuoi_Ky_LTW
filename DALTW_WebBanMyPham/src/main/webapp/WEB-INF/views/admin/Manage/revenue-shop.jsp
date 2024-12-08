@@ -16,6 +16,7 @@
             padding: 0;
             background-color: #f4f4f4;
         }
+
         .container {
             max-width: 1200px;
             margin: 30px auto;
@@ -89,14 +90,23 @@
 
     <!-- Form lọc -->
     <div class="form-container">
-        <form action="${pageContext.request.contextPath}/admin/view-detail-shop/revenue/{id}" method="get">
-            <label for="daySelector">Day:</label>
-            <select id="daySelector" name="month">
+        <form action="${pageContext.request.contextPath}/admin/view-detail-shop/revenue/${id}" method="get">
+            <label for="editShopId"></label>
+            <input type="text" id="editShopId" name="id_shop" value="${id}" disabled>
+
+            <label for="editShopname"></label>
+            <input type="text" id="editShopName" name="shopName" value="${shopName}" disabled>
+
+            <label for="editShopRevenue"></label>
+            <input type="text" id="editShopRevenue" name="shopRevenue" value="${shopRevenue}" disabled>
+
+            <select id="daySelector" name="day">
                 <option value="" ${selectedDay == null ? 'selected' : ''}>-- Select Day --</option>
                 <c:forEach var="i" begin="1" end="31">
                     <option value="${i}" ${i == selectedDay ? 'selected' : ''}>${i}</option>
                 </c:forEach>
             </select>
+
 
             <label for="monthSelector">Month:</label>
             <select id="monthSelector" name="month">
@@ -123,12 +133,9 @@
 </div>
 
 <script>
-    // Dữ liệu được lấy từ JSP
-    const labels = [];
-    const revenues = [];
-
-    <%--labels.push(${shop.name});--%>
-    <%--revenues.push(${shop.totalRevenue});--%>
+    // Lấy dữ liệu từ server (truyền từ Java Controller qua model)
+    const labels = [<c:out value="${shopName}" />]; // Tên của shop
+    const revenues = [<c:out value="${shopRevenue}" />]; // Tổng doanh thu
 
     const ctx = document.getElementById('topShopsChart').getContext('2d');
     new Chart(ctx, {
@@ -136,7 +143,7 @@
         data: {
             labels: labels,
             datasets: [{
-                label: 'Total Revenue',
+                label: 'Revenue',
                 data: revenues,
                 backgroundColor: 'rgba(75, 192, 192, 0.2)',
                 borderColor: 'rgba(75, 192, 192, 1)',
@@ -151,7 +158,7 @@
                 },
                 title: {
                     display: true,
-                    // text: 'Top 10 Shops by Revenue'
+                    text: 'Revenue Chart'
                 }
             },
             scales: {
@@ -162,6 +169,7 @@
         }
     });
 </script>
+
 
 </body>
 </html>
