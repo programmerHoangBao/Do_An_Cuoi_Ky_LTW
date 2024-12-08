@@ -3,6 +3,7 @@ package hcmute.edu.vn.repository;
 import java.util.List;
 
 import hcmute.edu.vn.entity.Category;
+import hcmute.edu.vn.entity.Shop;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -32,4 +33,6 @@ public interface ProductRepository extends JpaRepository<Product, Integer>{
 								 @Param("minPrice") Double minPrice,
 								 @Param("maxPrice") Double maxPrice,
 								 Pageable pageable);
+
+	List<Product> findByShop(Shop shop);
 }

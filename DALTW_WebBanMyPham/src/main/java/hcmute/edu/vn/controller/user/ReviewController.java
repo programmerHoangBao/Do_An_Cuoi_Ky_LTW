@@ -55,7 +55,7 @@ public class ReviewController {
             for (MultipartFile image : images) {
                 try {
                     String filePath = new ImageController().saveImage(image);
-                    imagePaths.append(filePath).append(";");
+                    imagePaths.append(filePath);
                 } catch (Exception e) {
                     return ResponseEntity.badRequest().body("{\"message\": \"Sản phẩm hoặc người dùng không tồn tại\"}");
                 }

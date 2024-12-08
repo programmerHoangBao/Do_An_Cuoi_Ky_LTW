@@ -27,8 +27,6 @@ public class ImageController {
         // Tạo tên file duy nhất bằng timestamp
         String fileName = System.currentTimeMillis() + "_" + image.getOriginalFilename();
 
-        // Loại bỏ dấu chấm phẩy ở cuối tên file (nếu có)
-        fileName = fileName.replaceAll(";$", "");
 
         // Đường dẫn đầy đủ của file
         Path filePath = Paths.get(uploadDir, fileName);
@@ -39,7 +37,7 @@ public class ImageController {
         // Lưu file vào thư mục
         Files.write(filePath, image.getBytes());
 
-        return fileName; // Trả về đường dẫn web
+        return "/templates/images/" + fileName; // Trả về đường dẫn web
     }
 
 
