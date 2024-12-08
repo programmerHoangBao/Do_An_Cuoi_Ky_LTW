@@ -15,4 +15,6 @@ public interface IProductService {
 	Product findProductById(Integer id);
 	Product saveProduct(Product product);
 	boolean deleteProduct(Integer idProduct);
+
+	Page<Product> findProductByShopId(Integer shopId, Pageable pageable);
 }

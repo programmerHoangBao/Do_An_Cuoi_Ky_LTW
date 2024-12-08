@@ -21,8 +21,8 @@ public interface ShopRepository extends JpaRepository<Shop, Integer> {
             "GROUP BY s.name_shop " +
             "ORDER BY totalRevenue DESC LIMIT 10", nativeQuery = true)
     List<Object[]> findTopShopsByMonthOrYear(@Param("month") Integer month, @Param("year") Integer year);
-
-
+    @Query("SELECT s FROM Shop s WHERE s.vendor.id_user = :userId")
+    Shop findShopByUserId(@Param("userId") Integer userId);
     @Modifying
     @Transactional
     @Query("""
@@ -36,4 +36,5 @@ public interface ShopRepository extends JpaRepository<Shop, Integer> {
             @Param("address") String address,
             @Param("introduce") String introduce
             );
+
 }

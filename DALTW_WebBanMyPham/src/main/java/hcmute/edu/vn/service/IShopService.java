@@ -18,4 +18,6 @@ public interface IShopService {
     //List<Map<String, Object>> getTopShopsByRevenue(String timePeriod);
 
  	Shop findShopById(Integer id_shop);
+
+    Shop findShopByIdUser(Integer id_user);
 }
