@@ -42,7 +42,7 @@
                                         <div class="config-alige">
                                             <div class="easyzoom easyzoom--overlay easyzoom--with-thumbnails">
                                                 <a href="${pageContext.request.contextPath}/templates/images/logo.png">
-                                                    <img src="${pageContext.request.contextPath}/templates/images/logo.png"
+                                                    <img src="${product.productColors[0].imageProduct}"
                                                     <%-- data-src="${pageContext.request.contextPath}/templates/images/logo.png"--%>
                                                          alt="${product.name}" class="img-reponsive" />
                                                 </a>
@@ -57,8 +57,8 @@
                                             <c:forEach items="${product.productColors}" var="color">
                                                 <div class="item">
                                                     <div class="item-thumnail">
-                                                        <a href="${pageContext.request.contextPath}/templates/images/logo.png" data-standard="${pageContext.request.contextPath}/templates/images/logo.png" class="active">
-                                                            <img width="85" height="85" src="${pageContext.request.contextPath}/templates/images/logo.png"
+                                                        <a href="${color.imageProduct}" data-standard="${color.imageProduct}" class="active">
+                                                            <img width="85" height="85" src="${color.imageProduct}"
                                                                  alt="${product.name}" class="img-reponsive" />
                                                         </a>
                                                     </div>

@@ -1,11 +1,14 @@
 package hcmute.edu.vn.controller.user;
 
 import hcmute.edu.vn.dto.ShoppingCartDTO;
+import hcmute.edu.vn.entity.Order;
+import hcmute.edu.vn.entity.User;
 import hcmute.edu.vn.repository.ProductColorRepository;
 import hcmute.edu.vn.service.implement.OrderService;
 import hcmute.edu.vn.service.implement.ProductColorService;
 import hcmute.edu.vn.service.implement.ShoppingCartService;
 import hcmute.edu.vn.service.implement.UserService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -69,4 +73,41 @@ public class OrderController {
         // Chuyển hướng đến trang thông báo thành công
         return "redirect:/user/home";
     }
+
+    @PostMapping("/user/orders/confirm-status")
+    public String confirmOrder(@RequestParam("orderId") Integer orderId, HttpSession session, RedirectAttributes redirectAttributes) {
+        User user = (User) session.getAttribute("loggedUser");
+        if (user == null) {
+            redirectAttributes.addFlashAttribute("message", "Bạn cần đăng nhập để thực hiện hành động này.");
+            return "redirect:/login";
+        }
+        Order order = orderService.findById(orderId);
+        if (order != null && order.getUser().getId_user().equals(user.getId_user())) {
+            order.setStatusOrder("Đã nhận hàng");
+            orderService.save(order);
+            redirectAttributes.addFlashAttribute("message", "Đã xác nhận đơn hàng.");
+        } else {
+            redirectAttributes.addFlashAttribute("message", "Đơn hàng không tồn tại hoặc không thuộc quyền sở hữu của bạn.");
+        }
+        return "redirect:/user/orders";
+    }
+
+    @PostMapping("/user/orders/return-status")
+    public String returnOrder(@RequestParam("orderId") Integer orderId, HttpSession session, RedirectAttributes redirectAttributes) {
+        User user = (User) session.getAttribute("loggedUser");
+        if (user == null) {
+            redirectAttributes.addFlashAttribute("message", "Bạn cần đăng nhập để thực hiện hành động này.");
+            return "redirect:/login";
+        }
+        Order order = orderService.findById(orderId);
+        if (order != null && order.getUser().getId_user().equals(user.getId_user())) {
+            order.setStatusOrder("Chờ phản hồi");
+            orderService.save(order);
+            redirectAttributes.addFlashAttribute("message", "Đã yêu cầu trả hàng.");
+        } else {
+            redirectAttributes.addFlashAttribute("message", "Đơn hàng không tồn tại hoặc không thuộc quyền sở hữu của bạn.");
+        }
+        return "redirect:/user/orders";
+    }
+
 }

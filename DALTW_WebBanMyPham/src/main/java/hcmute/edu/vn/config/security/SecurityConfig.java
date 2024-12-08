@@ -81,13 +81,16 @@ public class SecurityConfig {
 	                    jwtCookie.setMaxAge(0); // Đặt thời gian sống là 0 để xoá cookie
 	                    response.addCookie(jwtCookie);
 
+						// Xóa session
+						request.getSession().invalidate();
+
 	                    // Điều hướng hoặc trả về response sau khi logout
 	                    response.sendRedirect("/");
 	                })
 	                .permitAll()
             )
 			.sessionManagement(session -> session
-	                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+	                .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
 	        );
 
 	    http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
