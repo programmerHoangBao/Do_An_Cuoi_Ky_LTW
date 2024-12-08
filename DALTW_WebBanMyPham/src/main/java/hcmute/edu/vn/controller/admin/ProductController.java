@@ -1,22 +1,23 @@
 package hcmute.edu.vn.controller.admin;
 
-import java.io.File;
-import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.format.DateTimeFormatter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import hcmute.edu.vn.entity.Product;
 import hcmute.edu.vn.entity.ProductColor;
@@ -40,12 +41,20 @@ public class ProductController {
 	@Autowired
 	private ICategoryService categoryService;
 
+    // Hàm lấy đường dẫn thư mục lưu file
+    private String getUploadDirectory() {
+        String rootPath = System.getProperty("user.dir"); // Thư mục gốc của ứng dụng
+        return rootPath + "/src/main/webapp/templates/images";
+    }
+	
 	@GetMapping("/admin/list-product")
 	public String GetAllProduct(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "20") int size,
 			Model model) {
 
 		Pageable pageable = PageRequest.of(page, size);
 		Page<Product> productPage = this.productService.findProductPageable(pageable);
+		
+	    
 		List<ProductColor> productColors;
 		int index = 0;
 		for (Product product : productPage) {
@@ -59,13 +68,11 @@ public class ProductController {
 		model.addAttribute("totalPages", productPage.getTotalPages());
 		return "admin/Product/list-product";
 	}
-	
+
 	@GetMapping("/admin/search-product")
-	public String SearchProduct(
-			@RequestParam(name="name", required=false, defaultValue = "") String name,
-			@RequestParam(name="page", required = false, defaultValue = "0") int page,
-			@RequestParam(name = "size", required=false, defaultValue="20") int size,
-			Model model) {
+	public String SearchProduct(@RequestParam(name = "name", required = false, defaultValue = "") String name,
+			@RequestParam(name = "page", required = false, defaultValue = "0") int page,
+			@RequestParam(name = "size", required = false, defaultValue = "20") int size, Model model) {
 
 		Pageable pageable = PageRequest.of(page, size);
 		Page<Product> productPage = this.productService.findProductByNameContaining(name, pageable);
@@ -82,7 +89,7 @@ public class ProductController {
 		model.addAttribute("totalPages", productPage.getTotalPages());
 		return "admin/Product/list-product";
 	}
-
+	
 	@GetMapping("/admin/insert-product")
 	public String showProductForm(Model model) {
 		model.addAttribute("shops", shopService.findAllShop());
@@ -91,18 +98,17 @@ public class ProductController {
 	}
 
 	@PostMapping("/admin/insert-product")
-	@RequestMapping("/admin/insert-product")
-	public ResponseEntity<String> insertProduct(
-			@RequestParam("nameProduct") String name, 
+	public String insertProduct(
+			@RequestParam("nameProduct") String name,
 			@RequestParam("idShop") Integer id_shop,
 			@RequestParam("idCategory") Integer id_category, 
 			@RequestParam("price") Double price,
 			@RequestParam("quantity") Integer quantity, 
-			@RequestParam("statusProduct") Integer status,
-			@RequestParam List<String> colors,
-			@RequestParam List<MultipartFile> images
-			)  throws IOException
-	{
+			@RequestParam("statusProduct") boolean status,
+			@RequestParam(value = "colors[]", required = false) List<String> colors,
+            @RequestParam(value = "images[]", required = false) List<MultipartFile> images,
+	        Model model)
+			 {
 		try {
 			// Lưu sản phẩm
 			Product product = new Product();
@@ -111,37 +117,48 @@ public class ProductController {
 			product.setCategory(this.categoryService.findCategoryById(id_category));
 			product.setPrice(price);
 			product.setQuantity(quantity);
-			if (status == 1) {
-				product.setStatus_product(true);
-			} else {
-				product.setStatus_product(false);
-			}
+			product.setStatus_product(status);
+			
 			product = productService.saveProduct(product);
-			
-			List<ProductColor> productColors = new ArrayList<>();
-			
-			String color;
-			MultipartFile image;
-			String uploadeDir;
-			for (int i = 0; i < colors.size(); i++) {
-				color = colors.get(i);
-				image = images.get(i);
-				
-				uploadeDir = "D:/tmp/";
-				
-				File uploadFile = new File(uploadeDir + image.getOriginalFilename());
-				image.transferTo(uploadFile); 
-				
-				ProductColor productColor = new ProductColor();
-				productColor.setColor(color);
-				productColor.setImageProduct(uploadFile.getAbsolutePath());
-				productColor.setProduct(product);
-				
-				productColors.add(productColor);
+
+			 List<ProductColor> productColors = new ArrayList<>();
+			 
+			if (colors != null && images != null && colors.size() == images.size()) {
+	                for (int i = 0; i < colors.size(); i++) {
+	                    ProductColor productColor = new ProductColor();
+	                    productColor.setProduct(product); // Liên kết với sản phẩm đã lưu
+	                    productColor.setColor(colors.get(i));
+
+	                    // Lưu tệp ảnh
+	                    
+	                 // Lấy thời gian hiện tại
+	                    LocalDateTime currentTime = LocalDateTime.now();
+
+	                    // Định dạng thời gian theo yêu cầu
+	                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yy HH-mm-ss");
+
+	                    // Chuyển đổi sang chuỗi theo định dạng
+	                    String formattedTime = currentTime.format(formatter);
+	                    
+	                    String fileName = formattedTime+images.get(i).getOriginalFilename();
+	                    
+	                    String filePath = getUploadDirectory() + "/" + fileName;
+	                    images.get(i).transferTo(new java.io.File(filePath)); // Lưu ảnh vào thư mục
+
+	                    productColor.setImageProduct("/templates/images/"+fileName); // Ghi đường dẫn ảnh vào database
+	                    productColors.add(productColor);
+	                }
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
+			
+			 // Lưu màu sắc vào database
+	        for (ProductColor productColor : productColors) {
+	            productColorService.saveProductColor(productColor);
+	        }
+	        
+	        model.addAttribute("message", "Sản phẩm đã được thêm thành công!");
+		} catch (Exception e) {
+			model.addAttribute("message", "Đã xảy ra lỗi khi thêm sản phẩm: " + e.getMessage());
 		}
-		return ResponseEntity.ok("Dữ liệu và tệp đã được nhận thành công!");
+		return "redirect:/admin/insert-product";
 	}
 }

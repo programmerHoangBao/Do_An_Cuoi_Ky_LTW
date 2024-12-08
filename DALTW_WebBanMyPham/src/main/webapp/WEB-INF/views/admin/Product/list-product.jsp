@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="/common/taglib.jsp"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,13 +22,13 @@
 	<form action="/admin/list-product" method="get">
 		<div class="contain">
 			<div class=div_InsertProduct>
-				<button id=btnInsertProduct type="button">Thêm</button>
+				<button id=btnInsertProduct>Thêm</button>
 			</div>
 			<script>
 				document.getElementById("btnInsertProduct").addEventListener(
 						"click", function() {
 							window.open("/admin/insert-product", "_blank");
-						});}
+						});
 			</script>
 			<div class="table_product">
 				<table>
@@ -54,16 +56,58 @@
 									<td id="price_product">${product.price}</td>
 									<td>${product.quantity}</td>
 									<td id="image_product">
+										<script>
+    											// Biến index bắt đầu từ 0, bạn có thể đặt giá trị mặc định là 0
+    											let index = 0;
+
+    											// Hàm chuyển đến hình ảnh màu sắc trước (btnLeft)
+    											function prevValue() {
+        											// Giảm index. Nếu index < 0, gán giá trị bằng product.productColors.size() - 1
+    												if (index < 0) {
+        												index = ${product.productColors.size()} - 1; // Gán index cho phần tử cuối cùng
+        												} else {
+            												index--;
+            												}
+    												updateImageAndColor();
+    											}
+
+    											// Hàm chuyển đến hình ảnh màu sắc sau (btnRight)
+    											function nextValue() {
+        											// Tăng index. Nếu index vượt quá kích thước mảng, gán index = 0
+    												if (index > ${product.productColors.size()} - 1) {
+        												index = 0; // Quay lại phần tử đầu tiên
+        												} else {
+            												index++;
+            												}
+    												updateImageAndColor();
+    											}
+
+    											// Hàm cập nhật hình ảnh và màu sắc dựa trên index
+    											function updateImageAndColor() {
+        											// Cập nhật hình ảnh
+    												let imageProduct = document.getElementById("image_product_color");
+    												imageProduct.src = "${product.productColors[index].imageProduct}"; // Cập nhật đường dẫn hình ảnh
+												
+    											
+    												// Cập nhật màu sắc
+    												let colorProduct = document.getElementById("color_product");
+    												colorProduct.textContent = '${product.productColors[index].color}'; // Cập nhật tên màu
+    												console.log("index=", index);
+    												console.log("color=", colorProduct.textContent);
+    											} 
+
+    											</script>
 										<div class="list_image">
-											<button id="btnLeft">
+											<button type = "button" id="btnLeft" onclick="prevValue()">
 												<i class='bx bxs-caret-left-circle'></i>
 											</button>
 											<img id="image_product_color" alt="Hình ảnh sản phẩm"
-												src="${product.productColors[0].imageProduct}"> <label
-												id="color_product">${product.productColors[0].color}</label>
-											<button id="btnRight">
+												src="${product.productColors[index].imageProduct}"> <label
+												id="color_product">${product.productColors[index].color}</label>
+											<button type = "button" id="btnRight" onclick="nextValue()">
 												<i class='bx bxs-caret-right-circle'></i>
 											</button>
+
 										</div>
 									</td>
 									<td><c:if test='${product.status_product}'>
