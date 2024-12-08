@@ -1,5 +1,7 @@
 package hcmute.edu.vn.repository;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -36,5 +38,7 @@ public interface ShopRepository extends JpaRepository<Shop, Integer> {
             @Param("address") String address,
             @Param("introduce") String introduce
             );
+    @Query("SELECT s FROM Shop s WHERE s.name LIKE %:name%")
+    Page<Shop> findShopByNameContaining(@Param("name") String name, Pageable pageable);
 
 }
