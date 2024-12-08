@@ -135,7 +135,7 @@
         </div>
     </form>
     <div class="otp-footer">
-        <p>Chưa nhận được mã? <a href="${pageContext.request.contextPath}/resend-otp">Gửi lại mã OTP</a></p>
+<%--        <p>Chưa nhận được mã? <a href="${pageContext.request.contextPath}/resend-otp">Gửi lại mã OTP</a></p>--%>
         <p><a href="${pageContext.request.contextPath}/login">Quay lại đăng nhập</a></p>
     </div>
 </div>

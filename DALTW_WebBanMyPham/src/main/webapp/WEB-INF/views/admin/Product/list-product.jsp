@@ -108,6 +108,7 @@
 												<i class='bx bxs-caret-right-circle'></i>
 											</button> -->
 
+
 										</div>
 									</td>
 									<td><c:if test='${product.status_product}'>
