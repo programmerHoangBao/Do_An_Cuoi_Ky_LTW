@@ -67,7 +67,7 @@ public class ProductController {
         return "user/product-detail";
     }
 
-    @GetMapping("/user/products")
+    @GetMapping("/products")
     public String getProducts(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(required = false) String searchType,

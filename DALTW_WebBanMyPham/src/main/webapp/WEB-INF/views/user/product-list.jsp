@@ -108,19 +108,19 @@
             <ul>
                 <!-- Mục "Tất cả" để quay lại tìm tất cả sản phẩm -->
                 <li>
-                    <a href="/user/products?keyword=${keyword}&minPrice=${minPrice}&maxPrice=${maxPrice}&sortBy=${sortBy}">Tất cả</a>
+                    <a href="/products?keyword=${keyword}&minPrice=${minPrice}&maxPrice=${maxPrice}&sortBy=${sortBy}">Tất cả</a>
                 </li>
                 <!-- Các mục danh mục sản phẩm -->
                 <c:forEach var="category" items="${categories}">
                     <li>
-                        <a href="/user/products?categoryId=${category.id_category}&keyword=${keyword}&minPrice=${minPrice}&maxPrice=${maxPrice}&sortBy=${sortBy}">${category.name}</a>
+                        <a href="/products?categoryId=${category.id_category}&keyword=${keyword}&minPrice=${minPrice}&maxPrice=${maxPrice}&sortBy=${sortBy}">${category.name}</a>
                     </li>
                 </c:forEach>
             </ul>
         </div>
 
         <!-- Thanh tìm kiếm -->
-        <form class="search-bar" method="GET" action="/user/products">
+        <form class="search-bar" method="GET" action="/products">
             <input type="hidden" name="categoryId" value="${categoryId}" />
             <input type="text" name="keyword" value="${keyword}" placeholder="Nhập từ khóa tìm kiếm" />
             <input type="number" name="minPrice" value="${minPrice}" placeholder="Giá thấp nhất" min="0" />

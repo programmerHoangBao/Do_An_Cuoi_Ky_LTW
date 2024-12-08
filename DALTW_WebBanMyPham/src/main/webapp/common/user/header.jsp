@@ -19,7 +19,7 @@
         <nav class="header-navbar navbar-light header-bg-light">
             <div class="navbar-links">
                 <a href="${pageContext.request.contextPath}/user/home">Trang chủ</a>
-                <a href="${pageContext.request.contextPath}/user/products">Sản phẩm</a>
+                <a href="${pageContext.request.contextPath}/products">Sản phẩm</a>
                 <a href="${pageContext.request.contextPath}/login">Tài khoản của tôi</a>
                 <a href="${pageContext.request.contextPath}/user/vendor-register">Đăng kí bán hàng</a>
             </div>
