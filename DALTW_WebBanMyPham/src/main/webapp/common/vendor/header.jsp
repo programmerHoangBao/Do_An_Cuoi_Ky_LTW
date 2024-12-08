@@ -23,7 +23,7 @@
                     <a href="/vendor/home">Trang chủ</a>
                     <a href="/vendor/list-product">Sản phẩm</a>
                     <a href="/vendor/revenue">Doanh thu</a>
-                    <a href="${pageContext.request.contextPath}/client.html">Tài khoản của tôi</a>
+                    <a href="${pageContext.request.contextPath}/info">Tài khoản của tôi</a>
                 </div>
             </div>
             <span class="toggle_icon" onclick="openNav()">
