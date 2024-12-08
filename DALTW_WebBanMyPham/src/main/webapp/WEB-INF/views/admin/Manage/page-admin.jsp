@@ -93,6 +93,9 @@
                     <a href="${pageContext.request.contextPath}/admin/view-detail-shop/${s.id_shop}">
                         <button class="btn btn-edit">Sửa</button>
                     </a>
+                    <a href="${pageContext.request.contextPath}/admin/view-detail-shop/revenue/${s.id_shop}">
+                        <button class="btn btn-revenue">Doanh thu</button>
+                    </a>
                 </td>
             </tr>
         </c:forEach>
