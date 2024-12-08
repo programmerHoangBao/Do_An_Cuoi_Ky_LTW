@@ -47,6 +47,7 @@ public class OrderService implements IOrderService {
         order.setCreationTime(new Date());  // Thời gian tạo đơn hàng
         order.setStatusOrder("Chờ xác nhận");  // Trạng thái mặc định là "Chờ xác nhận"
         order.setTotal(total);  // Tính tổng giá trị của đơn hàng
+        order.setShop(product.getShop());
 
         // Lưu đơn hàng vào cơ sở dữ liệu
         orderRepository.save(order);

@@ -133,9 +133,6 @@
                                                         <i class='bx bx-cart-add'></i>
                                                         Thêm giỏ hàng
                                                     </button>
-                                                    <button type="button" class="btn-bts btn-fs" onclick="AddCard(2)">
-                                                        Mua Nhanh
-                                                    </button>
 
                                                     <div class="clr"></div>
                                                 </div>

@@ -40,18 +40,21 @@
                                 <div class="box-images">
                                     <a href="${pageContext.request.contextPath}/product/${product.id_product}" title="${product.name}">
                                         <img width="206" height="230"
-                                             src="${pageContext.request.contextPath}/templates/images/logo.png"
-<%--                                             data-src="${pageContext.request.contextPath}/templates/images/logo.png"--%>
-                                             alt="${product.name}" class="img-reponsive" />
+                                            <c:choose>
+                                                <c:when test="${not empty product.productColors}">
+                                                    src="${product.productColors[0].imageProduct}"
+                                                </c:when>
+                                                <c:otherwise>
+                                                    src="/templates/images/logo.png"
+                                                </c:otherwise>
+                                            </c:choose>
+                                            alt="${product.name}" />
                                     </a>
-<%--                                    <button type="button" onclick="LikeThis(this, '')" class="btn-addlike">--%>
-<%--                                        <i class="fa fa-heart-o heart_new"></i>--%>
-<%--                                    </button>--%>
                                     <div class="sale-off hide"></div>
                                 </div>
                                 <div class="box-content">
                                     <h3>
-                                        <a href="" title="${product.name}"></a>
+                                        <a href="${pageContext.request.contextPath}/product/${product.id_product}" >${product.name}</a>
                                     </h3>
                                     <div>
                                         <span class="price-drop">${product.price}</span>
