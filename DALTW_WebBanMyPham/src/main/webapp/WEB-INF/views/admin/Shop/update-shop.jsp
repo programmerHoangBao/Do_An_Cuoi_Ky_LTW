@@ -40,5 +40,23 @@
 			<p>${message}</p>
 		</c:if>
 	</div>
+	<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const uploadImageInput = document.getElementById("uploadImage");
+        const imageShop = document.getElementById("imageShop");
+
+        uploadImageInput.addEventListener("change", function (event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    imageShop.src = e.target.result; // Cập nhật nguồn ảnh
+                };
+                reader.readAsDataURL(file); // Đọc file ảnh
+            }
+        });
+    });
+</script>
+	
 </body>
 </html>
