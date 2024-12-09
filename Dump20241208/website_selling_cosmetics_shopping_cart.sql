@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.40, for Win64 (x86_64)
 --
--- Host: localhost    Database: website_selling_cosmetics
+-- Host: 127.0.0.1    Database: website_selling_cosmetics
 -- ------------------------------------------------------
 -- Server version	8.0.40
 
@@ -32,7 +32,7 @@ CREATE TABLE `shopping_cart` (
   KEY `FKpp037be5woo3mss09qseigw10` (`id_user`),
   CONSTRAINT `FK3iwg12k3j3t2j8v6h8fhsk2td` FOREIGN KEY (`id_product`) REFERENCES `products` (`id_product`),
   CONSTRAINT `FKpp037be5woo3mss09qseigw10` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -54,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-08 23:25:04
+-- Dump completed on 2024-12-09 10:27:50

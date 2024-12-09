@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.40, for Win64 (x86_64)
 --
--- Host: localhost    Database: website_selling_cosmetics
+-- Host: 127.0.0.1    Database: website_selling_cosmetics
 -- ------------------------------------------------------
 -- Server version	8.0.40
 
@@ -32,7 +32,7 @@ CREATE TABLE `follow_shop` (
   CONSTRAINT `FKbqmtahon7rur3ft7kvn6cebrk` FOREIGN KEY (`id_user`) REFERENCES `user_info` (`id`),
   CONSTRAINT `FKc14yp2q0uw7upiyx4j305ndfr` FOREIGN KEY (`id_shop`) REFERENCES `shops` (`id_shop`),
   CONSTRAINT `FKicfsc6lfn09plfh4od9uk08ld` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,6 +41,7 @@ CREATE TABLE `follow_shop` (
 
 LOCK TABLES `follow_shop` WRITE;
 /*!40000 ALTER TABLE `follow_shop` DISABLE KEYS */;
+INSERT INTO `follow_shop` VALUES (6,1,2),(16,1,5),(18,2,5);
 /*!40000 ALTER TABLE `follow_shop` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-08 23:25:05
+-- Dump completed on 2024-12-09 10:27:51

@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.40, for Win64 (x86_64)
 --
--- Host: localhost    Database: website_selling_cosmetics
+-- Host: 127.0.0.1    Database: website_selling_cosmetics
 -- ------------------------------------------------------
 -- Server version	8.0.40
 
@@ -30,7 +30,7 @@ CREATE TABLE `forgot_password` (
   PRIMARY KEY (`fpid`),
   UNIQUE KEY `UKss96nm4ed1jmllpxib14p1r7v` (`user_id`),
   CONSTRAINT `FK4lh8wkih8nl827qdu7k0u7tr2` FOREIGN KEY (`user_id`) REFERENCES `user_info` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -51,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-08 23:25:05
+-- Dump completed on 2024-12-09 10:27:51

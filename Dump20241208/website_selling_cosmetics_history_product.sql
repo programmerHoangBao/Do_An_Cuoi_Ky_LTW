@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.40, for Win64 (x86_64)
 --
--- Host: localhost    Database: website_selling_cosmetics
+-- Host: 127.0.0.1    Database: website_selling_cosmetics
 -- ------------------------------------------------------
 -- Server version	8.0.40
 
@@ -31,7 +31,7 @@ CREATE TABLE `history_product` (
   KEY `FKp2fu14lah8dmrlf68smo388td` (`id_user`),
   CONSTRAINT `FKfuwnk7u3gf5txgeph6ywmir6j` FOREIGN KEY (`id_product`) REFERENCES `products` (`id_product`),
   CONSTRAINT `FKp2fu14lah8dmrlf68smo388td` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,7 @@ CREATE TABLE `history_product` (
 
 LOCK TABLES `history_product` WRITE;
 /*!40000 ALTER TABLE `history_product` DISABLE KEYS */;
-INSERT INTO `history_product` VALUES (1,1,5),(2,1,5),(3,3,5);
+INSERT INTO `history_product` VALUES (1,1,5),(3,3,5),(4,2,5),(5,4,5),(6,5,5),(7,7,5),(8,13,5),(9,10,5),(10,9,5);
 /*!40000 ALTER TABLE `history_product` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-08 23:25:04
+-- Dump completed on 2024-12-09 10:27:50

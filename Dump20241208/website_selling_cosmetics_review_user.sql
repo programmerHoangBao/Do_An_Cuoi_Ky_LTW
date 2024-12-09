@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.40, for Win64 (x86_64)
 --
--- Host: localhost    Database: website_selling_cosmetics
+-- Host: 127.0.0.1    Database: website_selling_cosmetics
 -- ------------------------------------------------------
 -- Server version	8.0.40
 
@@ -35,7 +35,7 @@ CREATE TABLE `review_user` (
   KEY `FKhvm1igg7mw76gtiskljaf9t6b` (`id_user`),
   CONSTRAINT `FKhvm1igg7mw76gtiskljaf9t6b` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`),
   CONSTRAINT `FKr8i93kka2kiucja0m2fhb42i8` FOREIGN KEY (`id_product`) REFERENCES `products` (`id_product`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,7 +44,7 @@ CREATE TABLE `review_user` (
 
 LOCK TABLES `review_user` WRITE;
 /*!40000 ALTER TABLE `review_user` DISABLE KEYS */;
-INSERT INTO `review_user` VALUES (1,'2024-01-15 12:00:00.000000',5,'Kem dưỡng ẩm rất tốt, rất đáng mua!',1,1,NULL),(2,'2024-01-16 14:00:00.000000',4,'Kem nền dễ tán nhưng hơi đắt.',2,1,NULL),(3,'2024-01-16 14:00:00.000000',3,'Ổn',1,1,NULL),(4,'2024-12-06 11:48:50.541000',1,'tệ',1,2,'/templates/images/1733460530534_logo.png'),(5,'2024-12-06 11:52:22.131000',5,'tuyệt vời',3,2,''),(6,'2024-12-06 11:53:55.577000',3,'tạm được',4,2,''),(7,'2024-12-06 13:16:54.180000',4,'a',1,2,''),(8,'2024-12-06 13:17:50.389000',1,'a',1,2,''),(9,'2024-12-06 13:59:47.529000',3,'tạm',1,2,'');
+INSERT INTO `review_user` VALUES (1,'2024-01-15 12:00:00.000000',5,'Kem dưỡng ẩm rất tốt, rất đáng mua!',1,1,NULL),(2,'2024-01-16 14:00:00.000000',4,'Kem nền dễ tán nhưng hơi đắt.',2,1,NULL),(3,'2024-01-16 14:00:00.000000',3,'Ổn',1,1,NULL),(4,'2024-12-06 11:48:50.541000',1,'tệ',1,2,'/templates/images/1733460530534_logo.png'),(5,'2024-12-06 11:52:22.131000',5,'tuyệt vời',3,2,''),(6,'2024-12-06 11:53:55.577000',3,'tạm được',4,2,''),(7,'2024-12-06 13:16:54.180000',4,'a',1,2,''),(8,'2024-12-06 13:17:50.389000',1,'a',1,2,''),(9,'2024-12-06 13:59:47.529000',3,'tạm',1,2,''),(10,'2024-12-08 21:49:23.302000',4,'Thấy cũng đẹp nhưng chưa mua ',1,5,''),(12,'2024-12-08 22:32:48.275000',5,'đẹp',1,5,'/templates/images/1733671968269_Nuoc-hoa-The Body-Shop-Japanese-Cherry-Blossom-Eau-De-Toilette-hinh-1.jpg;'),(13,'2024-12-08 22:34:54.685000',1,'xấu',2,5,''),(14,'2024-12-08 22:36:23.128000',3,'xấu',2,5,'/templates/images/1733672183124_Neutrogena-Hydro-Boost-Water-Gel-15gr.jpg'),(15,'2024-12-09 08:04:27.019000',4,'Sản phẩm đẹp',3,5,'/templates/images/1733706267005_a1(1).jpg'),(16,'2024-12-09 08:20:23.097000',4,'a',7,5,''),(17,'2024-12-09 08:53:31.366000',4,'đẸP',7,5,'/templates/images/1733709211358_a1(1).jpg'),(18,'2024-12-09 09:42:44.873000',4,'rẤT TỐT',2,5,'/templates/images/1733712164873_a1(1).jpg'),(19,'2024-12-09 10:12:09.665000',1,'Tệ',2,5,'/templates/images/1733713929665_a1(1).jpg');
 /*!40000 ALTER TABLE `review_user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -57,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-08 23:25:04
+-- Dump completed on 2024-12-09 10:27:49

@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.40, for Win64 (x86_64)
 --
--- Host: localhost    Database: website_selling_cosmetics
+-- Host: 127.0.0.1    Database: website_selling_cosmetics
 -- ------------------------------------------------------
 -- Server version	8.0.40
 
@@ -42,7 +42,7 @@ CREATE TABLE `shops` (
 
 LOCK TABLES `shops` WRITE;
 /*!40000 ALTER TABLE `shops` DISABLE KEYS */;
-INSERT INTO `shops` VALUES (1,'789 Đường Maple, Thành phố Làm đẹp',NULL,'Chuyên gia chăm sóc da của bạn.','Cửa hàng làm đẹp của Alice','2023-02-12',3),(2,'789 Đường Maple, Thành phố Làm đẹp',NULL,'Chuyên gia chăm sóc da của bạn.','Cửa hàng làm đẹp của Hùng','2023-02-12',6);
+INSERT INTO `shops` VALUES (1,'789 Đường Maple, Thành phố Làm đẹp','/templates/images/1733706581402_vna_potal_dai_hoi_lan_thu_vii_cua_dang_doi_moi_toan_dien_dong_bo_dua_dat_nuoc_tien_len_theo_con_duong_xhcn_stand.jpg','Chuyên gia chăm sóc da của bạn. 02','Cửa hàng làm đẹp của Alice','2023-02-12',3),(2,'789 Đường Maple, Thành phố Làm đẹp','/templates/images/1733713642001_facebook-dynamic-nuoc-hoa-nu-armaf-club-de-nuit-woman-105ml-1723431690_img_385x385_622873_fit_center.jpg','Chuyên gia chăm sóc da của bạn.','Cửa hàng làm đẹp của Hùng','2023-02-12',6);
 /*!40000 ALTER TABLE `shops` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -55,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-08 23:25:05
+-- Dump completed on 2024-12-09 10:27:51

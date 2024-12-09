@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.40, for Win64 (x86_64)
 --
--- Host: localhost    Database: website_selling_cosmetics
+-- Host: 127.0.0.1    Database: website_selling_cosmetics
 -- ------------------------------------------------------
 -- Server version	8.0.40
 
@@ -46,7 +46,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'1990-05-15','22110388@hcmute.student.edu.vn','Admin One','/images/admin1.jpg','password1','ROLE_ADMIN','2024-01-01','nhan','123 Admin Street','0901234567',1),(2,'1992-07-20','user1@example.com','User One','/images/user1.jpg','password2','ROLE_USER','2024-02-15','user1','456 User Avenue','0912345678',1),(3,'1995-03-12','vendor1@example.com','Vendor One','/images/vendor1.jpg','password3','ROLE_VENDOR','2024-03-10','vendor1','789 Vendor Road','0923456789',1),(4,'1988-11-05','admin2@example.com','Admin Two','/images/admin2.jpg','password4','ROLE_ADMIN','2024-01-10','admin2','321 Admin Blvd','0934567890',1),(5,'1993-09-18','user2@example.com','User Two','/images/user2.jpg','password5','ROLE_USER','2024-02-20','user2','654 User Lane','0945678901',1),(6,'1996-06-22','vendor2@example.com','Vendor Two','/images/vendor2.jpg','password6','ROLE_VENDOR','2024-03-15','vendor2','987 Vendor Court','0956789012',1),(7,'1991-12-30','admin3@example.com','Admin Three','/images/admin3.jpg','password7','ROLE_ADMIN','2024-01-15','admin3','789 Admin Terrace','0967890123',1),(8,'1994-04-14','user3@example.com','User Three','/images/user3.jpg','password8','ROLE_USER','2024-02-25','user3','123 User Square','0978901234',1),(9,'1997-10-28','vendor3@example.com','Vendor Three','/images/vendor3.jpg','password9','ROLE_VENDOR','2024-03-20','vendor3','456 Vendor Circle','0989012345',1),(10,'1989-08-07','user4@example.com','User Four','/images/user4.jpg','password10','ROLE_USER','2024-02-28','user4','789 User Place','0990123456',1);
+INSERT INTO `users` VALUES (1,'1990-05-15','22110388@hcmute.student.edu.vn','Admin One','/images/admin1.jpg','password1','ROLE_ADMIN','2024-01-01','nhan','123 Admin Street','0901234567',1),(2,'1992-07-20','user1@example.com','User One 1','/images/user1.jpg','password2','ROLE_USER','2024-02-15','user1','456 User Avenue','0912345678',1),(3,'1995-03-12','vendor1@example.com','Vendor One','/images/vendor1.jpg','password3','ROLE_VENDOR','2024-03-10','vendor1','789 Vendor Road','0923456789',1),(4,'1988-11-05','admin2@example.com','Admin Two','/images/admin2.jpg','password4','ROLE_ADMIN','2024-01-10','admin2','321 Admin Blvd','0934567890',1),(5,'1993-09-18','user2@example.com','User Two','/images/user2.jpg','password5','ROLE_USER','2024-02-20','user2','654 User Lane','0945678901',1),(6,'1996-06-22','vendor2@example.com','Vendor Two','/images/vendor2.jpg','password6','ROLE_VENDOR','2024-03-15','vendor2','987 Vendor Court','0956789012',1),(7,'1991-12-30','admin3@example.com','Admin Three','/images/admin3.jpg','password7','ROLE_ADMIN','2024-01-15','admin3','789 Admin Terrace','0967890123',1),(8,'1994-04-14','user3@example.com','User Three','/images/user3.jpg','password8','ROLE_USER','2024-02-25','user3','123 User Square','0978901234',1),(9,'1997-10-28','vendor3@example.com','Vendor Three','/images/vendor3.jpg','password9','ROLE_VENDOR','2024-03-20','vendor3','456 Vendor Circle','0989012345',1),(10,'1989-08-07','user4@example.com','User Four 02','/images/user4.jpg','password10','ROLE_USER','2024-02-28','user4','789 User Place','0990123456',1);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -59,4 +59,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-08 23:25:04
+-- Dump completed on 2024-12-09 10:27:50

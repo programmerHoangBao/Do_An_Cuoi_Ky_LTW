@@ -75,6 +75,7 @@
             <th>Số lượng</th>
             <th>Ngày tạo</th>
             <th>Trạng thái</th>
+            <th>Địa Chỉ</th>
             <th>Tổng tiền</th>
             <th>Hành động</th>
         </tr>
@@ -88,6 +89,7 @@
                 <td>${order.quantity}</td>
                 <td><fmt:formatDate value="${order.creationTime}" pattern="dd-MM-yyyy HH:mm:ss"/></td>
                 <td>${order.statusOrder}</td>
+                <td>1 VVN</td>
                 <td>${order.total} VND</td>
                 <td>
                     <c:if test="${order.statusOrder == 'Chờ xác nhận'}">
