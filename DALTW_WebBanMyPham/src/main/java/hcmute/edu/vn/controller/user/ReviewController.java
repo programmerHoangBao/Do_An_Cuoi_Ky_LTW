@@ -2,13 +2,11 @@ package hcmute.edu.vn.controller.user;
 
 import hcmute.edu.vn.controller.ImageController;
 import hcmute.edu.vn.dto.ReviewDTO;
+import hcmute.edu.vn.entity.Order;
 import hcmute.edu.vn.entity.Product;
 import hcmute.edu.vn.entity.ReviewUser;
 import hcmute.edu.vn.entity.User;
-import hcmute.edu.vn.service.implement.ProductService;
-import hcmute.edu.vn.service.implement.ReviewUserService;
-import hcmute.edu.vn.service.implement.UserService;
-import hcmute.edu.vn.service.implement.UserService1;
+import hcmute.edu.vn.service.implement.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +27,9 @@ public class ReviewController {
     @Autowired
     private UserService1 userService;
 
+    @Autowired
+    private OrderService orderService;
+
     @GetMapping("/{productId}")
     public List<ReviewDTO> getReviewsByProductId(@PathVariable Integer productId) {
         return reviewUserService.getReviewDetailsByProductId(productId);
@@ -44,6 +45,18 @@ public class ReviewController {
     ) {
         Product product = productService.findProductById(productId);
         User user = userService.findById(userId);
+
+        // Kiểm tra đơn hàng
+        List<Order> orders = orderService.getOrdersByUser(user);
+        boolean hasReceivedOrder = orders.stream()
+                .anyMatch(order -> order.getStatusOrder().equals("Đã nhận") &&
+                        order.getProduct().equals(product));
+
+        if (!hasReceivedOrder) {
+            return ResponseEntity.badRequest()
+                    .body("{\"message\": \"Bạn cần hoàn tất đơn hàng để bình luận về sản phẩm này\"}");
+        }
+
 
         if (product == null || user == null) {
             return ResponseEntity.badRequest().body("Sản phẩm hoặc người dùng không tồn tại");

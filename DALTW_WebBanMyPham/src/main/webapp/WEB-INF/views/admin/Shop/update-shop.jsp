@@ -32,7 +32,7 @@
 		<input type="text" id="introduce" name="introduce" value="${shop.introduce}">
 		<label for="image">Hình ảnh</label>
 		<img alt="Logo shop" src="${shop.image}" id="imageShop">
-		<input type="file" id="uploadImage" name="uploadImage" accept="image/*" required />
+		<input type="file" id="uploadImage" name="uploadImage" accept="image/*"/>
 		<button type="submit" id="btnUpdateShop">Cập Nhật Shop</button>
 	</form>
 		<div id="message">

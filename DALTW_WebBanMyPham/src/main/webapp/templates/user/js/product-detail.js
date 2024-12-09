@@ -322,7 +322,6 @@ function addToCart() {
     const quantity = parseInt(quantityInput.value);
     const productId = document.getElementById("product_id").value; // ID sản phẩm từ thuộc tính data
     const userId = document.getElementById("userId-cart").value; // Lấy từ input ẩn
-    const colorId = selectedColor;
 
     if (!quantity || quantity < 1) {
         alert("Số lượng phải lớn hơn 0");
